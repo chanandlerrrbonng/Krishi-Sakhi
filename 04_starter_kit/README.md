@@ -25,7 +25,7 @@ Make sure you've completed steps **0** to **3**:
 
 Install dependencies:
 
-![Setting up](../../assets/install.png)
+![Setting up](../assets/install.png)
 
 ```bash
 # Set up a Python 3.12 virtual environment

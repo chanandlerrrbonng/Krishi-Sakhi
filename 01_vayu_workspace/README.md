@@ -8,7 +8,7 @@ Welcome to the **Ask-It** project! This step guides you through creating and pre
 
 ## Workspace Overview
 
-![Vayu AI Studio Workspace Overview](../../assets/workspaces.png)
+![Vayu AI Studio Workspace Overview](../assets/workspaces.png)
 
 ---
 

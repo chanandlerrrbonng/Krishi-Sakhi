@@ -85,7 +85,7 @@ The `Dockerfile` lives in this folder, but the **build context** must be the par
 
 ```bash
 # 1. Go to ask-it/ (parent of this folder)
-cd /path/to/vayu-hackathon/ask-it
+cd vayu-hackathon/ask-it
 
 # 2. Build — note -f points at this Dockerfile, . is ask-it/
 docker build -f 05_build_app/Dockerfile -t <VAYU_CONTAINER_REGISTRY>/ask-it-chat:latest . --push

@@ -10,7 +10,7 @@
 
 The final step (`05_build_app/chat_app.py`) is a Streamlit chat interface with retrieval settings, grounded answers, and expandable source citations:
 
-![Ask-It Streamlit chat UI](../assets/ask-it/app.png)
+![Ask-It Streamlit chat UI](./assets/ask-it/app.png)
 
 Typical hackathon domains: customer-support manuals, HR/onboarding policies, research PDFs (add loaders if you need PDF/DOCX beyond the starter’s `.md` / `.txt` / `.html`).
 
