@@ -49,6 +49,16 @@ pip install -r requirements.txt
 | Index   | Chunks documents in `DOCS_DIR`, generates embeddings, and upserts to `COLLECTION_NAME` |
 | Test    | Runs `rag_answer()` to perform RAG with citations                                    |
 
+**Required environment variables** (export before running the notebook — the config cell fails fast if any are missing):
+
+```bash
+export QDRANT_URL="<VAYU_QDRANT_URL>"
+export QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
+export LLM_OPENAI_API_KEY="sk-**********************"
+export EMBEDDING_OPENAI_API_KEY="sk-**********************"
+export OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
+```
+
 Set which documents to use:
 
 ```python

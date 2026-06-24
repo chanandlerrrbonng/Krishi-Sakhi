@@ -27,14 +27,22 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
 
 > 🗂️ **Tip:** Maintain the same folder structure locally and in the bucket to ensure source citations work end-to-end.
 
-1. **Set Required Env Vars:**  
-   In `00_dataset.ipynb`, provide the following environment variables with example values (replace with your actual credentials and bucket information):
+1. **Set required environment variables** (export in your shell or AI Studio secrets — do not paste credentials into notebook cells):
 
-   - `VAYU_S3_KEY` — e.g. `<VAYU_S3_KEY>`
-   - `VAYU_S3_SECRET` — e.g. `<VAYU_S3_SECRET>`
-   - `VAYU_S3_ENDPOINT` — e.g. `<VAYU_S3_ENDPOINT>`
-   - `VAYU_S3_BUCKET` — e.g. `<VAYU_S3_BUCKET>`
-   - `S3_PREFIX` — e.g. `docs/` (or leave blank for root)
+   ```bash
+   export VAYU_S3_KEY="<your-access-key>"
+   export VAYU_S3_SECRET="<your-secret-key>"
+   export VAYU_S3_ENDPOINT="<your-s3-endpoint>"
+   export VAYU_S3_BUCKET="<your-bucket-name>"
+   export S3_PREFIX="docs/"   # optional; default in notebook is docs/
+   ```
+
+   | Variable | Purpose |
+   |----------|---------|
+   | `VAYU_S3_KEY` | S3 access key ID |
+   | `VAYU_S3_SECRET` | S3 secret access key |
+   | `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
+   | `VAYU_S3_BUCKET` | Target bucket name |
 
    _(Never commit real credentials!)_
 

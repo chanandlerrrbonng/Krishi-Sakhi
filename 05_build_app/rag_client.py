@@ -1,6 +1,14 @@
 """
 Shared RAG logic for the Ask-It notebook and Streamlit chat UI.
-Configure via environment variables (see README).
+
+Required environment variables (hosted mode):
+  QDRANT_URL, QDRANT_API_KEY, LLM_OPENAI_API_KEY, EMBEDDING_OPENAI_API_KEY,
+  OPENAI_BASE_URL
+
+Optional: QDRANT_PATH (local on-disk Qdrant), QDRANT_PORT, COLLECTION_NAME,
+  EMBEDDING_MODEL, CHAT_MODEL, EMBED_BATCH_SIZE.
+
+See ``05_build_app/README.md`` for export examples.
 """
 
 from __future__ import annotations
@@ -11,6 +19,23 @@ from typing import Any
 
 from openai import OpenAI
 from qdrant_client import QdrantClient
+
+
+def _require_env(name: str) -> str:
+    """Return a required environment variable or fail fast with an actionable error."""
+    value = os.environ.get(name, "").strip()
+    if not value:
+        raise EnvironmentError(
+            f"Missing required environment variable {name!r}. "
+            f"Export it before starting the app (see 05_build_app/README.md)."
+        )
+    # Reject template placeholders so misconfiguration surfaces at startup, not at API call time.
+    if "<VAYU_" in value or "<YOUR_" in value or "<COLLECTION" in value or "***" in value:
+        raise EnvironmentError(
+            f"Environment variable {name!r} still contains a placeholder value. "
+            f"Replace it with real configuration."
+        )
+    return value
 
 
 def _payload_as_dict(payload: Any) -> dict:
@@ -41,15 +66,12 @@ def load_config() -> RAGConfig:
 
 
 def build_qdrant_client() -> QdrantClient:
+    """Build a Qdrant client for local on-disk storage or hosted Vayu Vector DB."""
     path = os.environ.get("QDRANT_PATH", "").strip()
     if path:
         return QdrantClient(path=path)
-    url = os.environ.get("QDRANT_URL", "<VAYU_QDRANT_URL>").strip()
-    if not url:
-        raise ValueError(
-            "Set QDRANT_URL (and QDRANT_API_KEY) for hosted Qdrant, or QDRANT_PATH for local on-disk mode."
-        )
-    api_key = os.environ.get("QDRANT_API_KEY", "<VAYU_QDRANT_API_KEY>").strip() or None
+    url = _require_env("QDRANT_URL")
+    api_key = _require_env("QDRANT_API_KEY")
     port = int(os.environ.get("QDRANT_PORT", "443"))
     return QdrantClient(
         url=url,
@@ -59,13 +81,11 @@ def build_qdrant_client() -> QdrantClient:
 
 
 def build_openai_client(is_embedding: bool = False) -> OpenAI:
+    """Build an OpenAI-compatible client for Vayu Model as a Service."""
     env_var = "EMBEDDING_OPENAI_API_KEY" if is_embedding else "LLM_OPENAI_API_KEY"
-    api_key = os.environ.get(env_var, "sk-**********************").strip() or None
-    base_url = os.environ.get("OPENAI_BASE_URL", "<VAYU_MODEL_AS_A_SERVICE_URL>").strip() or None
-    kwargs: dict = {"api_key": api_key}
-    if base_url:
-        kwargs["base_url"] = base_url
-    return OpenAI(**kwargs)
+    api_key = _require_env(env_var)
+    base_url = _require_env("OPENAI_BASE_URL")
+    return OpenAI(api_key=api_key, base_url=base_url)
 
 class RAGEngine:
     """Query-time RAG: embed question, search Qdrant, call chat model with context."""
