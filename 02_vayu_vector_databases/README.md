@@ -34,7 +34,7 @@ Set up the **Vayu Vector DB (Qdrant)** for Retrieval-Augmented Generation (RAG).
 
 | Resource               | URL                                                                                       |
 |------------------------|-------------------------------------------------------------------------------------------|
-| Provision Vayu Vector DB | https://ipcloud.tatacommunications.com/uat/aistudio/#/experiment/vectordatabase-list    |
+| Provision Vayu Vector DB | https://ipcloud.tatacommunications.com/aistudio/#/experiment/vectordatabase-list    |
 | Docs (Milvus)          | https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/milvus|
 | Docs (Qdrant)          | https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant|
 
