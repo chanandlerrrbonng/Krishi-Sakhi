@@ -15,6 +15,7 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 
 1. **Open the Vayu Model as a Service catalog**  
    https://ai-gateway.cloudservices.tatacommunications.com/models/models/home
+   
    Go to the Model Catalog in Vayu AI Studio.
 2. **Pick your models**  
    - Choose an **embedding model** (for converting text to vectors).
