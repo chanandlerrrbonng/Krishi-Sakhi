@@ -14,6 +14,7 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 ## Quick Setup
 
 1. **Open the Vayu Model as a Service catalog**  
+   https://ai-gateway.cloudservices.tatacommunications.com/models/models/home
    Go to the Model Catalog in Vayu AI Studio.
 2. **Pick your models**  
    - Choose an **embedding model** (for converting text to vectors).
@@ -24,11 +25,11 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
    Use these variables for both document ingestion (`qna.ipynb`) and for the chat app (`05_build_app/`):
 
    ```bash
+   export OPENAI_BASE_URL="https://models.cloudservices.tatacommunications.com/v1"
+   export CHAT_MODEL="openai/gpt-oss-20b"
    export LLM_OPENAI_API_KEY="sk-**********************"
+   export EMBEDDING_MODEL="Qwen/Qwen3-Embedding-8B"
    export EMBEDDING_OPENAI_API_KEY="sk-**********************"
-   export OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
-   export EMBEDDING_MODEL="<VAYU_EMBEDDING_MODEL>"
-   export CHAT_MODEL="<VAYU_CHAT_MODEL>"
    ```
 
 5. **Continue**  
