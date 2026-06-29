@@ -8,17 +8,22 @@ Required environment variables (hosted mode):
 Optional: QDRANT_PATH (local on-disk Qdrant), QDRANT_PORT, COLLECTION_NAME,
   EMBEDDING_MODEL, CHAT_MODEL, EMBED_BATCH_SIZE.
 
-See ``05_build_app/README.md`` for export examples.
+See ``05_build_app/README.md`` and ``.env.example`` at the repo root.
 """
 
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from dataclasses import dataclass
 from typing import Any
 
+from dotenv import load_dotenv
 from openai import OpenAI
 from qdrant_client import QdrantClient
+
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(_REPO_ROOT / ".env")
 
 
 def _require_env(name: str) -> str:
@@ -27,7 +32,7 @@ def _require_env(name: str) -> str:
     if not value:
         raise EnvironmentError(
             f"Missing required environment variable {name!r}. "
-            f"Export it before starting the app (see 05_build_app/README.md)."
+            f"Set it in ask-it/.env (copy from .env.example; see 05_build_app/README.md)."
         )
     # Reject template placeholders so misconfiguration surfaces at startup, not at API call time.
     if "<VAYU_" in value or "<YOUR_" in value or "<COLLECTION" in value or "***" in value:
@@ -58,10 +63,10 @@ class RAGConfig:
 
 def load_config() -> RAGConfig:
     return RAGConfig(
-        collection_name=os.environ.get("COLLECTION_NAME", "knowledge_base_rag"),
-        embedding_model=os.environ.get("EMBEDDING_MODEL", "Qwen/Qwen3-Embedding-8B"),
-        chat_model=os.environ.get("CHAT_MODEL", "openai/gpt-oss-120b"),
-        embed_batch_size=int(os.environ.get("EMBED_BATCH_SIZE", "32")),
+        collection_name=os.environ.get("COLLECTION_NAME", "").strip() or "knowledge_base_rag",
+        embedding_model=os.environ.get("EMBEDDING_MODEL", "").strip() or "Qwen/Qwen3-Embedding-8B",
+        chat_model=os.environ.get("CHAT_MODEL", "").strip() or "openai/gpt-oss-120b",
+        embed_batch_size=int(os.environ.get("EMBED_BATCH_SIZE", "").strip() or "32"),
     )
 
 

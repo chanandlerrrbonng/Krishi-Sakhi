@@ -17,13 +17,13 @@ Set up the **Vayu Vector DB (Qdrant)** for Retrieval-Augmented Generation (RAG).
    In Vayu AI Studio, create a new Vector DB (Qdrant) instance.
 2. **Collect Access Details:**  
    After provisioning, note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
-3. **Set Environment Variables:**  
-   Paste the values into your shell for access in notebooks and scripts (`qna.ipynb`, `chat_app.py`, etc):
+3. **Set environment variables:**  
+   Copy `.env.example` to `.env` at the **ask-it** repo root and fill in your values (used by notebooks and `chat_app.py`):
 
    ```bash
-   export QDRANT_URL="<VAYU_QDRANT_URL>"
-   export QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
-   export COLLECTION_NAME="<COLLECTION_NAME>"
+   cd ask-it
+   cp .env.example .env
+   # Edit .env — set QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
    ```
 4. **Local Development (Optional):**  
    For local testing, use on-disk Qdrant with the `QDRANT_PATH` variable in your notebook, instead of the hosted service.

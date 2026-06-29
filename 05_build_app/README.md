@@ -51,17 +51,10 @@ source venv/bin/activate
 cd ask-it
 pip install -r requirements.txt
 
+cp .env.example .env
+# Edit .env with your Vayu Vector DB and Model as a Service credentials
+
 cd 05_build_app
-
-export QDRANT_URL="<VAYU_QDRANT_URL>"
-export QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
-export LLM_OPENAI_API_KEY="sk-**********************"
-export EMBEDDING_OPENAI_API_KEY="sk-**********************"
-export OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
-export EMBEDDING_MODEL="Qwen/Qwen3-Embedding-8B"
-export CHAT_MODEL="openai/gpt-oss-120b"
-export COLLECTION_NAME="<COLLECTION_NAME>"
-
 streamlit run chat_app.py
 ```
 

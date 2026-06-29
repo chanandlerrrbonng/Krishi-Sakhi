@@ -76,8 +76,8 @@ def main() -> None:
     except Exception as e:
         st.error(f"Could not connect to the RAG engine: {e}")
         st.info(
-            "Set `QDRANT_URL`, `QDRANT_API_KEY`, `EMBEDDING_OPENAI_API_KEY` and `LLM_OPENAI_API_KEY` in your environment. "
-            "See the project README for details."
+            "Set `QDRANT_URL`, `QDRANT_API_KEY`, `EMBEDDING_OPENAI_API_KEY` and `LLM_OPENAI_API_KEY` in `ask-it/.env` "
+            "(copy from `.env.example`). See the project README for details."
         )
         return
 

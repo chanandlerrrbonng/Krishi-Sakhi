@@ -36,6 +36,17 @@ source venv/bin/activate
 
 cd ask-it
 pip install -r requirements.txt
+
+cp .env.example .env
+# Edit .env with credentials from Steps 2–3
+```
+
+**Required environment variables** (set in `ask-it/.env` — the config cell fails fast if any are missing):
+
+```bash
+cp .env.example .env
+# QDRANT_URL, QDRANT_API_KEY, LLM_OPENAI_API_KEY,
+# EMBEDDING_OPENAI_API_KEY, OPENAI_BASE_URL, COLLECTION_NAME, etc.
 ```
 
 ---
@@ -44,20 +55,10 @@ pip install -r requirements.txt
 
 | Stage   | Description                                                                          |
 |---------|--------------------------------------------------------------------------------------|
-| Connect | Sets up **Vayu Vector DB** (Qdrant) and **Vayu Model as a Service** clients                        |
+| Connect | Sets up **Vayu Vector DB** (Qdrant) and **Vayu Model as a Service** clients        |
 | Probe   | Checks embedding dimensions to auto-configure the collection                         |
 | Index   | Chunks documents in `DOCS_DIR`, generates embeddings, and upserts to `COLLECTION_NAME` |
 | Test    | Runs `rag_answer()` to perform RAG with citations                                    |
-
-**Required environment variables** (export before running the notebook — the config cell fails fast if any are missing):
-
-```bash
-export QDRANT_URL="<VAYU_QDRANT_URL>"
-export QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
-export LLM_OPENAI_API_KEY="sk-**********************"
-export EMBEDDING_OPENAI_API_KEY="sk-**********************"
-export OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
-```
 
 Set which documents to use:
 
@@ -91,7 +92,7 @@ cd 05_build_app
 streamlit run chat_app.py
 ```
 
-Use the same environment variables as in **Step 2 (Vayu Vector DB)** and **Step 3 (Vayu Model as a Service)**.
+Use the same `.env` values as in **Step 2 (Vayu Vector DB)** and **Step 3 (Vayu Model as a Service)**.
 
 ---
 

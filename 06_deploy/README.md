@@ -103,7 +103,7 @@ Optional **Args**: leave empty unless your platform team specifies extra Streaml
 
 ### 3.2 Environment variables (required)
 
-Add each key/value pair in **Environment Variable** on the Start step (or equivalent secrets UI). Use the **same values** as local Streamlit and `qna.ipynb`:
+Add each key/value pair in **Environment Variable** on the Start step (or equivalent secrets UI). Use the **same values** as in your local `ask-it/.env` and `qna.ipynb` ingest run (the `.env` file is for local dev only — it is not baked into the Docker image).
 
 | Key | Required | Source |
 |-----|----------|--------|

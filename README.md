@@ -14,6 +14,8 @@ The final step (`05_build_app/chat_app.py`) is a Streamlit chat interface with r
 
 Typical hackathon domains: customer-support manuals, HR/onboarding policies, research PDFs (add loaders if you need PDF/DOCX beyond the starter’s `.md` / `.txt` / `.html`).
 
+**Architecture diagram:** single Excalidraw file [`diagrams/ask-it-architecture.excalidraw`](./diagrams/ask-it-architecture.excalidraw) (platform journey, ingest, query, deploy).
+
 ---
 
 ## Project layout (steps)
@@ -22,7 +24,7 @@ Typical hackathon domains: customer-support manuals, HR/onboarding policies, res
 ask-it/
 ├── README.md
 ├── requirements.txt
-│
+├── .env.example                  # Template — copy to .env and fill in values
 ├── 00_dataset/
 │   ├── 00_dataset.ipynb          # Upload docs to Vayu Object Storage
 │   └── docs/                     # Sample corpus (.md, .txt, .html)
@@ -69,7 +71,7 @@ This table ties each step of the Vayu platform to the concrete artifacts in this
 |--------------|------------------------------------------|
 | **Vayu Object Storage** | Store raw documents (S3‑compatible). Sync `docs/` to a bucket so **Vayu AI Studio** notebooks can read them during ingest (`00_dataset.ipynb`). |
 | **Vayu AI Studio Workspace** | Open `qna.ipynb` in **Vayu AI Studio** (or local Jupyter). Use a Python 3.12 venv, `cd ask-it`, `pip install -r requirements.txt`. |
-| **Vayu Vector DB** | Provision hosted **Qdrant** in AI Studio (Vector DB → Create). Export `QDRANT_URL` and `QDRANT_API_KEY` for the notebook and Streamlit app. |
+| **Vayu Vector DB** | Provision hosted **Qdrant** in AI Studio (Vector DB → Create). Set `QDRANT_URL` and `QDRANT_API_KEY` in `ask-it/.env`. |
 | **Vayu Model as a Service** | Pick embedding + chat models from the **Vayu Model as a Service catalog**. Set `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL`. |
 | **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (Vayu Model as a Service) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
 | **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call Vayu Model as a Service chat, return citations (notebook tests + Streamlit UI). |
@@ -115,14 +117,8 @@ source env/bin/activate
 cd ask-it
 pip install -r requirements.txt
 
-export QDRANT_URL="<VAYU_QDRANT_URL>"
-export QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
-export LLM_OPENAI_API_KEY="sk-**********************"
-export EMBEDDING_OPENAI_API_KEY="sk-**********************"
-export OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
-export EMBEDDING_MODEL="Qwen/Qwen3-Embedding-8B"
-export CHAT_MODEL="openai/gpt-oss-120b"
-export COLLECTION_NAME="<COLLECTION_NAME>"
+cp .env.example .env
+# Edit .env with your Vayu Vector DB and Model as a Service credentials
 ```
 
 1. Run all cells in **`04_starter_kit/qna.ipynb`** in **Vayu AI Studio** (or local Jupyter).

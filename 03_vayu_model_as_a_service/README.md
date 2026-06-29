@@ -22,15 +22,14 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
    - Choose a **chat model** (for conversational/answering capabilities).
 3. **Get API credentials**  
    - Copy your API key and the base endpoint URL from the catalog or your Workspace details.
-4. **Export configuration variables**  
-   Use these variables for both document ingestion (`qna.ipynb`) and for the chat app (`05_build_app/`):
+4. **Configure `.env`**  
+   At the **ask-it** repo root, copy `.env.example` to `.env` and set these variables (used by `qna.ipynb` and `05_build_app/`):
 
    ```bash
-   export OPENAI_BASE_URL="https://models.cloudservices.tatacommunications.com/v1"
-   export CHAT_MODEL="openai/gpt-oss-20b"
-   export LLM_OPENAI_API_KEY="sk-**********************"
-   export EMBEDDING_MODEL="Qwen/Qwen3-Embedding-8B"
-   export EMBEDDING_OPENAI_API_KEY="sk-**********************"
+   cd ask-it
+   cp .env.example .env
+   # Edit .env — OPENAI_BASE_URL, CHAT_MODEL, LLM_OPENAI_API_KEY,
+   # EMBEDDING_MODEL, EMBEDDING_OPENAI_API_KEY
    ```
 
 5. **Continue**  
@@ -42,7 +41,7 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 
 - The **embedding model** determines vector dimension; your **Vayu Vector DB** collection must use the *same* size.
 - Always use the *same* `EMBEDDING_MODEL` and `CHAT_MODEL` environment variables when running both ingestion and the chat app.
-- API keys and base URL should never be committed to version control—export them in your shell or configure them via environment management tools.
+- API keys and base URL should never be committed to version control—set them in `ask-it/.env` (copy from `.env.example`).
 
 ---
 

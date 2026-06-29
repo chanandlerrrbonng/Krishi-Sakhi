@@ -27,14 +27,13 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
 
 > 🗂️ **Tip:** Maintain the same folder structure locally and in the bucket to ensure source citations work end-to-end.
 
-1. **Set required environment variables** (export in your shell or AI Studio secrets — do not paste credentials into notebook cells):
+1. **Set required environment variables** in `ask-it/.env` (copy from `.env.example` — do not paste credentials into notebook cells):
 
    ```bash
-   export VAYU_S3_KEY="<your-access-key>"
-   export VAYU_S3_SECRET="<your-secret-key>"
-   export VAYU_S3_ENDPOINT="<your-s3-endpoint>"
-   export VAYU_S3_BUCKET="<your-bucket-name>"
-   export S3_PREFIX="docs/"   # optional; default in notebook is docs/
+   cd ask-it
+   cp .env.example .env
+   # Edit .env — VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
+   # Optional: S3_PREFIX=docs/
    ```
 
    | Variable | Purpose |
