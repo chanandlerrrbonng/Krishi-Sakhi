@@ -27,45 +27,34 @@ The container **does not** re-ingest documents. It only queries the collection y
 
 ## Prerequisites
 
-Complete these steps first:
-
 | Step | Folder | You need |
 |------|--------|----------|
-| 0 | [`00_dataset/`](../00_dataset/) | Corpus in `docs/` (optional Object Storage sync) |
-| 1 | [`01_vayu_workspace/`](../01_vayu_workspace/) | Vayu AI Studio workspace |
+| 0 | [`00_vayu_workspace/`](../00_vayu_workspace/) | Vayu AI Studio workspace (Docker enabled) |
+| 1 | [`01_dataset/`](../01_dataset/) | Corpus in `docs/` (optional Object Storage sync) |
 | 2 | [`02_vayu_vector_databases/`](../02_vayu_vector_databases/) | `QDRANT_URL`, `QDRANT_API_KEY`, `COLLECTION_NAME` |
 | 3 | [`03_vayu_model_as_a_service/`](../03_vayu_model_as_a_service/) | `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL` |
 | 4 | [`04_starter_kit/`](../04_starter_kit/) | `qna.ipynb` run — vectors in Vector DB |
 | 5 | [`05_build_app/`](../05_build_app/) | Image built and pushed to **Vayu Hackathon Container Registry** |
 
-**Before Step 6:** smoke-test the image locally (see [Step 5 — Dockerize](../05_build_app/README.md#dockerize-your-chatbot)) so you know RAG works with your env vars.
+**Before Step 6:** smoke-test the image locally (see [Step 5 — Build and push](../05_build_app/README.md#build-and-push-docker-image)) so you know RAG works with your env vars.
 
 ---
 
 ## Step 1 — Build and push the Docker image
 
-Build context **must** be `ask-it/` (not `05_build_app/`). Full details: [`05_build_app/README.md`](../05_build_app/README.md#dockerize-your-chatbot).
+Build context **must** be `ask-it/` (not `05_build_app/`). Full details: [`05_build_app/README.md`](../05_build_app/README.md#build-and-push-docker-image).
 
 ```bash
-cd /path/to/vayu-hackathon/ask-it
+cd ask-it
+docker login <YOUR_CONTAINER_REGISTRY_HOST>
 
-docker build -f 05_build_app/Dockerfile -t ask-it-chat:latest .
+docker build -f 05_build_app/Dockerfile -t <YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest . --push
 ```
 
-Tag and push to the registry your hackathon track uses (example — replace with your registry host and credentials):
-
-```bash
-# Example: tag for Vayu / hackathon registry
-docker tag ask-it-chat:latest <registry-host>/ask-it-chat:latest
-docker login <registry-host>
-docker push <registry-host>/ask-it-chat:latest
-```
-
-Note the full image reference you pushed (e.g. `<registry-host>/ask-it-chat:latest`) — you will enter it in the ML Service wizard.
+Note the full image reference you pushed (e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest`) — you will enter it in the ML Service wizard.
 
 | Check | |
 |-------|---|
-| Image runs locally | `docker run` from Step 5 README opens **http://localhost:8501** and answers a test question |
 | Port in image | **8501** (Streamlit; see `EXPOSE` in Dockerfile) |
 | Secrets | **Not** baked into the image — only at runtime |
 
@@ -73,13 +62,9 @@ Note the full image reference you pushed (e.g. `<registry-host>/ask-it-chat:late
 
 ## Step 2 — Open Vayu ML Services
 
-| Resource | URL |
-|----------|-----|
-| **ML Services list (create)** | [Create ML Service](https://ipcloud.tatacommunications.com/uat/aistudio/#/deploy/mlops-service-list) |
-| **ML Service documentation** | [ML Service docs](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/ml-service/) |
-| **Container registry** | [Registry docs](https://aistudio.cloudservices.tatacommunications.com/docs/aistudio/registry/) |
+Go to [Vayu ML Services](https://ipcloud.tatacommunications.com/aistudio/#/deploy/mlops-service-list).
 
-In AI Studio: **Deploy** → **ML Services** → **Create ML Service**.
+For the full create wizard (Start → Infrastructure → Configure Compute → Observability → Review), see the [Creating ML Service guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/ml-service/#creating-ml-service).
 
 ---
 
@@ -93,9 +78,9 @@ Follow the platform wizard. Map Ask-It settings as below.
 |-------|----------------|
 | **Name** | e.g. `ask-it-chat` or your team name |
 | **Framework** | **Streamlit** (or **Python3** if Streamlit is not listed — app still runs via `streamlit run` in the image CMD) |
-| **Private Registry → Registry URL** | Your hackathon / Vayu registry host |
-| **Private Registry → Image** | Full image you pushed, e.g. `<registry-host>/ask-it-chat:latest` |
-| **Private Registry → Username / Password** | Registry credentials from your track |
+| **Private Registry → Registry URL** | `<YOUR_CONTAINER_REGISTRY_HOST>` |
+| **Private Registry → Image** | Full image you pushed, e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest` |
+| **Private Registry → Username / Password** | `<YOUR_REGISTRY_USERNAME>` / `<YOUR_REGISTRY_PASSWORD>` |
 | **Port** | **8501** |
 | **Public Expose** | Enable if you need a URL reachable outside the cluster (typical for demos) |
 
@@ -119,14 +104,14 @@ Add each key/value pair in **Environment Variable** on the Start step (or equiva
 Example values (replace secrets with yours):
 
 ```text
-QDRANT_URL=<VAYU_QDRANT_URL>
-QDRANT_API_KEY="<VAYU_QDRANT_API_KEY>"
-LLM_OPENAI_API_KEY="sk-**********************"
-EMBEDDING_OPENAI_API_KEY="sk-**********************"
-OPENAI_BASE_URL="<VAYU_MODEL_AS_A_SERVICE_URL>"
-EMBEDDING_MODEL=Qwen/Qwen3-Embedding-8B
-CHAT_MODEL=openai/gpt-oss-120b
-COLLECTION_NAME="<COLLECTION_NAME>"
+QDRANT_URL=<YOUR_QDRANT_URL>
+QDRANT_API_KEY=<YOUR_QDRANT_API_KEY>
+LLM_OPENAI_API_KEY=<YOUR_MAAS_API_KEY>
+EMBEDDING_OPENAI_API_KEY=<YOUR_MAAS_API_KEY>
+OPENAI_BASE_URL=<YOUR_MAAS_BASE_URL>
+EMBEDDING_MODEL=<YOUR_EMBEDDING_MODEL>
+CHAT_MODEL=<YOUR_CHAT_MODEL>
+COLLECTION_NAME=knowledge_base_rag
 ```
 
 Do **not** set `QDRANT_PATH` for hosted deployment unless you intentionally use on-disk Qdrant inside the container (not recommended for this template).
@@ -175,7 +160,7 @@ If your hackathon track requires registering the RAG configuration:
 
 | Resource | URL |
 |----------|-----|
-| **Model Registry** | [Model Registry list](https://ipcloud.tatacommunications.com/uat/aistudio/#/deploy/model-registry-list) |
+| **Model Registry** | https://ipcloud.tatacommunications.com/aistudio/#/deploy/model-registry-list |
 
 Register metadata such as collection name, embedding model, chat model, and top-k — aligned with [`rag_client.py`](../05_build_app/rag_client.py). Deployment still runs through **ML Service** using the Docker image from Step 5.
 
@@ -183,15 +168,12 @@ Register metadata such as collection name, embedding model, chat model, and top-
 
 ## Environment variable reference
 
-Same table as the [Ask-It overview](../README.md#docker); required at **runtime** on the ML Service, not in the Dockerfile.
-
 | Variable | Required | Notes |
 |----------|----------|--------|
 | `QDRANT_URL` / `QDRANT_API_KEY` | Yes (hosted) | From **Vayu Vector DB** |
 | `QDRANT_PATH` | No | Local dev only — omit in ML Service |
-| `LLM_OPENAI_API_KEY` / `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** |
+| `LLM_OPENAI_API_KEY` / `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** |
 | `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** |
-| `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** |
 | `EMBEDDING_MODEL` / `CHAT_MODEL` | Yes | Must match `qna.ipynb` ingest |
 | `COLLECTION_NAME` | No | Default `knowledge_base_rag` |
 
@@ -217,7 +199,7 @@ Same table as the [Ask-It overview](../README.md#docker); required at **runtime*
 
 ---
 
-## Jump around
+## Navigation
 
 | | |
 |---|---|

@@ -20,17 +20,17 @@ Typical hackathon domains: customer-support manuals, HR/onboarding policies, res
 
 ## Project layout (steps)
 
-```
+```text
 ask-it/
 ├── README.md
 ├── requirements.txt
 ├── .env.example                  # Template — copy to .env and fill in values
-├── 00_dataset/
-│   ├── 00_dataset.ipynb          # Upload docs to Vayu Object Storage
-│   └── docs/                     # Sample corpus (.md, .txt, .html)
-│
-├── 01_vayu_workspace/
+├── 00_vayu_workspace/
 │   └── README.md                 # Allocate a Vayu Workspace
+│
+├── 01_dataset/
+│   ├── 01_dataset.ipynb          # Upload docs to Vayu Object Storage
+│   └── docs/                     # Sample corpus (.md, .txt, .html)
 │
 ├── 02_vayu_vector_databases/
 │   └── README.md                 # Provision Vayu Vector DB (Qdrant)
@@ -39,7 +39,7 @@ ask-it/
 │   └── README.md                 # Get Vayu Model as a Service key
 │
 ├── 04_starter_kit/
-│   └── qna.ipynb                 # Vayu AI Studio: chunk → Vayu Model as a Service embed → Vector DB index
+│   └── qna.ipynb                 # Vayu AI Studio: chunk → MaaS embed → Vector DB index
 │
 ├── 05_build_app/
 │   ├── chat_app.py               # Streamlit chat UI
@@ -53,11 +53,11 @@ ask-it/
 
 | Step | Vayu service | Folder | What to run / open |
 |------|--------------|--------|-------------------|
-| 0 | **Vayu Object Storage** | `00_dataset/` | `00_dataset.ipynb` — sync `docs/` to object storage |
-| 1 | **Vayu AI Studio Workspace** | `01_vayu_workspace/` | `README.md` — create workspace, install deps |
+| 0 | **Vayu AI Studio Workspace** | `00_vayu_workspace/` | `README.md` — create workspace (enable Docker) |
+| 1 | **Vayu Object Storage** | `01_dataset/` | `01_dataset.ipynb` — sync `docs/` to object storage |
 | 2 | **Vayu Vector DB** (Qdrant) | `02_vayu_vector_databases/` | `README.md` — provision DB; set `QDRANT_URL` / `QDRANT_API_KEY` |
-| 3 | **Vayu Model as a Service** | `03_vayu_model_as_a_service/` | `README.md` — Vayu Model as a Service API key, base URL, embedding + chat models |
-| 4 | **Vayu AI Studio RAG lab** | `04_starter_kit/` | `qna.ipynb` — chunk, embed (Vayu Model as a Service), index (Vector DB) |
+| 3 | **Vayu Model as a Service** | `03_vayu_model_as_a_service/` | `README.md` — MaaS API key, base URL, embedding + chat models |
+| 4 | **Vayu AI Studio RAG lab** | `04_starter_kit/` | `qna.ipynb` — chunk, embed (MaaS), index (Vector DB) |
 | 5 | **Vayu chat app (build)** | `05_build_app/` | `chat_app.py` + `rag_client.py`; build/push Docker image |
 | 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Deploy image to **Vayu ML Service** — hosted Streamlit endpoint |
 
@@ -65,19 +65,16 @@ ask-it/
 
 ## Mapping to the Vayu “Ask-It — Guided Journey”
 
-This table ties each step of the Vayu platform to the concrete artifacts in this repository, helping you see where code lives and which Vayu services you need to provision.
-
 | Journey step | How to leverage Vayu ecosystem (detailed) |
 |--------------|------------------------------------------|
-| **Vayu Object Storage** | Store raw documents (S3‑compatible). Sync `docs/` to a bucket so **Vayu AI Studio** notebooks can read them during ingest (`00_dataset.ipynb`). |
-| **Vayu AI Studio Workspace** | Open `qna.ipynb` in **Vayu AI Studio** (or local Jupyter). Use a Python 3.12 venv, `cd ask-it`, `pip install -r requirements.txt`. |
-| **Vayu Vector DB** | Provision hosted **Qdrant** in AI Studio (Vector DB → Create). Set `QDRANT_URL` and `QDRANT_API_KEY` in `ask-it/.env`. |
-| **Vayu Model as a Service** | Pick embedding + chat models from the **Vayu Model as a Service catalog**. Set `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL`. |
-| **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (Vayu Model as a Service) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
-| **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call Vayu Model as a Service chat, return citations (notebook tests + Streamlit UI). |
+| **Vayu AI Studio Workspace** | Create your workspace with **Enable Docker in the Workspace** turned on, then clone this repo ([`00_vayu_workspace/`](00_vayu_workspace/)). |
+| **Vayu Object Storage** | Store raw documents (S3‑compatible). Sync `docs/` to a bucket so **Vayu AI Studio** notebooks can read them during ingest (`01_dataset.ipynb`). |
+| **Vayu Vector DB** | Provision hosted **Qdrant** in AI Studio (Vector DB → Create → select **Qdrant**). Set `QDRANT_URL` and `QDRANT_API_KEY` in `ask-it/.env`. See the [Creating Qdrant guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant/#creating-qdrant). |
+| **Vayu Model as a Service** | Pick embedding + chat models from the **MaaS catalog**. Set `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL`. |
+| **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (MaaS) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
+| **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call MaaS chat, return citations (notebook tests + Streamlit UI). |
 | **Vayu chat UI** | `streamlit run chat_app.py` locally or from the Docker image; same Vector DB collection and source panel for judges. |
 | **Vayu ML Service (deploy)** | Push image from Step 5, create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars — see [`06_deploy/README.md`](06_deploy/README.md). |
-
 
 ---
 
@@ -85,14 +82,14 @@ This table ties each step of the Vayu platform to the concrete artifacts in this
 
 | Layer | Vayu / stack choice |
 |--------|---------------------|
-| Documents | **Vayu Object Storage** (optional) + local `00_dataset/docs/` |
+| Documents | **Vayu Object Storage** (optional) + local `01_dataset/docs/` |
 | Compute | **Vayu AI Studio** — `04_starter_kit/qna.ipynb` |
 | Vector search | **Vayu Vector DB** (Qdrant) |
 | Embeddings + chat | **Vayu Model as a Service** — OpenAI-compatible API |
 | App surface | **Streamlit** (`05_build_app/chat_app.py`) |
 | Container | **`05_build_app/Dockerfile`** → registry → **`06_deploy/`** ML Service |
 
-**In the box:** `04_starter_kit/qna.ipynb` (ingest + lab), `05_build_app/rag_client.py`, `05_build_app/chat_app.py`, `00_dataset/docs/` sample corpus, `requirements.txt`, `05_build_app/Dockerfile`.
+**In the box:** `04_starter_kit/qna.ipynb` (ingest + lab), `05_build_app/rag_client.py`, `05_build_app/chat_app.py`, `01_dataset/docs/` sample corpus, `requirements.txt`, `05_build_app/Dockerfile`.
 
 ---
 
@@ -100,59 +97,82 @@ This table ties each step of the Vayu platform to the concrete artifacts in this
 
 ### What this code does
 
-1. **Vayu RAG ingest** — `04_starter_kit/qna.ipynb` chunks `00_dataset/docs/`, embeds via **Vayu Model as a Service**, upserts into **Vayu Vector DB**.
+1. **Vayu RAG ingest** — `04_starter_kit/qna.ipynb` chunks `01_dataset/docs/`, embeds via **Vayu Model as a Service**, upserts into **Vayu Vector DB**.
 2. **Vayu RAG query** — `05_build_app/rag_client.py` embeds the question, searches Vector DB, calls **Vayu Model as a Service** chat, returns answer + citations.
 3. **Vayu chat UI** — `05_build_app/chat_app.py` queries the **same** Vector DB collection; does **not** re-ingest. Run the notebook first.
 
 ### Minimal run
 
-Set up the environment **once** (step 2 below assumes this venv stays active):
+1. **Set up the environment**
 
-```bash
-# Set up a Python 3.12 virtual environment
-pip install virtualenv
-virtualenv env
-source env/bin/activate
+   ```bash
+   cd ask-it
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
-cd ask-it
-pip install -r requirements.txt
+2. **Create a `.env` file** in the project root (`ask-it/.env`) with your Vayu credentials:
 
-cp .env.example .env
-# Edit .env with your Vayu Vector DB and Model as a Service credentials
-```
+   ```bash
+   # Vayu Vector DB (Qdrant) — Step 2
+   QDRANT_URL=<your-qdrant-url>
+   QDRANT_API_KEY=<your-qdrant-api-key>
+   COLLECTION_NAME=knowledge_base_rag
 
-1. Run all cells in **`04_starter_kit/qna.ipynb`** in **Vayu AI Studio** (or local Jupyter).
-2. Start the UI:
+   # Vayu Model as a Service — Step 3
+   OPENAI_BASE_URL=<your-maas-base-url>
+   LLM_OPENAI_API_KEY=<your-maas-api-key>
+   EMBEDDING_OPENAI_API_KEY=<your-maas-api-key>
+   EMBEDDING_MODEL=<your-embedding-model>
+   CHAT_MODEL=<your-chat-model>
 
-```bash
-cd 05_build_app
-streamlit run chat_app.py
-```
+   # Vayu Object Storage (optional) — Step 1
+   VAYU_S3_KEY=<your-access-key>
+   VAYU_S3_SECRET=<your-secret-key>
+   VAYU_S3_ENDPOINT=<your-s3-endpoint>
+   VAYU_S3_BUCKET=<your-bucket-name>
+   S3_PREFIX=docs/
+   ```
 
-Open **http://localhost:8501** (or the Studio proxy URL). Use the sidebar **top-k** and expand **Sources** on each reply.
+   Python scripts and notebooks load this file automatically via `load_dotenv`. Do not commit `.env` to git.
 
-### Docker
+3. **Run ingest (once)**
 
-**Build context must be `ask-it/`** (the folder that contains `requirements.txt` and `05_build_app/`). Do **not** run `docker build` from inside `05_build_app/` — paths like `COPY ../requirements.txt` will fail.
+   Open `04_starter_kit/qna.ipynb` in Vayu AI Studio, select the kernel, then run all cells:
 
-```bash
-# From your clone (adjust if your repo path differs)
-cd vayu-hackathon/ask-it
+   1. Open **Select Kernel** and choose **Python Environments**.
 
-docker build -f 05_build_app/Dockerfile -t <VAYU_CONTAINER_REGISTRY>/ask-it-chat:latest . --push
-```
+   ![Select Kernel — Python Environments](assets/kernel_select.png)
 
-Push the image to your registry, then deploy on **Vayu ML Service** — full steps: [`06_deploy/README.md`](06_deploy/README.md). Build details: [`05_build_app/README.md`](05_build_app/README.md).
+   2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](00_vayu_workspace/)).
+
+   ![Select a Python Environment](assets/Select_kernerl_env.png)
+
+   See [Step 4](04_starter_kit/) for full ingest details.
+
+4. **Launch the chat UI** (`05_build_app/`)
+
+   ```bash
+   cd 05_build_app
+   streamlit run chat_app.py
+   ```
+
+   Open **http://localhost:8501** (or the Studio proxy URL, e.g. `https://<your-workspace-host>/proxy/8501`). Use the sidebar **top-k** and expand **Sources** on each reply.
+
+   **Or build the Docker image** for [Step 6](06_deploy/) — see [`05_build_app/README.md`](05_build_app/README.md).
+
+---
+
+## Environment variables
 
 | Variable | Required | Notes |
 |----------|----------|--------|
 | `QDRANT_URL` / `QDRANT_API_KEY` | Yes (hosted) | From **Vayu Vector DB** in AI Studio |
 | `QDRANT_PATH` | Dev alternative | Local Qdrant only; omit `QDRANT_URL` |
-| `LLM_OPENAI_API_KEY` / `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** credentials and base URL |
-| `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** credentials and base URL |
-| `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** credentials and base URL |
+| `LLM_OPENAI_API_KEY` / `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** API keys |
+| `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** base URL |
 | `EMBEDDING_MODEL` / `CHAT_MODEL` | Yes | Must match models used at ingest |
-| `CHAT_MODEL` | Yes | Must match models used at ingest |
 | `COLLECTION_NAME` | No | Default `knowledge_base_rag` |
 
 ---

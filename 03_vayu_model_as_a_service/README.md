@@ -2,27 +2,34 @@
 
 **Ask-It** › **Vayu Model as a Service** · `03_vayu_model_as_a_service/`
 
-|                      |                                                    |
-|----------------------|----------------------------------------------------|
-| **Previous**         | [← Step 2 — Vayu Vector DB](../02_vayu_vector_databases/) |
-| **Next**             | [Step 4 — Vayu RAG ingest lab →](../04_starter_kit/) |
+| | |
+|---|---|
+| **Previous** | [← Step 2 — Vayu Vector DB](../02_vayu_vector_databases/) |
+| **Next** | [Step 4 — Vayu RAG ingest lab →](../04_starter_kit/) |
 
 Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 
 ---
 
+## Open Model Catalog
+
+Go to the [Vayu Model as a Service catalog](https://ai-gateway.cloudservices.tatacommunications.com/models/models/home).
+
+For detailed setup instructions, see the **Vayu Model as a Service** documentation in AI Studio (link from your tenant console).
+
+---
+
 ## Quick Setup
 
-1. **Open the Vayu Model as a Service catalog**  
-   https://ai-gateway.cloudservices.tatacommunications.com/models/models/home
-   
-   Go to the Model Catalog in Vayu AI Studio.
-2. **Pick your models**  
+1. **Pick your models**
    - Choose an **embedding model** (for converting text to vectors).
    - Choose a **chat model** (for conversational/answering capabilities).
-3. **Get API credentials**  
+
+2. **Get API credentials**
    - Copy your API key and the base endpoint URL from the catalog or your Workspace details.
-4. **Configure `.env`**  
+
+3. **Configure `.env`**
+
    At the **ask-it** repo root, copy `.env.example` to `.env` and set these variables (used by `qna.ipynb` and `05_build_app/`):
 
    ```bash
@@ -32,7 +39,8 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
    # EMBEDDING_MODEL, EMBEDDING_OPENAI_API_KEY
    ```
 
-5. **Continue**  
+4. **Continue**
+
    Go to [Step 4 — Vayu RAG ingest lab →](../04_starter_kit/) and run `qna.ipynb` in Vayu AI Studio.
 
 ---
@@ -41,20 +49,14 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 
 - The **embedding model** determines vector dimension; your **Vayu Vector DB** collection must use the *same* size.
 - Always use the *same* `EMBEDDING_MODEL` and `CHAT_MODEL` environment variables when running both ingestion and the chat app.
-- API keys and base URL should never be committed to version control—set them in `ask-it/.env` (copy from `.env.example`).
-
----
-
-## Where to Find More Info
-
-- Detailed instructions are in the **Vayu Model as a Service** documentation in AI Studio (link from your tenant console).
+- API keys and base URL should never be committed to version control — set them in `ask-it/.env` (copy from `.env.example`).
 
 ---
 
 ## Navigation
 
-|                      |                                                    |
-|----------------------|----------------------------------------------------|
-| **Previous**         | [← Step 2 — Vayu Vector DB](../02_vayu_vector_databases/) |
-| **Next**             | [Step 4 — Vayu RAG ingest lab →](../04_starter_kit/) |
-| **Overview**         | [Ask-It overview](../README.md)                    |
+| | |
+|---|---|
+| **Previous** | [← Step 2 — Vayu Vector DB](../02_vayu_vector_databases/) |
+| **Next** | [Step 4 — Vayu RAG ingest lab →](../04_starter_kit/) |
+| **Overview** | [Ask-It overview](../README.md) |
