@@ -9,8 +9,6 @@
 
 Welcome! This folder contains your starting document corpus and scripts to sync it with **Vayu Object Storage** — essential for seamless downstream ingestion and RAG workflows in Vayu AI Studio.
 
-**Reference docs:** [Vayu S3 Object Storage Documentation](https://ipcloud.tatacommunications.com/docs/docs/s3-object-browser/)
-
 ---
 
 ## Folder Contents
@@ -41,6 +39,7 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
    | `VAYU_S3_SECRET` | S3 secret access key |
    | `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
    | `VAYU_S3_BUCKET` | Target bucket name |
+   | `S3_PREFIX` | Optional S3 folder prefix (default `docs/` in the notebook) |
 
    _(Never commit real credentials!)_
 
@@ -58,7 +57,15 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
 
    Use the Upload/Download cells to move the corpus (`docs/`) between your local disk and Vayu Object Storage.
 
-3. **Continue project steps**
+3. **Verify upload in S3 Browser**
+
+   Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) to confirm your files uploaded successfully:
+
+   1. Select the bucket named in **`VAYU_S3_BUCKET`** (from your `.env`).
+   2. Navigate to the **`docs/`** path (matches **`S3_PREFIX`** in `01_dataset.ipynb`; default is `docs/`).
+   3. Confirm your corpus files are present (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
+
+4. **Continue project steps**
 
    Once uploaded, open [`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb) for ingest.
 
