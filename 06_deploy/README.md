@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **⬅ Previous** | [Step 5 — Build Docker image](../05_build_app/) |
+| **⬅ Previous** | [Step 5 — Build app](../05_build_app/) |
 | **🏁 Next** | — (journey complete) |
 | **🏠 Overview** | [Ask-It overview](../README.md) |
 
@@ -34,24 +34,32 @@ The container **does not** re-ingest documents. It only queries the collection y
 | 2 | [`02_vayu_vector_databases/`](../02_vayu_vector_databases/) | `QDRANT_URL`, `QDRANT_API_KEY`, `COLLECTION_NAME` |
 | 3 | [`03_vayu_model_as_a_service/`](../03_vayu_model_as_a_service/) | `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL` |
 | 4 | [`04_starter_kit/`](../04_starter_kit/) | `qna.ipynb` run — vectors in Vector DB |
-| 5 | [`05_build_app/`](../05_build_app/) | Image built and pushed to **Vayu Hackathon Container Registry** |
+| 5 | [`05_build_app/`](../05_build_app/) | Chat app tested locally |
 
-**Before Step 6:** smoke-test the image locally (see [Step 5 — Build and push](../05_build_app/README.md#build-and-push-docker-image)) so you know RAG works with your env vars.
+**Before Step 6:** Run `streamlit run chat_app.py` locally ([Step 5](../05_build_app/README.md)) and confirm RAG answers work with your env vars.
 
 ---
 
 ## Step 1 — Build and push the Docker image
 
-Build context **must** be `ask-it/` (not `05_build_app/`). Full details: [`05_build_app/README.md`](../05_build_app/README.md#build-and-push-docker-image).
+Build context **must** be `ask-it/` (not `05_build_app/`).
+
+| | Path |
+|---|------|
+| **Build from** | `ask-it/` |
+| **Dockerfile** | `ask-it/05_build_app/Dockerfile` |
+| **Do not build from** | `05_build_app/` (will fail on `COPY`) |
+
+For registry login, credentials, and push details, see the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/).
 
 ```bash
 cd ask-it
 docker login <YOUR_CONTAINER_REGISTRY_HOST>
 
-docker build -f 05_build_app/Dockerfile -t <YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest . --push
+docker build -f 05_build_app/Dockerfile -t <YOUR_CONTAINER_REGISTRY_HOST>/<YOUR_PROJECT>/ask-it-chat:latest . --push
 ```
 
-Note the full image reference you pushed (e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest`) — you will enter it in the ML Service wizard.
+Note the full image reference you pushed (e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/<YOUR_PROJECT>/ask-it-chat:latest`) — you will enter it in the ML Service wizard.
 
 | Check | |
 |-------|---|
@@ -60,7 +68,17 @@ Note the full image reference you pushed (e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/a
 
 ---
 
-## Step 2 — Open Vayu ML Services
+## Step 2 — Sign the image
+
+Vayu ML Services require **signed** container images. Sign the image after push.
+
+Follow the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/) — especially **Steps 4–8** (signing certificates, `tcl-cosign` setup, sign, and verify). Image reference:
+
+- `<YOUR_CONTAINER_REGISTRY_HOST>/<YOUR_PROJECT>/ask-it-chat:latest`
+
+---
+
+## Step 3 — Open Vayu ML Services
 
 Go to [Vayu ML Services](https://ipcloud.tatacommunications.com/aistudio/#/deploy/mlops-service-list).
 
@@ -68,25 +86,25 @@ For the full create wizard (Start → Infrastructure → Configure Compute → O
 
 ---
 
-## Step 3 — Create the ML Service (wizard)
+## Step 4 — Create the ML Service (wizard)
 
 Follow the platform wizard. Map Ask-It settings as below.
 
-### 3.1 Start — image and runtime
+### 4.1 Start — image and runtime
 
 | Field | Ask-It value |
 |-------|----------------|
 | **Name** | e.g. `ask-it-chat` or your team name |
 | **Framework** | **Streamlit** (or **Python3** if Streamlit is not listed — app still runs via `streamlit run` in the image CMD) |
 | **Private Registry → Registry URL** | `<YOUR_CONTAINER_REGISTRY_HOST>` |
-| **Private Registry → Image** | Full image you pushed, e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest` |
+| **Private Registry → Image** | Full signed image you pushed, e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/<YOUR_PROJECT>/ask-it-chat:latest` |
 | **Private Registry → Username / Password** | `<YOUR_REGISTRY_USERNAME>` / `<YOUR_REGISTRY_PASSWORD>` |
 | **Port** | **8501** |
 | **Public Expose** | Enable if you need a URL reachable outside the cluster (typical for demos) |
 
 Optional **Args**: leave empty unless your platform team specifies extra Streamlit flags.
 
-### 3.2 Environment variables (required)
+### 4.2 Environment variables (required)
 
 Add each key/value pair in **Environment Variable** on the Start step (or equivalent secrets UI). Use the **same values** as in your local `ask-it/.env` and `qna.ipynb` ingest run (the `.env` file is for local dev only — it is not baked into the Docker image).
 
@@ -116,28 +134,28 @@ COLLECTION_NAME=knowledge_base_rag
 
 Do **not** set `QDRANT_PATH` for hosted deployment unless you intentionally use on-disk Qdrant inside the container (not recommended for this template).
 
-### 3.3 Infrastructure
+### 4.3 Infrastructure
 
 Select the **Datacenter**, **Business Unit**, and **Environment** assigned to your hackathon workspace (same as other Vayu resources).
 
-### 3.4 Configure compute
+### 4.4 Configure compute
 
 | Field | Guidance |
 |-------|----------|
 | **Resources / flavor** | CPU is enough for Streamlit + API calls; add GPU only if your track requires it |
 | **Replicas** | `1` for demo; increase for load testing |
 
-### 3.5 Observability
+### 4.5 Observability
 
 Enable **Monitoring** and **Logging** if available — useful when debugging retrieval or MaaS errors during the demo.
 
-### 3.6 Review and submit
+### 4.6 Review and submit
 
 Review name, image, port **8501**, and all environment variables. Click **Submit** and wait until status is **ready** (or equivalent) on the ML Services list.
 
 ---
 
-## Step 4 — Get the endpoint and verify
+## Step 5 — Get the endpoint and verify
 
 1. Open **ML Services List** → click your service **Name**.
 2. On **View ML Service**, check **Summary** and **Connect** for the public or internal URL.
@@ -154,7 +172,7 @@ Review name, image, port **8501**, and all environment variables. Click **Submit
 
 ---
 
-## Step 5 — Optional: Model Registry
+## Step 6 — Optional: Model Registry
 
 If your hackathon track requires registering the RAG configuration:
 
@@ -182,7 +200,7 @@ Register metadata such as collection name, embedding model, chat model, and top-
 ## Demo checklist (submission-ready)
 
 - [ ] Corpus indexed in Vector DB ([`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb))
-- [ ] Docker image built from `ask-it/` and pushed to registry
+- [ ] Docker image built from `ask-it/`, pushed to registry, and **signed**
 - [ ] ML Service **ready** with port **8501** and all env vars set
 - [ ] Public/demo URL opens Ask-It UI
 - [ ] Test question returns a grounded answer with **Sources** expanded
@@ -203,6 +221,6 @@ Register metadata such as collection name, embedding model, chat model, and top-
 
 | | |
 |---|---|
-| **⬅ Previous** | [Step 5 — Build app & Docker image](../05_build_app/) |
+| **⬅ Previous** | [Step 5 — Build app](../05_build_app/) |
 | **Step 4** | [Vayu RAG ingest lab](../04_starter_kit/) |
 | **🏠 Overview** | [Ask-It overview](../README.md) |

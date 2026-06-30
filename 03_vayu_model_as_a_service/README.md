@@ -11,6 +11,21 @@ Set up **Vayu Model as a Service** for both text embeddings and chat completion.
 
 Ask-It uses **two models** (one embedding, one LLM) and **two API keys** — create a separate key for each model.
 
+See the [Model as a Service overview](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-intro) for platform features and getting started.
+
+---
+
+## Documentation
+
+| Topic | Documentation |
+|-------|----------------|
+| **Overview** | [MaaS introduction](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-intro) |
+| **Explore Models** | [Explore Models guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models) |
+| **API keys** | [API Key Management](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys) |
+| **Playground** | [Playground](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-playground) |
+| **Dashboard** | [Dashboard](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-dashboard) |
+| **LLM providers** | [LLM Provider List](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-llm-providers) |
+
 ---
 
 ## Quick Setup
@@ -20,6 +35,8 @@ Ask-It uses **two models** (one embedding, one LLM) and **two API keys** — cre
 Open the **Explore Models** tab in the Model as a Service catalog:
 
 [Explore Models](https://ai-gateway.cloudservices.tatacommunications.com/models/models/explore)
+
+See also the [Explore Models guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models).
 
 Choose which models you want to use:
 
@@ -33,6 +50,8 @@ You will get the exact model IDs in step 3 via the `/v1/models` API.
 Open the **Secret Key** list:
 
 [API keys — Secret Key list](https://ai-gateway.cloudservices.tatacommunications.com/models/models/user/secret-key-list)
+
+See also [API Key Management](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys).
 
 Click **Create API key** and create **two keys**:
 

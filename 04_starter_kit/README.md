@@ -66,7 +66,7 @@ cp .env.example .env
 
 2. **Run all cells:** The notebook chunks documents, embeds them, upserts to Vector DB, and tests `rag_answer()` with citations.
 
-3. **Continue to the chat app:** Proceed to [Step 5](../05_build_app/) to run or containerise the Streamlit UI.
+3. **Continue to the chat app:** Proceed to [Step 5](../05_build_app/) to run the Streamlit UI locally, then [Step 6](../06_deploy/) to deploy.
 
 ---
 

@@ -58,8 +58,8 @@ ask-it/
 | 2 | **Vayu Vector DB** (Qdrant) | `02_vayu_vector_databases/` | `README.md` — provision DB; set `QDRANT_URL` / `QDRANT_API_KEY` |
 | 3 | **Vayu Model as a Service** | `03_vayu_model_as_a_service/` | `README.md` — MaaS API key, base URL, embedding + chat models |
 | 4 | **Vayu AI Studio RAG lab** | `04_starter_kit/` | `qna.ipynb` — chunk, embed (MaaS), index (Vector DB) |
-| 5 | **Vayu chat app (build)** | `05_build_app/` | `chat_app.py` + `rag_client.py`; build/push Docker image |
-| 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Deploy image to **Vayu ML Service** — hosted Streamlit endpoint |
+| 5 | **Vayu chat app (local)** | `05_build_app/` | `chat_app.py` — run Streamlit locally; Dockerfile used in Step 6 |
+| 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Build, sign, push image; deploy hosted Streamlit endpoint |
 
 ---
 
@@ -74,7 +74,7 @@ ask-it/
 | **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (MaaS) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
 | **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call MaaS chat, return citations (notebook tests + Streamlit UI). |
 | **Vayu chat UI** | `streamlit run chat_app.py` locally or from the Docker image; same Vector DB collection and source panel for judges. |
-| **Vayu ML Service (deploy)** | Push image from Step 5, create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars — see [`06_deploy/README.md`](06_deploy/README.md). |
+| **Vayu ML Service (deploy)** | Build, sign, and push the Docker image from Step 5, then create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars — see [`06_deploy/README.md`](06_deploy/README.md). |
 
 ---
 
@@ -159,7 +159,7 @@ ask-it/
 
    Open **http://localhost:8501** (or the Studio proxy URL, e.g. `https://<your-workspace-host>/proxy/8501`). Use the sidebar **top-k** and expand **Sources** on each reply.
 
-   **Or build the Docker image** for [Step 6](06_deploy/) — see [`05_build_app/README.md`](05_build_app/README.md).
+   **Or deploy to Vayu** — build, sign, and push the Docker image in [Step 6](06_deploy/).
 
 ---
 

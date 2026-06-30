@@ -1,13 +1,13 @@
 # Step 5 — Vayu chat app & Realtime Inference
 
-**Ask-It** › **Vayu Container Registry & Realtime Inference** · `05_build_app/`
+**Ask-It** › **Streamlit Chat App** · `05_build_app/`
 
 | | |
 |---|---|
 | **Previous** | [Step 4 — Vayu RAG ingest lab](../04_starter_kit/) |
 | **Next** | [Step 6 — Deploy ML Service →](../06_deploy/) |
 
-Build the **Ask-It** Streamlit app and Docker image locally, then continue to [Step 6 — Deploy](../06_deploy/) for the hosted **Vayu ML Service** endpoint.
+Run the **Ask-It** Streamlit chat app locally, then continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the Docker image as a **Vayu ML Service**.
 
 ---
 
@@ -37,7 +37,7 @@ Streamlit UI (port 8501)
 |------|-------------|
 | `chat_app.py` | Streamlit interface for asking questions |
 | `rag_client.py` | Abstraction for retrieval & LLM chat |
-| `Dockerfile` | Production-ready image for **Vayu Hackathon Container Registry** |
+| `Dockerfile` | Used in [Step 6](../06_deploy/) to build the ML Service image |
 
 ---
 
@@ -48,7 +48,7 @@ Streamlit UI (port 8501)
 
 ---
 
-## Run Locally (Dev Mode)
+## Run locally
 
 ```bash
 cd ask-it
@@ -68,46 +68,7 @@ streamlit run chat_app.py
 - Change **Top-K** from the sidebar to fine-tune answers
 - Click and expand **Sources** for each response
 
----
-
-## Build and push Docker image
-
-The `Dockerfile` lives in this folder, but the **build context** must be the parent **`ask-it/`** directory (one level up), because the image copies `requirements.txt` from there.
-
-| | Path |
-|---|------|
-| **Build from** | `ask-it/` |
-| **Dockerfile** | `ask-it/05_build_app/Dockerfile` |
-| **Do not build from** | `05_build_app/` (will fail on `COPY`) |
-
-### Vayu Container Registry
-
-| Resource | Value |
-|----------|-------|
-| **Registry host** | `<YOUR_CONTAINER_REGISTRY_HOST>` |
-| **Registry username** | `<YOUR_REGISTRY_USERNAME>` |
-| **Registry password** | `<YOUR_REGISTRY_PASSWORD>` |
-
-1. Log in to your hackathon / Vayu container registry:
-
-   ```bash
-   docker login <YOUR_CONTAINER_REGISTRY_HOST>
-   ```
-
-2. Build and push from the `ask-it/` root:
-
-   ```bash
-   cd ask-it
-
-   docker build -f 05_build_app/Dockerfile -t <YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest . --push
-   ```
-
-3. Note the full image reference (e.g. `<YOUR_CONTAINER_REGISTRY_HOST>/ask-it-chat:latest`) — you will enter it in the ML Service wizard in [Step 6](../06_deploy/).
-
-| Check | |
-|-------|---|
-| Port in image | **8501** (Streamlit; see `EXPOSE` in Dockerfile) |
-| Secrets | **Not** baked into the image — only at runtime |
+When local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the Docker image.
 
 ---
 
@@ -134,20 +95,13 @@ The `Dockerfile` lives in this folder, but the **build context** must be the par
 | Empty or wrong answers | Re-run `qna.ipynb`; verify `COLLECTION_NAME` and `EMBEDDING_MODEL` match ingest |
 | Model errors | Confirm `CHAT_MODEL` / `OPENAI_BASE_URL`; check API key and credits |
 | Page won't load in workspace | Use the proxy URL (`/proxy/8501`) instead of `localhost` |
-| Docker build fails on `COPY` | Build from `ask-it/` root, not `05_build_app/` |
 
 ---
 
-## Next: deploy to Vayu ML Service
-
-After the image is pushed to your registry, follow **[Step 6 — Deploy](../06_deploy/README.md)** for the ML Service wizard (port **8501**, environment variables, public URL, and demo checklist).
-
----
-
-## Pro Tips & Notes
+## Pro tips
 
 - Re-running `qna.ipynb` is **required** after corpus updates!
-- Never bake secrets into Docker images — use runtime environment variables instead.
+- Never bake secrets into Docker images — use runtime environment variables in the ML Service (Step 6).
 
 ---
 
