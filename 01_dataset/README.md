@@ -30,7 +30,6 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
    cd ask-it
    cp .env.example .env
    # Edit .env — VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
-   # Optional: S3_PREFIX=docs/
    ```
 
    | Variable | Purpose |
@@ -39,7 +38,6 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
    | `VAYU_S3_SECRET` | S3 secret access key |
    | `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
    | `VAYU_S3_BUCKET` | Target bucket name |
-   | `S3_PREFIX` | Optional S3 folder prefix (default `docs/` in the notebook) |
 
    _(Never commit real credentials!)_
 
@@ -62,7 +60,7 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
    Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) to confirm your files uploaded successfully:
 
    1. Select the bucket named in **`VAYU_S3_BUCKET`** (from your `.env`).
-   2. Navigate to the **`docs/`** path (matches **`S3_PREFIX`** in `01_dataset.ipynb`; default is `docs/`).
+   2. Navigate to **`ask-it/docs/`**.
    3. Confirm your corpus files are present (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
 
 4. **Continue project steps**
@@ -95,7 +93,7 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
 ## Best Practices
 
 - **Never commit** storage credentials to git or share them in public repos.
-- Consistent structure: keep the `docs/` layout identical in local and remote locations to enable accurate citations and easier debugging.
+- Consistent structure: keep the local `docs/` layout mirrored under **`ask-it/docs/`** in the bucket to enable accurate citations and easier debugging.
 
 ---
 

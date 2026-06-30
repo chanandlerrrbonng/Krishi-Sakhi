@@ -132,7 +132,6 @@ ask-it/
    VAYU_S3_SECRET=<your-secret-key>
    VAYU_S3_ENDPOINT=<your-s3-endpoint>
    VAYU_S3_BUCKET=<your-bucket-name>
-   S3_PREFIX=docs/
    ```
 
    Python scripts and notebooks load this file automatically via `load_dotenv`. Do not commit `.env` to git.
