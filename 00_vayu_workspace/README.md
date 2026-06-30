@@ -42,7 +42,7 @@ For the full create wizard (Start → Infrastructure → Configure Compute and S
    Clone or upload the `ask-it` repository into your new workspace:
 
    ```bash
-   git clone <YOUR_ASK_IT_REPO_URL>
+   git clone https://github.com/your-org/ask-it.git
    ```
 
    Or upload it manually via the UI.
