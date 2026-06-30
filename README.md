@@ -4,11 +4,11 @@
 
 **Problem:** Users often have to comb through massive documents (PDFs, policies, textbooks) in languages like Hindi, needing a quick answer they can trust. Choose a real user (e.g., a customer‑support agent, loan officer, MSME owner, junior doctor, law student, HR newcomer, student, or citizen) and a document set they care about. Build an end‑to‑end copilot **using the Vayu platform**: store the document corpus in **Vayu Object Storage**, ingest and chunk them in a **Vayu AI Studio** notebook, embed with an approved model from **Vayu Model as a Service**, index in **Vayu Vector DB (Qdrant)**, configure the RAG pipeline and register it in the **Vayu Model Registry**, and expose a chat UI via **Vayu Realtime Inference**.
 
-**Outcome:** This starter template demonstrates the full Vayu‑centric pipeline: upload docs to **Vayu Object Storage**, ingest‑chunk‑embed‑index in **Vayu AI Studio**, store vectors in **Vayu Vector DB**, register RAG configuration in the **Vayu Model Registry**, and run a Streamlit chat app containerised and pushed to the **Vayu Hackathon Container Registry**, then served via **Vayu Realtime Inference**. The UI returns answers in plain language, cites the exact source document and line, supports multilingual queries (English + an Indian language), and respects guardrails (PII, toxicity, jailbreak).
+**Outcome:** This starter template demonstrates the full Vayu‑centric pipeline: upload docs to **Vayu Object Storage**, ingest‑chunk‑embed‑index in **Vayu AI Studio**, store vectors in **Vayu Vector DB**, register RAG configuration in the **Vayu Model Registry**, run the Streamlit chat app locally (Step 5), then containerise, sign, and serve it via **Vayu ML Service** (Step 6). The UI returns answers in plain language, cites the exact source document and line, supports multilingual queries (English + an Indian language), and respects guardrails (PII, toxicity, jailbreak).
 
 ### Chat UI preview
 
-The final step (`05_build_app/chat_app.py`) is a Streamlit chat interface with retrieval settings, grounded answers, and expandable source citations:
+The chat UI (`05_build_app/chat_app.py`) is a Streamlit interface with retrieval settings, grounded answers, and expandable source citations. Run it locally in Step 5; deploy it as an ML Service in Step 6.
 
 ![Ask-It Streamlit chat UI](./assets/ask-it/app.png)
 
@@ -42,13 +42,13 @@ ask-it/
 │   └── qna.ipynb                 # Vayu AI Studio: chunk → MaaS embed → Vector DB index
 │
 ├── 05_build_app/
-│   ├── chat_app.py               # Streamlit chat UI
+│   ├── chat_app.py               # Streamlit chat UI (run locally)
 │   ├── rag_client.py             # RAG engine (retrieve + prompt + citations)
-│   ├── Dockerfile                # Build image for registry
-│   └── README.md                 # Local run + Docker build
+│   ├── Dockerfile                # Image definition — built in Step 6
+│   └── README.md                 # Local Streamlit run
 │
 └── 06_deploy/
-    └── README.md                 # Push image + Vayu ML Service endpoint
+    └── README.md                 # Build, sign, push image + ML Service endpoint
 ```
 
 | Step | Vayu service | Folder | What to run / open |
@@ -58,8 +58,8 @@ ask-it/
 | 2 | **Vayu Vector DB** (Qdrant) | `02_vayu_vector_databases/` | `README.md` — provision DB; set `QDRANT_URL` / `QDRANT_API_KEY` |
 | 3 | **Vayu Model as a Service** | `03_vayu_model_as_a_service/` | `README.md` — MaaS API key, base URL, embedding + chat models |
 | 4 | **Vayu AI Studio RAG lab** | `04_starter_kit/` | `qna.ipynb` — chunk, embed (MaaS), index (Vector DB) |
-| 5 | **Vayu chat app (local)** | `05_build_app/` | `chat_app.py` — run Streamlit locally; Dockerfile used in Step 6 |
-| 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Build, sign, push image; deploy hosted Streamlit endpoint |
+| 5 | **Vayu chat app (local)** | `05_build_app/` | `streamlit run chat_app.py` — test RAG locally |
+| 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Build, sign, push Docker image; deploy hosted endpoint |
 
 ---
 
@@ -73,8 +73,8 @@ ask-it/
 | **Vayu Model as a Service** | Pick embedding + chat models from the **MaaS catalog**. Set `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL`. |
 | **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (MaaS) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
 | **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call MaaS chat, return citations (notebook tests + Streamlit UI). |
-| **Vayu chat UI** | `streamlit run chat_app.py` locally or from the Docker image; same Vector DB collection and source panel for judges. |
-| **Vayu ML Service (deploy)** | Build, sign, and push the Docker image from Step 5, then create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars — see [`06_deploy/README.md`](06_deploy/README.md). |
+| **Vayu chat UI (local)** | `streamlit run chat_app.py` in [`05_build_app/`](05_build_app/) — same Vector DB collection and source panel for judges. |
+| **Vayu ML Service (deploy)** | In [`06_deploy/`](06_deploy/): build, sign, and push the Docker image, then create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars. |
 
 ---
 
@@ -86,8 +86,8 @@ ask-it/
 | Compute | **Vayu AI Studio** — `04_starter_kit/qna.ipynb` |
 | Vector search | **Vayu Vector DB** (Qdrant) |
 | Embeddings + chat | **Vayu Model as a Service** — OpenAI-compatible API |
-| App surface | **Streamlit** (`05_build_app/chat_app.py`) |
-| Container | **`05_build_app/Dockerfile`** → registry → **`06_deploy/`** ML Service |
+| App surface | **Streamlit** (`05_build_app/chat_app.py`) — local in Step 5 |
+| Deploy | **Vayu ML Service** — build/sign/push image in Step 6 ([`06_deploy/`](06_deploy/)) |
 
 **In the box:** `04_starter_kit/qna.ipynb` (ingest + lab), `05_build_app/rag_client.py`, `05_build_app/chat_app.py`, `01_dataset/docs/` sample corpus, `requirements.txt`, `05_build_app/Dockerfile`.
 
@@ -99,7 +99,8 @@ ask-it/
 
 1. **Vayu RAG ingest** — `04_starter_kit/qna.ipynb` chunks `01_dataset/docs/`, embeds via **Vayu Model as a Service**, upserts into **Vayu Vector DB**.
 2. **Vayu RAG query** — `05_build_app/rag_client.py` embeds the question, searches Vector DB, calls **Vayu Model as a Service** chat, returns answer + citations.
-3. **Vayu chat UI** — `05_build_app/chat_app.py` queries the **same** Vector DB collection; does **not** re-ingest. Run the notebook first.
+3. **Vayu chat UI (local)** — `05_build_app/chat_app.py` queries the **same** Vector DB collection; does **not** re-ingest. Run the notebook first.
+4. **Vayu ML Service (deploy)** — build, sign, and push the Docker image, then host the chat UI on the platform ([`06_deploy/`](06_deploy/)).
 
 ### Minimal run
 
@@ -150,7 +151,7 @@ ask-it/
 
    See [Step 4](04_starter_kit/) for full ingest details.
 
-4. **Launch the chat UI** (`05_build_app/`)
+4. **Launch the chat UI locally** (`05_build_app/`)
 
    ```bash
    cd 05_build_app
@@ -159,7 +160,9 @@ ask-it/
 
    Open **http://localhost:8501** (or the Studio proxy URL, e.g. `https://<your-workspace-host>/proxy/8501`). Use the sidebar **top-k** and expand **Sources** on each reply.
 
-   **Or deploy to Vayu** — build, sign, and push the Docker image in [Step 6](06_deploy/).
+5. **Deploy to Vayu** (optional, for judges)
+
+   After local testing works, build, sign, and push the Docker image in [Step 6](06_deploy/).
 
 ---
 
