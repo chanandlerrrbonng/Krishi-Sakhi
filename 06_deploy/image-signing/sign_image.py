@@ -105,6 +105,7 @@ def sign_image() -> None:
         f"--fulcio-url={FULCIO_SERVICE}",
         f"--registry-username={username}",
         f"--registry-password={password}",
+        "--recursive"
     ]
     print("Signing image (follow the browser prompt if shown)...")
     subprocess.run(cmd, env=env, check=True)
