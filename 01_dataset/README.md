@@ -53,6 +53,8 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
 
+   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](../00_vayu_workspace/)).
+
    Use the Upload/Download cells to move the corpus (`docs/`) between your local disk and Vayu Object Storage.
 
 3. **Verify upload in S3 Browser**

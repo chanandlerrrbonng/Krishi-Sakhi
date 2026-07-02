@@ -33,8 +33,11 @@ For the full create wizard (Start → Infrastructure → Configure Compute and S
 
 1. **Create a Vayu AI Studio workspace**
 
+   > **SKIP THIS STEP** if a Vayu AI Studio workspace has already been provided to you — continue with step 2 below.
+
    - Log in to [Vayu AI Studio](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list).
    - Click **Create Workspace** and follow the prompts. See the [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace) for step-by-step wizard details.
+   - **Object storage host alias:** During workspace creation, add a **host alias** for object storage using the **IP** and **endpoint** from your provided SOP document. Enter the endpoint as the hostname **only** — do not include `http://` or `https://`.
    - Make sure **Enable Docker in the Workspace** is turned on before you finish creating the workspace (required for [Step 5](../05_build_app/) and [Step 6](../06_deploy/)).
 
 2. **Import this repository**
@@ -52,13 +55,13 @@ For the full create wizard (Start → Infrastructure → Configure Compute and S
    Inside your workspace terminal:
 
    ```bash
-   cd ask-it
    python3 -m venv .venv
    source .venv/bin/activate
+   cd ask-it
    pip install -r requirements.txt
 
    cp .env.example .env
-   # Edit .env with credentials from Steps 2–3
+   # Edit .env with credentials from Steps 2–3 (and registry vars for Step 6)
    ```
 
 4. **Select the notebook kernel**
@@ -72,6 +75,8 @@ For the full create wizard (Start → Infrastructure → Configure Compute and S
    2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` Python you just created).
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
+
+   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in step 3).
 
 5. **Where to work**
 

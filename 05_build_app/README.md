@@ -50,10 +50,22 @@ Streamlit UI (port 8501)
 
 ## Run locally
 
+From the workspace root (after [Step 0](../00_vayu_workspace/)):
+
 ```bash
 cd ask-it
+source .venv/bin/activate   # if not already active
+
+cd 05_build_app
+streamlit run chat_app.py
+```
+
+If you have not set up the venv yet:
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+cd ask-it
 pip install -r requirements.txt
 
 cp .env.example .env

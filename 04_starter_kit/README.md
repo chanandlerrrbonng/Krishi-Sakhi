@@ -34,9 +34,9 @@ Install dependencies:
 ![Setting up](../assets/install.png)
 
 ```bash
-cd ask-it
 python3 -m venv .venv
 source .venv/bin/activate
+cd ask-it
 pip install -r requirements.txt
 
 cp .env.example .env
@@ -63,6 +63,8 @@ cp .env.example .env
    2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](../00_vayu_workspace/)).
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
+
+   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](../00_vayu_workspace/)).
 
 2. **Run all cells:** The notebook chunks documents, embeds them, upserts to Vector DB, and tests `rag_answer()` with citations.
 

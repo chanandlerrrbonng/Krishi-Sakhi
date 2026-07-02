@@ -14,8 +14,6 @@ The chat UI (`05_build_app/chat_app.py`) is a Streamlit interface with retrieval
 
 Typical hackathon domains: customer-support manuals, HR/onboarding policies, research PDFs (add loaders if you need PDF/DOCX beyond the starter’s `.md` / `.txt` / `.html`).
 
-**Architecture diagram:** single Excalidraw file [`diagrams/ask-it-architecture.excalidraw`](./diagrams/ask-it-architecture.excalidraw) (platform journey, ingest, query, deploy).
-
 ---
 
 ## Project layout (steps)
@@ -48,7 +46,8 @@ ask-it/
 │   └── README.md                 # Local Streamlit run
 │
 └── 06_deploy/
-    └── README.md                 # Build, sign, push image + ML Service endpoint
+    ├── README.md                 # Build, sign, push image + ML Service endpoint
+    └── image-signing/            # Optional automated tcl-cosign signing
 ```
 
 | Step | Vayu service | Folder | What to run / open |
@@ -106,10 +105,12 @@ ask-it/
 
 1. **Set up the environment**
 
+   Complete [Step 0](00_vayu_workspace/) first (workspace, clone repo). Inside your workspace terminal:
+
    ```bash
-   cd ask-it
    python3 -m venv .venv
    source .venv/bin/activate
+   cd ask-it
    pip install -r requirements.txt
    ```
 
@@ -133,9 +134,19 @@ ask-it/
    VAYU_S3_SECRET=<your-secret-key>
    VAYU_S3_ENDPOINT=<your-s3-endpoint>
    VAYU_S3_BUCKET=<your-bucket-name>
+
+   # Vayu Container Registry (Step 6 — build, sign, deploy)
+   # Host only — do not include https://, http://, or a trailing /
+   IMAGE_REGISTRY=<your-image-registry>
+   REGISTRY_PROJECT=<your-registry-project>
+   REGISTRY_USERNAME=<container-registry-username>
+   REGISTRY_PASSWORD=<container-registry-password>
+   VAYU_USERNAME=<your-vayu-username>
    ```
 
    Python scripts and notebooks load this file automatically via `load_dotenv`. Do not commit `.env` to git.
+
+   For `IMAGE_REGISTRY`, use the registry **hostname only** (e.g. `image-registry-....cloudservices.tatacommunications.com`) — no `https://`, `http://`, or trailing `/`.
 
 3. **Run ingest (once)**
 
@@ -148,6 +159,8 @@ ask-it/
    2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](00_vayu_workspace/)).
 
    ![Select a Python Environment](assets/Select_kernerl_env.png)
+
+   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](00_vayu_workspace/)).
 
    See [Step 4](04_starter_kit/) for full ingest details.
 
@@ -170,12 +183,24 @@ ask-it/
 
 | Variable | Required | Notes |
 |----------|----------|--------|
-| `QDRANT_URL` / `QDRANT_API_KEY` | Yes (hosted) | From **Vayu Vector DB** in AI Studio |
+| `QDRANT_URL` | Yes (hosted) | **Vayu Vector DB** endpoint from AI Studio |
+| `QDRANT_API_KEY` | Yes (hosted) | **Vayu Vector DB** API key from AI Studio |
 | `QDRANT_PATH` | Dev alternative | Local Qdrant only; omit `QDRANT_URL` |
-| `LLM_OPENAI_API_KEY` / `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** API keys |
+| `LLM_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** chat API key |
+| `EMBEDDING_OPENAI_API_KEY` | Yes | **Vayu Model as a Service** embedding API key |
 | `OPENAI_BASE_URL` | Yes | **Vayu Model as a Service** base URL |
-| `EMBEDDING_MODEL` / `CHAT_MODEL` | Yes | Must match models used at ingest |
+| `EMBEDDING_MODEL` | Yes | Must match model used at ingest |
+| `CHAT_MODEL` | Yes | Must match model used at ingest |
 | `COLLECTION_NAME` | No | Default `knowledge_base_rag` |
+| `VAYU_S3_KEY` | Step 1 only | Object Storage access key (optional) |
+| `VAYU_S3_SECRET` | Step 1 only | Object Storage secret key (optional) |
+| `VAYU_S3_ENDPOINT` | Step 1 only | Object Storage endpoint URL (optional) |
+| `VAYU_S3_BUCKET` | Step 1 only | Object Storage bucket name (optional) |
+| `IMAGE_REGISTRY` | Step 6 only | Container registry hostname (no `https://`) |
+| `REGISTRY_PROJECT` | Step 6 only | Registry project name |
+| `REGISTRY_USERNAME` | Step 6 only | `docker login` and image signing |
+| `REGISTRY_PASSWORD` | Step 6 only | `docker login` and image signing |
+| `VAYU_USERNAME` | Step 6 only | Certificate identity for `tcl-cosign verify` |
 
 ---
 
