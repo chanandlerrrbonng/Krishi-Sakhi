@@ -21,7 +21,7 @@ Go to [Vayu Vector DB](https://ipcloud.tatacommunications.com/aistudio/#/experim
 
 1. **Provision Vayu Vector DB (Qdrant):** In AI Studio, click **Create Vector Database** and select the **Qdrant** engine under **Vector Type** (see the [Creating Qdrant Vector DB guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant/#creating-qdrant)).
 2. **Wait for Ready:** Submit the deployment and wait until the status shows **Ready**.
-3. **Collect access details:** Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
+3. **Collect access details:** Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console. When you copy the URL, paste the link as-is but remove the trailing `dashboard` at the end (e.g. use `https://<your-host>` instead of `https://<your-host>/dashboard`).
 4. **Set environment variables:** Copy `.env.example` to `.env` at the **ask-it** repo root and fill in your values (used by notebooks and `chat_app.py`):
 
    ```bash

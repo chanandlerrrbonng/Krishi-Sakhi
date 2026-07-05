@@ -24,7 +24,7 @@ from dotenv import load_dotenv
 
 SIGN_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SIGN_DIR.parent.parent
-load_dotenv(REPO_ROOT / ".env")
+load_dotenv(REPO_ROOT / ".env", override=True)
 COSIGN_BIN = REPO_ROOT / "tcl-cosign"
 COSIGN_URL = "https://ipcloud.tatacommunications.com/docs/downloads/tcl-cosign"
 

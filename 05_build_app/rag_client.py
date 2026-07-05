@@ -23,7 +23,7 @@ from openai import OpenAI
 from qdrant_client import QdrantClient
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
-load_dotenv(_REPO_ROOT / ".env")
+load_dotenv(_REPO_ROOT / ".env", override=True)
 
 
 def _require_env(name: str) -> str:
