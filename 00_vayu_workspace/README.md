@@ -2,6 +2,13 @@
 
 **Step 0 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
+<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
+</tr>
+</table>
+
 > **Goal:** Create a place in the cloud (a "workspace") where you'll run the notebooks and the chat app for the rest of this project.
 
 **What you'll do here:**
@@ -12,14 +19,10 @@
 
 You only do this step once.
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>🧭 What is a "workspace"?</strong></summary>
-
-<br>
+<summary><h3>🧭 What is a "workspace"?</h3></summary>
 
 A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal, a code editor, and Jupyter notebooks. Instead of setting up Python on your own laptop, you do everything inside this workspace.
 
@@ -27,10 +30,10 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
 
 </details>
 
-<details>
-<summary><strong>1️⃣ Create the workspace</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>1. Create the workspace</h3></summary>
 
 > **Already have a workspace?** If one was provided to you, skip straight to the next section.
 
@@ -41,10 +44,10 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
 
 </details>
 
-<details>
-<summary><strong>2️⃣ Get the code into your workspace</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>2. Get the code into your workspace</h3></summary>
 
 Open the workspace terminal and clone this repository:
 
@@ -56,10 +59,10 @@ git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon
 
 </details>
 
-<details>
-<summary><strong>3️⃣ Install dependencies</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>3. Install dependencies</h3></summary>
 
 Still in the terminal, set up a Python virtual environment and install the packages:
 
@@ -77,10 +80,10 @@ cp .env.example .env
 
 </details>
 
-<details>
-<summary><strong>4️⃣ Select the notebook kernel</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>4. Select the notebook kernel</h3></summary>
 
 Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.venv` you just created:
 
@@ -96,10 +99,10 @@ Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.ve
 
 </details>
 
-<details>
-<summary><strong>🔗 Where you'll work next & resources</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🧭 Where you'll work next</h3></summary>
 
 You'll use this workspace for:
 
@@ -107,20 +110,19 @@ You'll use this workspace for:
 - [Step 4 — RAG ingest notebook](../04_starter_kit/qna.ipynb)
 - [Step 5 — Chat app & deploy](../05_build_app/)
 
-| Resource | Link |
-|----------|------|
-| Vayu AI Studio | [Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list) |
-| Documentation | [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/) |
-
 </details>
 
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
+#### Resources
 
-<table width="100%">
+- [Vayu AI Studio Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list)
+- [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/)
+
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"></td>
-<td align="right"><a href="../01_dataset/">Step 1 — Vayu Object Storage →</a></td>
+<td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
 </tr>
 </table>

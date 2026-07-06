@@ -2,6 +2,13 @@
 
 **Step 1 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
+</tr>
+</table>
+
 > **Goal:** Store the documents your assistant will answer from in **Vayu Object Storage**, so the notebooks in later steps can read them.
 
 **What you'll do here:**
@@ -11,14 +18,10 @@
 
 > This step is **optional** — you can also just keep documents in the local `docs/` folder. But uploading to Object Storage is closer to a real project and useful if your team shares a corpus.
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>📁 What's in this folder</strong></summary>
-
-<br>
+<summary><h3>📁 What's in this folder</h3></summary>
 
 | File / Folder | What it's for |
 |---------------|---------------|
@@ -27,10 +30,10 @@
 
 </details>
 
-<details>
-<summary><strong>1️⃣ Add your storage credentials</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>1. Add your storage credentials</h3></summary>
 
 Set these values in `ask-it/.env` (copy from `.env.example` first — never paste credentials into notebook cells):
 
@@ -47,16 +50,16 @@ cp .env.example .env
 | `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
 | `VAYU_S3_BUCKET` | The bucket to upload to |
 
-> ⚠️ Never commit real credentials to git.
+> Never commit real credentials to git.
 
 > **Tip:** Keep the same folder structure locally and in the bucket — this keeps source citations working end to end.
 
 </details>
 
-<details>
-<summary><strong>2️⃣ Run the notebook</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>2. Run the notebook</h3></summary>
 
 Open [`01_dataset.ipynb`](01_dataset.ipynb), then select the kernel:
 
@@ -74,10 +77,10 @@ Then run the **Upload** cell to send `docs/` to Object Storage. (The **Download*
 
 </details>
 
-<details>
-<summary><strong>3️⃣ Verify the upload</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>3. Verify the upload</h3></summary>
 
 Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) and check your files:
 
@@ -87,10 +90,10 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 </details>
 
-<details>
-<summary><strong>📚 The sample corpus & supported files</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📚 The sample corpus & supported files</h3></summary>
 
 | Example file | Description |
 |--------------|-------------|
@@ -104,10 +107,10 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 </details>
 
-<details>
-<summary><strong>💡 Best practices</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>💡 Best practices</h3></summary>
 
 - **Never commit** storage credentials to git or share them publicly.
 - **Mirror your structure** — keep the local `docs/` layout identical under `ask-it/docs/` in the bucket. This makes citations accurate and debugging easier.
@@ -116,11 +119,10 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
-
-<table width="100%">
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../00_vayu_workspace/">← Step 0 — Workspace</a></td>
-<td align="right"><a href="../02_vayu_vector_databases/">Step 2 — Vayu Vector DB →</a></td>
+<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
 </tr>
 </table>

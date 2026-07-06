@@ -2,6 +2,13 @@
 
 **Step 5 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
+<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
+</tr>
+</table>
+
 > **Goal:** Run the **Ask-It** chat app on your machine and ask questions about your indexed documents. This is where it all comes together.
 
 **What you'll do here:**
@@ -9,14 +16,10 @@
 2. Start the Streamlit app
 3. Open it in a browser and ask a question
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>🔄 How a question flows through the app</strong></summary>
-
-<br>
+<summary><h3>🔄 How a question flows through the app</h3></summary>
 
 ```text
 User question (chat_app.py)
@@ -36,10 +39,10 @@ Shown in the Streamlit UI  (port 8501)
 
 </details>
 
-<details>
-<summary><strong>📁 What's in this folder</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📁 What's in this folder</h3></summary>
 
 | File | What it does |
 |------|--------------|
@@ -49,20 +52,20 @@ Shown in the Streamlit UI  (port 8501)
 
 </details>
 
-<details>
-<summary><strong>📋 Before you start</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📋 Before you start</h3></summary>
 
 - [Step 4](../04_starter_kit/) is done — your documents are indexed in the Vector DB.
 - `.env` has the values from [Step 2](../02_vayu_vector_databases/) (Vector DB) and [Step 3](../03_vayu_model_as_a_service/) (models).
 
 </details>
 
-<details>
-<summary><strong>▶️ Run it</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>▶️ Run it</h3></summary>
 
 If your environment is already set up (from [Step 0](../00_vayu_workspace/)):
 
@@ -96,14 +99,14 @@ Then:
 - Adjust **Top-K** in the sidebar to control how many document chunks are retrieved.
 - Expand **Sources** under any answer to see where it came from.
 
-</details>
-
 > Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the image as a hosted service.
 
-<details>
-<summary><strong>🔑 Environment variables</strong></summary>
+</details>
 
-<br>
+---
+
+<details>
+<summary><h3>🔑 Environment variables</h3></summary>
 
 | Variable | Required | Used by | Purpose |
 |----------|----------|---------|---------|
@@ -118,10 +121,10 @@ Then:
 
 </details>
 
-<details>
-<summary><strong>🛠️ Troubleshooting</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🛠️ Troubleshooting</h3></summary>
 
 | Symptom | Fix |
 |---------|-----|
@@ -132,10 +135,10 @@ Then:
 
 </details>
 
-<details>
-<summary><strong>💡 Pro tips</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>💡 Pro tips</h3></summary>
 
 - **Re-run `qna.ipynb` after changing your documents** — otherwise the app searches stale data.
 - **Never bake secrets into Docker images** — pass them as runtime environment variables in the ML Service (Step 6).
@@ -144,11 +147,10 @@ Then:
 
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
-
-<table width="100%">
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../04_starter_kit/">← Step 4 — RAG ingest lab</a></td>
-<td align="right"><a href="../06_deploy/">Step 6 — Deploy ML Service →</a></td>
+<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
 </tr>
 </table>

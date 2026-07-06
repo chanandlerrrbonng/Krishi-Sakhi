@@ -2,6 +2,13 @@
 
 **Step 4 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../03_vayu_model_as_a_service/">Previous — Step 3 — Model as a Service</a></td>
+<td align="right"><a href="../05_build_app/">Next — Step 5 — Chat app</a></td>
+</tr>
+</table>
+
 > **Goal:** Run one notebook (`qna.ipynb`) that reads your documents, turns them into embeddings, and stores them in your Vector DB — so the chat app has something to search.
 
 **What you'll do here:**
@@ -11,14 +18,10 @@
 
 > **This step is required before the chat app will work.** The app in Step 5 only *searches* — this notebook is what actually fills the database.
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>📁 What's in this folder</strong></summary>
-
-<br>
+<summary><h3>📁 What's in this folder</h3></summary>
 
 | File | What it does |
 |------|--------------|
@@ -26,10 +29,10 @@
 
 </details>
 
-<details>
-<summary><strong>📋 Before you start</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📋 Before you start</h3></summary>
 
 Make sure these earlier steps are complete:
 
@@ -59,10 +62,10 @@ cp .env.example .env
 
 </details>
 
-<details>
-<summary><strong>1️⃣ Open the notebook and pick the kernel</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>1. Open the notebook and pick the kernel</h3></summary>
 
 Open `04_starter_kit/qna.ipynb`, then:
 
@@ -78,28 +81,28 @@ Open `04_starter_kit/qna.ipynb`, then:
 
 </details>
 
-<details>
-<summary><strong>2️⃣ Run all cells</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>2. Run all cells</h3></summary>
 
 Run every cell top to bottom. The notebook will chunk your documents, embed them, store them in the Vector DB, and finish by calling `rag_answer()` on a sample question — with citations.
 
 </details>
 
-<details>
-<summary><strong>3️⃣ Continue</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>3. Continue</h3></summary>
 
 Once it runs cleanly, go to [Step 5](../05_build_app/) to chat with your data locally.
 
 </details>
 
-<details>
-<summary><strong>⚙️ What does <code>qna.ipynb</code> actually do?</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>⚙️ What does <code>qna.ipynb</code> actually do?</h3></summary>
 
 | Stage | What happens |
 |-------|--------------|
@@ -116,10 +119,10 @@ DOCS_DIR = Path("../01_dataset/docs")
 
 </details>
 
-<details>
-<summary><strong>🔧 Two settings you may need to change</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🔧 Two settings you may need to change</h3></summary>
 
 Both are in **cell 6** of `qna.ipynb`:
 
@@ -128,10 +131,10 @@ Both are in **cell 6** of `qna.ipynb`:
 
 </details>
 
-<details>
-<summary><strong>🧩 The key functions</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🧩 The key functions</h3></summary>
 
 | Function | Purpose |
 |----------|---------|
@@ -142,10 +145,10 @@ Both are in **cell 6** of `qna.ipynb`:
 
 </details>
 
-<details>
-<summary><strong>➡️ What happens after ingest?</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🚀 What happens after ingest?</h3></summary>
 
 With the `.venv` still active and env vars from Steps 2–3 set, you can jump straight into the app:
 
@@ -158,10 +161,10 @@ Use the **same** `.env` values you used here.
 
 </details>
 
-<details>
-<summary><strong>💡 Pro tips</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>💡 Pro tips</h3></summary>
 
 - Use the same embedding and chat models as [Step 3](../03_vayu_model_as_a_service/).
 - If you change the embedding model, **recreate** the Vector DB collection — the vector size must match.
@@ -170,11 +173,10 @@ Use the **same** `.env` values you used here.
 
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
-
-<table width="100%">
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../03_vayu_model_as_a_service/">← Step 3 — Model as a Service</a></td>
-<td align="right"><a href="../05_build_app/">Step 5 — Chat app →</a></td>
+<td align="left"><a href="../03_vayu_model_as_a_service/">Previous — Step 3 — Model as a Service</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right"><a href="../05_build_app/">Next — Step 5 — Chat app</a></td>
 </tr>
 </table>

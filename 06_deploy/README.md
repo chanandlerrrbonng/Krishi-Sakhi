@@ -2,6 +2,13 @@
 
 **Step 6 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
+<td align="right">Journey complete</td>
+</tr>
+</table>
+
 > **Goal:** Take the chat app from Step 5, package it as a Docker image, sign it, and run it on **Vayu ML Service** — so anyone can open Ask-It from a URL without running anything locally.
 
 **What you'll do here:**
@@ -12,14 +19,10 @@
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>🗺️ The big picture</strong></summary>
-
-<br>
+<summary><h3>🗺️ The big picture</h3></summary>
 
 You'll deploy the **same** app you tested in Step 5. Nothing gets re-indexed — the container just *queries* the collection you already built.
 
@@ -34,10 +37,10 @@ You'll deploy the **same** app you tested in Step 5. Nothing gets re-indexed —
 
 </details>
 
-<details>
-<summary><strong>📋 Before you start</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📋 Before you start</h3></summary>
 
 | Step | You need |
 |------|----------|
@@ -55,10 +58,10 @@ Set these registry variables in the root [`.env`](../.env.example): `IMAGE_REGIS
 
 </details>
 
-<details>
-<summary><strong>1️⃣ Build and push the Docker image</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>1. Build and push the Docker image</h3></summary>
 
 > **Important:** build from the `ask-it/` folder, **not** `05_build_app/`. Building from the wrong folder will fail on `COPY`.
 
@@ -90,10 +93,10 @@ Note the full image reference you pushed (e.g. `$IMAGE_REGISTRY/$REGISTRY_PROJEC
 
 </details>
 
-<details>
-<summary><strong>2️⃣ Sign the image</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>2. Sign the image</h3></summary>
 
 Vayu ML Services only run **signed** images. Sign yours right after pushing.
 
@@ -105,10 +108,10 @@ Follow the [Container Registry guide](https://ipcloud.tatacommunications.com/doc
 
 </details>
 
-<details>
-<summary><strong>3️⃣ Open Vayu ML Services</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>3. Open Vayu ML Services</h3></summary>
 
 Go to [Vayu ML Services](https://ipcloud.tatacommunications.com/aistudio/#/deploy/mlops-service-list).
 
@@ -116,10 +119,10 @@ For the full create wizard (Start → Infrastructure → Configure Compute → O
 
 </details>
 
-<details>
-<summary><strong>4️⃣ Create the ML Service (the wizard)</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>4. Create the ML Service (the wizard)</h3></summary>
 
 Follow the wizard and map Ask-It's settings as below.
 
@@ -188,10 +191,10 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 
 </details>
 
-<details>
-<summary><strong>🔍 Verify the endpoint</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🔍 Verify the endpoint</h3></summary>
 
 1. Open **ML Services List** → click your service **Name**.
 2. On **View ML Service**, check **Summary** and **Connect** for the public or internal URL.
@@ -210,25 +213,21 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 
 </details>
 
+---
+
 <details>
-<summary><strong>🗂️ Optional: Model Registry</strong></summary>
+<summary><h3>🗂️ Optional: Model Registry</h3></summary>
 
-<br>
-
-If your track requires registering the RAG configuration:
-
-| Resource | URL |
-|----------|-----|
-| **Model Registry** | https://ipcloud.tatacommunications.com/aistudio/#/deploy/model-registry-list |
+If your track requires registering the RAG configuration, register it at the [Vayu Model Registry](https://ipcloud.tatacommunications.com/aistudio/#/deploy/model-registry-list).
 
 Register metadata like collection name, embedding model, chat model, and top-k — aligned with [`rag_client.py`](../05_build_app/rag_client.py). Deployment still runs through **ML Service** using the signed image from Step 1.
 
 </details>
 
-<details>
-<summary><strong>✔️ Demo checklist (submission-ready)</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>✔️ Demo checklist (submission-ready)</h3></summary>
 
 - [ ] Corpus indexed in Vector DB ([`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb))
 - [ ] Docker image built from `ask-it/`, pushed, and **signed**
@@ -239,10 +238,10 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 </details>
 
-<details>
-<summary><strong>🔑 Environment variable reference</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🔑 Environment variable reference</h3></summary>
 
 | Variable | Required | Notes |
 |----------|----------|--------|
@@ -263,10 +262,10 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 </details>
 
-<details>
-<summary><strong>💡 Pro tips</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>💡 Pro tips</h3></summary>
 
 - **Re-deploy after env changes** — editing env vars usually requires a restart or new revision; confirm in the UI after saving.
 - **Same models end to end** — changing `EMBEDDING_MODEL` without re-ingesting breaks vector search.
@@ -277,11 +276,10 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
-
-<table width="100%">
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../05_build_app/">← Step 5 — Build app</a></td>
-<td align="right">🏁 Journey complete</td>
+<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right">Journey complete</td>
 </tr>
 </table>

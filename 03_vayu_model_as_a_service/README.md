@@ -2,6 +2,13 @@
 
 **Step 3 of 6**
 
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
+<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
+</tr>
+</table>
+
 > **Goal:** Get access to the two AI models Ask-It needs — one to create embeddings and one to answer questions — through **Vayu Model as a Service (MaaS)**.
 
 **What you'll do here:**
@@ -10,14 +17,10 @@
 3. Look up the exact model IDs
 4. Save everything into `.env`
 
-> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
-
 ---
 
 <details>
-<summary><strong>🤔 Why two models and two keys?</strong></summary>
-
-<br>
+<summary><h3>🤔 Why two models and two keys?</h3></summary>
 
 Ask-It uses **two** models:
 
@@ -30,10 +33,10 @@ See the [Model as a Service overview](https://ipcloud.tatacommunications.com/doc
 
 </details>
 
-<details>
-<summary><strong>1️⃣ Pick your two models</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>1. Pick your two models</h3></summary>
 
 Open the **Explore Models** catalog: [Explore Models](https://ai-gateway.cloudservices.tatacommunications.com/models/models/explore) ([guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models)).
 
@@ -46,10 +49,10 @@ You'll get the exact model IDs in step 3 below.
 
 </details>
 
-<details>
-<summary><strong>2️⃣ Create two API keys</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>2. Create two API keys</h3></summary>
 
 Open the **Secret Key** list: [API keys](https://ai-gateway.cloudservices.tatacommunications.com/models/models/user/secret-key-list) ([guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys)).
 
@@ -62,10 +65,10 @@ Click **Create API key** twice to make one key per model:
 
 </details>
 
-<details>
-<summary><strong>3️⃣ Find the exact model IDs</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>3. Find the exact model IDs</h3></summary>
 
 Ask the API which models are available, using each key. Replace the placeholders with your keys:
 
@@ -85,10 +88,10 @@ From each response, copy the model ID that matches your choices from step 1. The
 
 </details>
 
-<details>
-<summary><strong>4️⃣ Fill in <code>.env</code></strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>4. Fill in <code>.env</code></h3></summary>
 
 At the `ask-it` repo root:
 
@@ -111,10 +114,10 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 
 </details>
 
-<details>
-<summary><strong>📌 Things to remember</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📌 Things to remember</h3></summary>
 
 - **One API key per model** — embedding and LLM keys are kept separate in this template.
 - **The embedding model sets the vector size** — your Vector DB collection ([Step 2](../02_vayu_vector_databases/)) must match it. Change the embedding model later and you'll need to recreate the collection.
@@ -123,29 +126,21 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 
 </details>
 
-<details>
-<summary><strong>📚 Documentation</strong></summary>
-
-<br>
-
-| Topic | Link |
-|-------|------|
-| Overview | [MaaS introduction](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-intro) |
-| Explore models | [Explore Models guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models) |
-| API keys | [API Key Management](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys) |
-| Playground | [Playground](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-playground) |
-| Dashboard | [Dashboard](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-dashboard) |
-| LLM providers | [LLM Provider List](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-llm-providers) |
-
-</details>
-
 ---
 
-<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
+#### Resources
 
-<table width="100%">
+- [MaaS introduction](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-intro)
+- [Explore Models guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models)
+- [API Key Management](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys)
+- [Playground](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-playground)
+- [Dashboard](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-dashboard)
+- [LLM Provider List](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-llm-providers)
+
+<table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../02_vayu_vector_databases/">← Step 2 — Vector DB</a></td>
-<td align="right"><a href="../04_starter_kit/">Step 4 — RAG ingest lab →</a></td>
+<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
+<td align="center"><a href="../README.md">Overview</a></td>
+<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
 </tr>
 </table>

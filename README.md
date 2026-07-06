@@ -1,10 +1,6 @@
 # Ask-It — Build a Document Chat Assistant on Vayu
 
-> **New here? Start with [Step 0 — Set up your workspace](00_vayu_workspace/) and follow the steps in order.**
-
-**Ask-It** is a starter template that helps you build a chat assistant that answers questions from *your own* documents — and always shows which document the answer came from.
-
-Think of it as "ChatGPT for your files": you give it a folder of documents (manuals, policies, textbooks, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
+**Ask-It** is a starter template that helps you build a chat assistant that answers questions from *your own* documents — and always shows which document the answer came from. You give it a folder of documents (manuals, policies, textbooks, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
 
 ---
 
@@ -20,7 +16,7 @@ The chat UI (`05_build_app/chat_app.py`) lets users ask questions, returns groun
 
 ## How it works (in plain English)
 
-This project uses a technique called **RAG (Retrieval-Augmented Generation)**. Don't worry about the name — here is the whole idea in four steps:
+This project uses a technique called **RAG (Retrieval-Augmented Generation)**. Here is the whole idea in four steps:
 
 1. **Store** your documents in cloud storage.
 2. **Chunk & embed** them — split documents into small pieces and turn each piece into a list of numbers (an *embedding*) that captures its meaning.
@@ -35,30 +31,26 @@ You do **not** need to be an AI expert to complete this. Each step tells you exa
 
 ---
 
-## The 7 steps
+## Journey at a glance
 
 Follow these in order. Each folder has its own README with detailed instructions.
 
-| Step | What you'll do | Vayu service | Folder |
-|:----:|----------------|--------------|--------|
-| **0** | Create your workspace (with Docker enabled) and clone this repo | Vayu AI Studio Workspace | [`00_vayu_workspace/`](00_vayu_workspace/) |
-| **1** | Upload your documents to cloud storage | Vayu Object Storage | [`01_dataset/`](01_dataset/) |
-| **2** | Create a vector database to hold the embeddings | Vayu Vector DB (Qdrant) | [`02_vayu_vector_databases/`](02_vayu_vector_databases/) |
-| **3** | Get API keys for an embedding model and a chat model | Vayu Model as a Service | [`03_vayu_model_as_a_service/`](03_vayu_model_as_a_service/) |
-| **4** | Run the notebook that chunks, embeds, and indexes your docs | Vayu AI Studio (RAG lab) | [`04_starter_kit/`](04_starter_kit/) |
-| **5** | Run the chat app on your machine and test it | Streamlit (local) | [`05_build_app/`](05_build_app/) |
-| **6** | Build, sign, and deploy the app as a hosted service | Vayu ML Service | [`06_deploy/`](06_deploy/) |
+| Step | Vayu service | Folder | Role in the stack | How you wire it up |
+|:----:|--------------|--------|-------------------|--------------------|
+| 0 | Vayu AI Studio Workspace | [`00_vayu_workspace/`](00_vayu_workspace/) | Compute environment for the notebooks and app | Create your workspace with Docker enabled and clone this repo |
+| 1 | Vayu Object Storage | [`01_dataset/`](01_dataset/) | Data — your source documents | Upload your documents to a cloud bucket (optional; the local `docs/` folder also works) |
+| 2 | Vayu Vector DB (Qdrant) | [`02_vayu_vector_databases/`](02_vayu_vector_databases/) | Retrieval — stores embeddings for meaning-based search | Create a Qdrant database, then copy `QDRANT_URL` and `QDRANT_API_KEY` into `.env` |
+| 3 | Vayu Model as a Service | [`03_vayu_model_as_a_service/`](03_vayu_model_as_a_service/) | Models — one embedding model and one chat model (LLM) | Create two API keys, then set `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, and `CHAT_MODEL` in `.env` |
+| 4 | Vayu AI Studio (RAG lab) | [`04_starter_kit/`](04_starter_kit/) | Ingestion — chunk, embed, and index the docs | Run `qna.ipynb` to chunk, embed, and index your documents |
+| 5 | Streamlit (local) | [`05_build_app/`](05_build_app/) | App — chat UI plus the RAG engine | Run `chat_app.py` locally and test with Top-K and Sources |
+| 6 | Vayu ML Service | [`06_deploy/`](06_deploy/) | Hosting — the deployed container | Build, sign, and push the image, then deploy it as an ML Service |
 
 > **Tip:** Steps 0–4 set things up. Step 5 is where you first *see it work*. Step 6 is optional but recommended if you want a shareable URL (e.g. for judges).
-
-> 💡 The sections below are collapsed. Click a heading to expand its details.
 
 ---
 
 <details>
-<summary><strong>🗂️ Project layout</strong></summary>
-
-<br>
+<summary><h3>🗂️ Project layout</h3></summary>
 
 ```text
 ask-it/
@@ -86,14 +78,14 @@ ask-it/
 
 </details>
 
-<details>
-<summary><strong>🔐 Before you begin: the <code>.env</code> file</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🔐 Before you begin: the <code>.env</code> file</h3></summary>
 
 Almost every step reads its settings from one file: **`ask-it/.env`**. You create it once (by copying `.env.example`) and fill in values as you complete each step. The notebooks and app load it automatically.
 
-> ⚠️ **Never commit `.env` to git or share it** — it holds your secret keys.
+> **Never commit `.env` to git or share it** — it holds your secret keys.
 
 Here is the full template. You will collect these values as you go through Steps 1–3 (and 6):
 
@@ -127,10 +119,10 @@ VAYU_USERNAME=<your-vayu-username>
 
 </details>
 
-<details>
-<summary><strong>🚀 Quick start (the short version)</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🚀 Quick start (the short version)</h3></summary>
 
 If you just want the overall shape before diving into each step:
 
@@ -175,10 +167,10 @@ If you just want the overall shape before diving into each step:
 
 </details>
 
-<details>
-<summary><strong>🔑 Environment variables reference</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>🔑 Environment variables reference</h3></summary>
 
 | Variable | Required | Notes |
 |----------|----------|--------|
@@ -203,10 +195,10 @@ If you just want the overall shape before diving into each step:
 
 </details>
 
-<details>
-<summary><strong>💡 Tips for a great result</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>💡 Tips for a great result</h3></summary>
 
 - **Ingest before you chat** — The app only *queries*; run the notebook first so it has something to search.
 - **Show your sources** — Grounded answers with citations are far more trustworthy than fluent guesses.
@@ -216,15 +208,11 @@ If you just want the overall shape before diving into each step:
 
 </details>
 
-<details>
-<summary><strong>📄 License</strong></summary>
+---
 
-<br>
+<details>
+<summary><h3>📄 License</h3></summary>
 
 Use and modify for the **Vayu Hackathon** submission unless your team repo specifies otherwise.
 
 </details>
-
----
-
-<p align="center">Ready? <a href="00_vayu_workspace/"><strong>Start with Step 0 — Set up your workspace →</strong></a></p>
