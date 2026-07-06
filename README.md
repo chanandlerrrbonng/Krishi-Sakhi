@@ -135,6 +135,7 @@ If you just want the overall shape before diving into each step:
 1. **Set up** — Do [Step 0](00_vayu_workspace/) (create workspace, clone repo). Then, in the workspace terminal:
 
    ```bash
+   https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
    python3 -m venv .venv
    source .venv/bin/activate
    cd ask-it
