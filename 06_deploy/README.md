@@ -14,7 +14,7 @@
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
+<td align="left"><a href="../05_build_app/README.md">Previous — Step 5 — Chat app</a></td>
 <td align="right">Journey complete</td>
 </tr>
 </table>
@@ -278,7 +278,7 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
+<td align="left"><a href="../05_build_app/README.md">Previous — Step 5 — Chat app</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
 <td align="right">Journey complete</td>
 </tr>

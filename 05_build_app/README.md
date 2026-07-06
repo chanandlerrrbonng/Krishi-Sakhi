@@ -11,8 +11,8 @@
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
-<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
+<td align="left"><a href="../04_starter_kit/README.md">Previous — Step 4 — RAG ingest lab</a></td>
+<td align="right"><a href="../06_deploy/README.md">Next — Step 6 — Deploy</a></td>
 </tr>
 </table>
 
@@ -149,8 +149,8 @@ Then:
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
+<td align="left"><a href="../04_starter_kit/README.md">Previous — Step 4 — RAG ingest lab</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
+<td align="right"><a href="../06_deploy/README.md">Next — Step 6 — Deploy</a></td>
 </tr>
 </table>

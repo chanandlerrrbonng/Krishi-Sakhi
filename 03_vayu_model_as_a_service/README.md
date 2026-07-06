@@ -12,8 +12,8 @@
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
-<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
+<td align="left"><a href="../02_vayu_vector_databases/README.md">Previous — Step 2 — Vector DB</a></td>
+<td align="right"><a href="../04_starter_kit/README.md">Next — Step 4 — RAG ingest lab</a></td>
 </tr>
 </table>
 
@@ -139,8 +139,8 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
+<td align="left"><a href="../02_vayu_vector_databases/README.md">Previous — Step 2 — Vector DB</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
+<td align="right"><a href="../04_starter_kit/README.md">Next — Step 4 — RAG ingest lab</a></td>
 </tr>
 </table>

@@ -11,8 +11,8 @@
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../01_dataset/">Previous — Step 1 — Object Storage</a></td>
-<td align="right"><a href="../03_vayu_model_as_a_service/">Next — Step 3 — Model as a Service</a></td>
+<td align="left"><a href="../01_dataset/README.md">Previous — Step 1 — Object Storage</a></td>
+<td align="right"><a href="../03_vayu_model_as_a_service/README.md">Next — Step 3 — Model as a Service</a></td>
 </tr>
 </table>
 
@@ -90,8 +90,8 @@ For quick local testing without the hosted service, use on-disk Qdrant via the `
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../01_dataset/">Previous — Step 1 — Object Storage</a></td>
+<td align="left"><a href="../01_dataset/README.md">Previous — Step 1 — Object Storage</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../03_vayu_model_as_a_service/">Next — Step 3 — Model as a Service</a></td>
+<td align="right"><a href="../03_vayu_model_as_a_service/README.md">Next — Step 3 — Model as a Service</a></td>
 </tr>
 </table>

@@ -13,8 +13,8 @@
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
-<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
+<td align="left"><a href="../00_vayu_workspace/README.md">Previous — Step 0 — Workspace</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/README.md">Next — Step 2 — Vector DB</a></td>
 </tr>
 </table>
 
@@ -121,8 +121,8 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 <table width="100%" style="width:100%">
 <tr>
-<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
+<td align="left"><a href="../00_vayu_workspace/README.md">Previous — Step 0 — Workspace</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/README.md">Next — Step 2 — Vector DB</a></td>
 </tr>
 </table>

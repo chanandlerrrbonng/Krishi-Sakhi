@@ -15,7 +15,7 @@ You only do this step once.
 <table width="100%" style="width:100%">
 <tr>
 <td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
-<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
+<td align="right"><a href="../01_dataset/README.md">Next — Step 1 — Object Storage</a></td>
 </tr>
 </table>
 
@@ -123,6 +123,6 @@ You'll use this workspace for:
 <tr>
 <td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
 <td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
+<td align="right"><a href="../01_dataset/README.md">Next — Step 1 — Object Storage</a></td>
 </tr>
 </table>
