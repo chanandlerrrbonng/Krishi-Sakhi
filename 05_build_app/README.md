@@ -156,9 +156,7 @@ Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to buil
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<table width="100%">
-<tr>
-<td align="left"><a href="../04_starter_kit/">← Step 4 — RAG ingest lab</a></td>
-<td align="right"><a href="../06_deploy/">Step 6 — Deploy ML Service →</a></td>
-</tr>
-</table>
+<div style="display: flex; justify-content: space-between; width: 100%;">
+<a href="../04_starter_kit/">← Step 4 — RAG ingest lab</a>
+<a href="../06_deploy/">Step 6 — Deploy ML Service →</a>
+</div>

@@ -128,9 +128,7 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<table width="100%">
-<tr>
-<td align="left"><a href="../00_vayu_workspace/">← Step 0 — Workspace</a></td>
-<td align="right"><a href="../02_vayu_vector_databases/">Step 2 — Vayu Vector DB →</a></td>
-</tr>
-</table>
+<div style="display: flex; justify-content: space-between; width: 100%;">
+<a href="../00_vayu_workspace/">← Step 0 — Workspace</a>
+<a href="../02_vayu_vector_databases/">Step 2 — Vayu Vector DB →</a>
+</div>

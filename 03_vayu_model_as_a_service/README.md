@@ -153,9 +153,7 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<table width="100%">
-<tr>
-<td align="left"><a href="../02_vayu_vector_databases/">← Step 2 — Vector DB</a></td>
-<td align="right"><a href="../04_starter_kit/">Step 4 — RAG ingest lab →</a></td>
-</tr>
-</table>
+<div style="display: flex; justify-content: space-between; width: 100%;">
+<a href="../02_vayu_vector_databases/">← Step 2 — Vector DB</a>
+<a href="../04_starter_kit/">Step 4 — RAG ingest lab →</a>
+</div>
