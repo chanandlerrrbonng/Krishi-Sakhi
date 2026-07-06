@@ -65,19 +65,6 @@ Welcome! This folder contains your starting document corpus and scripts to sync 
    2. Navigate to **`ask-it/docs/`**.
    3. Confirm your corpus files are present (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
 
-4. **Continue project steps**
-
-   Once uploaded, open [`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb) for ingest.
-
-   **Paths depend on where the notebook runs** — you usually do **not** change anything in this folder:
-
-   | You are here | Corpus path | Why |
-   |--------------|-------------|-----|
-   | `01_dataset/` (`01_dataset.ipynb`) | `docs` or `Path("docs")` | Corpus is **in this folder** — already set in the notebook as `LOCAL_FOLDER = "docs"` |
-   | `04_starter_kit/` (`qna.ipynb`) | `Path("../01_dataset/docs")` | Notebook is one level up from `01_dataset/` |
-
-   Do **not** use `../01_dataset/docs` inside `01_dataset.ipynb` — that would point outside this step’s folder.
-
 ---
 
 ## Sample Corpus
