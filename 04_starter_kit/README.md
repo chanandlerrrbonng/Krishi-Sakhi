@@ -11,12 +11,8 @@
 
 > **This step is required before the chat app will work.** The app in Step 5 only *searches* — this notebook is what actually fills the database.
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../03_vayu_model_as_a_service/README.md">Previous — Step 3 — Model as a Service</a></td>
-<td align="right"><a href="../05_build_app/README.md">Next — Step 5 — Chat app</a></td>
-</tr>
-</table>
+| [← Previous — Step 3 — Model as a Service](../03_vayu_model_as_a_service/README.md) | [Next — Step 5 — Chat app →](../05_build_app/README.md) |
+|:---|---:|
 
 ---
 
@@ -173,10 +169,5 @@ Use the **same** `.env` values you used here.
 
 ---
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../03_vayu_model_as_a_service/README.md">Previous — Step 3 — Model as a Service</a></td>
-<td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../05_build_app/README.md">Next — Step 5 — Chat app</a></td>
-</tr>
-</table>
+| [← Previous — Step 3 — Model as a Service](../03_vayu_model_as_a_service/README.md) | [Overview](../README.md) | [Next — Step 5 — Chat app →](../05_build_app/README.md) |
+|:---|:---:|---:|

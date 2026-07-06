@@ -9,12 +9,8 @@
 2. Wait until it's **Ready**
 3. Copy its URL and API key into `.env`
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../01_dataset/README.md">Previous — Step 1 — Object Storage</a></td>
-<td align="right"><a href="../03_vayu_model_as_a_service/README.md">Next — Step 3 — Model as a Service</a></td>
-</tr>
-</table>
+| [← Previous — Step 1 — Object Storage](../01_dataset/README.md) | [Next — Step 3 — Model as a Service →](../03_vayu_model_as_a_service/README.md) |
+|:---|---:|
 
 ---
 
@@ -88,10 +84,5 @@ For quick local testing without the hosted service, use on-disk Qdrant via the `
 - [Qdrant documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant)
 - [Milvus documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/milvus)
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../01_dataset/README.md">Previous — Step 1 — Object Storage</a></td>
-<td align="center"><a href="../README.md">Overview</a></td>
-<td align="right"><a href="../03_vayu_model_as_a_service/README.md">Next — Step 3 — Model as a Service</a></td>
-</tr>
-</table>
+| [← Previous — Step 1 — Object Storage](../01_dataset/README.md) | [Overview](../README.md) | [Next — Step 3 — Model as a Service →](../03_vayu_model_as_a_service/README.md) |
+|:---|:---:|---:|

@@ -6,12 +6,8 @@
 
 Vayu ML Services only run **signed** container images. Use this if you'd rather automate signing than follow the manual steps in the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/).
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../README.md">Back — Step 6 — Deploy</a></td>
-<td align="right"><a href="https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/">Manual signing — Container Registry guide</a></td>
-</tr>
-</table>
+| [← Back — Step 6 — Deploy](../README.md) | [Manual signing — Container Registry guide →](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/) |
+|:---|---:|
 
 ---
 
@@ -96,9 +92,5 @@ python 06_deploy/image-signing/sign_image.py verify
 
 ---
 
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../README.md">Back — Step 6 — Deploy</a></td>
-<td align="right"><a href="https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/">Manual signing — Container Registry guide</a></td>
-</tr>
-</table>
+| [← Back — Step 6 — Deploy](../README.md) | [Manual signing — Container Registry guide →](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/) |
+|:---|---:|
