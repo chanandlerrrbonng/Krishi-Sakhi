@@ -1,13 +1,6 @@
-# Step 3 — Get your model API keys (Model as a Service)
+# 🧠 Step 3 — Get your model API keys (Model as a Service)
 
-**Step 3 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
-<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
-</tr>
-</table>
+**Ask-It** › **Vayu Model as a Service** · `03_vayu_model_as_a_service/`
 
 > **Goal:** Get access to the two AI models Ask-It needs — one to create embeddings and one to answer questions — through **Vayu Model as a Service (MaaS)**.
 
@@ -16,6 +9,13 @@
 2. Create **two** API keys (one per model)
 3. Look up the exact model IDs
 4. Save everything into `.env`
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../02_vayu_vector_databases/">Previous — Step 2 — Vector DB</a></td>
+<td align="right"><a href="../04_starter_kit/">Next — Step 4 — RAG ingest lab</a></td>
+</tr>
+</table>
 
 ---
 

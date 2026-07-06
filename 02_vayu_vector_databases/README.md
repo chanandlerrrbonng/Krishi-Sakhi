@@ -1,13 +1,6 @@
-# Step 2 — Create your Vector Database (Qdrant)
+# 🔎 Step 2 — Create your Vector Database (Qdrant)
 
-**Step 2 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../01_dataset/">Previous — Step 1 — Object Storage</a></td>
-<td align="right"><a href="../03_vayu_model_as_a_service/">Next — Step 3 — Model as a Service</a></td>
-</tr>
-</table>
+**Ask-It** › **Vayu Vector DB (Qdrant)** · `02_vayu_vector_databases/`
 
 > **Goal:** Set up a **Vayu Vector DB (Qdrant)** — the database that stores your documents as embeddings so they can be searched by meaning.
 
@@ -15,6 +8,13 @@
 1. Create a Qdrant vector database in AI Studio
 2. Wait until it's **Ready**
 3. Copy its URL and API key into `.env`
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../01_dataset/">Previous — Step 1 — Object Storage</a></td>
+<td align="right"><a href="../03_vayu_model_as_a_service/">Next — Step 3 — Model as a Service</a></td>
+</tr>
+</table>
 
 ---
 

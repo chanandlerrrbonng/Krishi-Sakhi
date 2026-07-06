@@ -1,13 +1,6 @@
-# Step 1 — Upload your documents (Vayu Object Storage)
+# 🗄️ Step 1 — Upload your documents (Vayu Object Storage)
 
-**Step 1 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
-<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
-</tr>
-</table>
+**Ask-It** › **Vayu Object Storage** · `01_dataset/`
 
 > **Goal:** Store the documents your assistant will answer from in **Vayu Object Storage**, so the notebooks in later steps can read them.
 
@@ -17,6 +10,13 @@
 3. Confirm the files landed in the S3 Browser
 
 > This step is **optional** — you can also just keep documents in the local `docs/` folder. But uploading to Object Storage is closer to a real project and useful if your team shares a corpus.
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../00_vayu_workspace/">Previous — Step 0 — Workspace</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/">Next — Step 2 — Vector DB</a></td>
+</tr>
+</table>
 
 ---
 

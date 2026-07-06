@@ -1,6 +1,10 @@
-# Image signing (optional automation)
+# ✍️ Image signing (optional automation)
 
-**Ask-It** › [Step 6 — Deploy](../README.md) › `06_deploy/image-signing/`
+**Ask-It** › **Step 6 — Deploy** › `06_deploy/image-signing/`
+
+> **Goal:** Sign your pushed Docker image the easy way, using the helper script [`sign_image.py`](sign_image.py), instead of the manual signing steps.
+
+Vayu ML Services only run **signed** container images. Use this if you'd rather automate signing than follow the manual steps in the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/).
 
 <table width="100%" style="width:100%">
 <tr>
@@ -8,10 +12,6 @@
 <td align="right"><a href="https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/">Manual signing — Container Registry guide</a></td>
 </tr>
 </table>
-
-> **Goal:** Sign your pushed Docker image the easy way, using the helper script [`sign_image.py`](sign_image.py), instead of the manual signing steps.
-
-Vayu ML Services only run **signed** container images. Use this if you'd rather automate signing than follow the manual steps in the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/).
 
 ---
 

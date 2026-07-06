@@ -1,13 +1,6 @@
-# Step 0 — Set up your Vayu Workspace
+# 🧑‍💻 Step 0 — Set up your Vayu Workspace
 
-**Step 0 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
-<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
-</tr>
-</table>
+**Ask-It** › **Vayu AI Studio Workspace** · `00_vayu_workspace/`
 
 > **Goal:** Create a place in the cloud (a "workspace") where you'll run the notebooks and the chat app for the rest of this project.
 
@@ -18,6 +11,13 @@
 4. Pick the right kernel for the notebooks
 
 You only do this step once.
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../README.md">Previous — Ask-It overview</a></td>
+<td align="right"><a href="../01_dataset/">Next — Step 1 — Object Storage</a></td>
+</tr>
+</table>
 
 ---
 

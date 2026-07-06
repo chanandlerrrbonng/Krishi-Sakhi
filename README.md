@@ -1,10 +1,16 @@
-# Ask-It — Build a Document Chat Assistant on Vayu
+# 💬 Ask-It — Build a Document Chat Assistant on Vayu
+
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Vector%20DB-Qdrant-DC244C?logo=qdrant&logoColor=white)
+![Model as a Service](https://img.shields.io/badge/Models-Vayu%20MaaS-6E56CF)
+![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)
+![Deploy](https://img.shields.io/badge/Deploy-Vayu%20ML%20Service-0EA5E9)
 
 **Ask-It** is a starter template that helps you build a chat assistant that answers questions from *your own* documents — and always shows which document the answer came from. You give it a folder of documents (manuals, policies, textbooks, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
 
 ---
 
-## What you'll build
+## 🎯 What you'll build
 
 A working question-answering app, powered end to end by the **Vayu platform**:
 
@@ -14,7 +20,7 @@ The chat UI (`05_build_app/chat_app.py`) lets users ask questions, returns groun
 
 ---
 
-## How it works (in plain English)
+## ⚙️ How it works (in plain English)
 
 This project uses a technique called **RAG (Retrieval-Augmented Generation)**. Here is the whole idea in four steps:
 
@@ -31,7 +37,7 @@ You do **not** need to be an AI expert to complete this. Each step tells you exa
 
 ---
 
-## Journey at a glance
+## 🗺️ Journey at a glance
 
 Follow these in order. Each folder has its own README with detailed instructions.
 

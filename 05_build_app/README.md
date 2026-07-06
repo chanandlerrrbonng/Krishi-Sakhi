@@ -1,13 +1,6 @@
-# Step 5 — Run the chat app locally
+# 🖥️ Step 5 — Run the chat app locally
 
-**Step 5 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
-<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
-</tr>
-</table>
+**Ask-It** › **Streamlit (local)** · `05_build_app/`
 
 > **Goal:** Run the **Ask-It** chat app on your machine and ask questions about your indexed documents. This is where it all comes together.
 
@@ -15,6 +8,13 @@
 1. Confirm your documents are indexed (Step 4) and `.env` is filled in
 2. Start the Streamlit app
 3. Open it in a browser and ask a question
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../04_starter_kit/">Previous — Step 4 — RAG ingest lab</a></td>
+<td align="right"><a href="../06_deploy/">Next — Step 6 — Deploy</a></td>
+</tr>
+</table>
 
 ---
 

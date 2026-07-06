@@ -1,13 +1,6 @@
-# Step 6 — Deploy Ask-It as a hosted service
+# ☁️ Step 6 — Deploy Ask-It as a hosted service
 
-**Step 6 of 6**
-
-<table width="100%" style="width:100%">
-<tr>
-<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
-<td align="right">Journey complete</td>
-</tr>
-</table>
+**Ask-It** › **Vayu ML Service** · `06_deploy/`
 
 > **Goal:** Take the chat app from Step 5, package it as a Docker image, sign it, and run it on **Vayu ML Service** — so anyone can open Ask-It from a URL without running anything locally.
 
@@ -18,6 +11,13 @@
 4. Verify the live URL works
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
+
+<table width="100%" style="width:100%">
+<tr>
+<td align="left"><a href="../05_build_app/">Previous — Step 5 — Chat app</a></td>
+<td align="right">Journey complete</td>
+</tr>
+</table>
 
 ---
 
@@ -198,7 +198,7 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 
 1. Open **ML Services List** → click your service **Name**.
 2. On **View ML Service**, check **Summary** and **Connect** for the public or internal URL.
-3. Open the URL — you should see the Ask-It UI (same as local; see the [overview screenshot](../README.md#what-youll-build)).
+3. Open the URL — you should see the Ask-It UI (same as local; see the [overview screenshot](../README.md)).
 4. Ask a question that exists in your docs (e.g. the field-trip reminder from `text-example.txt`).
 5. Expand **Sources** on the reply — citations should match your [Step 4](../04_starter_kit/) ingest.
 
