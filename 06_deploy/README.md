@@ -1,6 +1,6 @@
 # Step 6 — Deploy Ask-It as a hosted service
 
-**Step 6 of 6** · [← Step 5 — Build app](../05_build_app/) · [🏠 Overview](../README.md) · 🏁 Final step
+**Step 6 of 6**
 
 > **Goal:** Take the chat app from Step 5, package it as a Docker image, sign it, and run it on **Vayu ML Service** — so anyone can open Ask-It from a URL without running anything locally.
 

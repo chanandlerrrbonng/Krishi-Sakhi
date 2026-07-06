@@ -1,6 +1,6 @@
 # Step 1 — Upload your documents (Vayu Object Storage)
 
-**Step 1 of 6** · [← Step 0 — Workspace](../00_vayu_workspace/) · [🏠 Overview](../README.md) · [Step 2 — Vector DB →](../02_vayu_vector_databases/)
+**Step 1 of 6**
 
 > **Goal:** Store the documents your assistant will answer from in **Vayu Object Storage**, so the notebooks in later steps can read them.
 

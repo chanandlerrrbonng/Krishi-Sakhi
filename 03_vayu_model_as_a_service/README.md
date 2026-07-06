@@ -1,6 +1,6 @@
 # Step 3 — Get your model API keys (Model as a Service)
 
-**Step 3 of 6** · [← Step 2 — Vector DB](../02_vayu_vector_databases/) · [🏠 Overview](../README.md) · [Step 4 — Ingest lab →](../04_starter_kit/)
+**Step 3 of 6**
 
 > **Goal:** Get access to the two AI models Ask-It needs — one to create embeddings and one to answer questions — through **Vayu Model as a Service (MaaS)**.
 

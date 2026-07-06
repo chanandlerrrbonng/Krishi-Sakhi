@@ -1,6 +1,6 @@
 # Step 4 — Index your documents (RAG ingest lab)
 
-**Step 4 of 6** · [← Step 3 — Models](../03_vayu_model_as_a_service/) · [🏠 Overview](../README.md) · [Step 5 — Chat app →](../05_build_app/)
+**Step 4 of 6**
 
 > **Goal:** Run one notebook (`qna.ipynb`) that reads your documents, turns them into embeddings, and stores them in your Vector DB — so the chat app has something to search.
 

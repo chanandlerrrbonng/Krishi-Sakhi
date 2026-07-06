@@ -1,6 +1,6 @@
 # Step 5 — Run the chat app locally
 
-**Step 5 of 6** · [← Step 4 — Ingest lab](../04_starter_kit/) · [🏠 Overview](../README.md) · [Step 6 — Deploy →](../06_deploy/)
+**Step 5 of 6**
 
 > **Goal:** Run the **Ask-It** chat app on your machine and ask questions about your indexed documents. This is where it all comes together.
 

@@ -1,6 +1,6 @@
 # Step 0 — Set up your Vayu Workspace
 
-**Step 0 of 6** · [🏠 Overview](../README.md) · [Step 1 — Object Storage →](../01_dataset/)
+**Step 0 of 6**
 
 > **Goal:** Create a place in the cloud (a "workspace") where you'll run the notebooks and the chat app for the rest of this project.
 

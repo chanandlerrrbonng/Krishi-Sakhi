@@ -1,6 +1,6 @@
 # Step 2 — Create your Vector Database (Qdrant)
 
-**Step 2 of 6** · [← Step 1 — Object Storage](../01_dataset/) · [🏠 Overview](../README.md) · [Step 3 — Models →](../03_vayu_model_as_a_service/)
+**Step 2 of 6**
 
 > **Goal:** Set up a **Vayu Vector DB (Qdrant)** — the database that stores your documents as embeddings so they can be searched by meaning.
 
