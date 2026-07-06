@@ -12,7 +12,7 @@
 
 You only do this step once.
 
-| [← Previous — Ask-It overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/README.md) |
+| [← Previous — Ask-It overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/) |
 |:---|---:|
 
 ---
@@ -115,5 +115,5 @@ You'll use this workspace for:
 - [Vayu AI Studio Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list)
 - [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/)
 
-| [← Previous — Ask-It overview](../README.md) | [Overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/README.md) |
+| [← Previous — Ask-It overview](../README.md) | [Overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/) |
 |:---|:---:|---:|

@@ -9,7 +9,7 @@
 2. Start the Streamlit app
 3. Open it in a browser and ask a question
 
-| [← Previous — Step 4 — RAG ingest lab](../04_starter_kit/README.md) | [Next — Step 6 — Deploy →](../06_deploy/README.md) |
+| [← Previous — Step 4 — RAG ingest lab](../04_starter_kit/) | [Next — Step 6 — Deploy →](../06_deploy/) |
 |:---|---:|
 
 ---
@@ -143,5 +143,5 @@ Then:
 
 ---
 
-| [← Previous — Step 4 — RAG ingest lab](../04_starter_kit/README.md) | [Overview](../README.md) | [Next — Step 6 — Deploy →](../06_deploy/README.md) |
+| [← Previous — Step 4 — RAG ingest lab](../04_starter_kit/) | [Overview](../README.md) | [Next — Step 6 — Deploy →](../06_deploy/) |
 |:---|:---:|---:|

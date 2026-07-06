@@ -10,7 +10,7 @@
 3. Look up the exact model IDs
 4. Save everything into `.env`
 
-| [← Previous — Step 2 — Vector DB](../02_vayu_vector_databases/README.md) | [Next — Step 4 — RAG ingest lab →](../04_starter_kit/README.md) |
+| [← Previous — Step 2 — Vector DB](../02_vayu_vector_databases/) | [Next — Step 4 — RAG ingest lab →](../04_starter_kit/) |
 |:---|---:|
 
 ---
@@ -133,5 +133,5 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 - [Dashboard](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-dashboard)
 - [LLM Provider List](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-llm-providers)
 
-| [← Previous — Step 2 — Vector DB](../02_vayu_vector_databases/README.md) | [Overview](../README.md) | [Next — Step 4 — RAG ingest lab →](../04_starter_kit/README.md) |
+| [← Previous — Step 2 — Vector DB](../02_vayu_vector_databases/) | [Overview](../README.md) | [Next — Step 4 — RAG ingest lab →](../04_starter_kit/) |
 |:---|:---:|---:|

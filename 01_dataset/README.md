@@ -11,7 +11,7 @@
 
 > This step is **optional** — you can also just keep documents in the local `docs/` folder. But uploading to Object Storage is closer to a real project and useful if your team shares a corpus.
 
-| [← Previous — Step 0 — Workspace](../00_vayu_workspace/README.md) | [Next — Step 2 — Vector DB →](../02_vayu_vector_databases/README.md) |
+| [← Previous — Step 0 — Workspace](../00_vayu_workspace/) | [Next — Step 2 — Vector DB →](../02_vayu_vector_databases/) |
 |:---|---:|
 
 ---
@@ -115,5 +115,5 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 ---
 
-| [← Previous — Step 0 — Workspace](../00_vayu_workspace/README.md) | [Overview](../README.md) | [Next — Step 2 — Vector DB →](../02_vayu_vector_databases/README.md) |
+| [← Previous — Step 0 — Workspace](../00_vayu_workspace/) | [Overview](../README.md) | [Next — Step 2 — Vector DB →](../02_vayu_vector_databases/) |
 |:---|:---:|---:|

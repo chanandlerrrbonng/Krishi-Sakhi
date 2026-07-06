@@ -12,7 +12,7 @@
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
 
-| [← Previous — Step 5 — Chat app](../05_build_app/README.md) | Journey complete |
+| [← Previous — Step 5 — Chat app](../05_build_app/) | Journey complete |
 |:---|---:|
 
 ---
@@ -272,5 +272,5 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 ---
 
-| [← Previous — Step 5 — Chat app](../05_build_app/README.md) | [Overview](../README.md) | Journey complete |
+| [← Previous — Step 5 — Chat app](../05_build_app/) | [Overview](../README.md) | Journey complete |
 |:---|:---:|---:|
