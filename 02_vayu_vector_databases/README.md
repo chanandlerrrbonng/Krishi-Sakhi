@@ -104,7 +104,9 @@ For quick local testing without the hosted service, use on-disk Qdrant via the `
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<div style="display: flex; justify-content: space-between; width: 100%;">
-<a href="../01_dataset/">← Step 1 — Object Storage</a>
-<a href="../03_vayu_model_as_a_service/">Step 3 — Model as a Service →</a>
-</div>
+<table width="100%">
+<tr>
+<td align="left"><a href="../01_dataset/">← Step 1 — Object Storage</a></td>
+<td align="right"><a href="../03_vayu_model_as_a_service/">Step 3 — Model as a Service →</a></td>
+</tr>
+</table>

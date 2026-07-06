@@ -129,7 +129,9 @@ You'll use this workspace for:
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<div style="display: flex; justify-content: space-between; width: 100%;">
-<span></span>
-<a href="../01_dataset/">Step 1 — Vayu Object Storage →</a>
-</div>
+<table width="100%">
+<tr>
+<td align="left"></td>
+<td align="right"><a href="../01_dataset/">Step 1 — Vayu Object Storage →</a></td>
+</tr>
+</table>

@@ -290,7 +290,9 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 <p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-<div style="display: flex; justify-content: space-between; width: 100%;">
-<a href="../05_build_app/">← Step 5 — Build app</a>
-<span>🏁 Journey complete</span>
-</div>
+<table width="100%">
+<tr>
+<td align="left"><a href="../05_build_app/">← Step 5 — Build app</a></td>
+<td align="right">🏁 Journey complete</td>
+</tr>
+</table>

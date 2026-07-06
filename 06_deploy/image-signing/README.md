@@ -105,7 +105,9 @@ python 06_deploy/image-signing/sign_image.py verify
 
 <p align="center"><a href="https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/">📄 Manual signing guide</a></p>
 
-<div style="display: flex; justify-content: space-between; width: 100%;">
-<a href="../README.md">← Back to Step 6 — Deploy</a>
-<span></span>
-</div>
+<table width="100%">
+<tr>
+<td align="left"><a href="../README.md">← Back to Step 6 — Deploy</a></td>
+<td align="right"></td>
+</tr>
+</table>
