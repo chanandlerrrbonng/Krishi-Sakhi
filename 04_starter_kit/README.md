@@ -97,16 +97,6 @@ Once it runs cleanly, go to [Step 5](../05_build_app/) to chat with your data lo
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- All cells run without errors.
-- The final cell prints an answer **and** the source it came from.
-
-</details>
-
-<details>
 <summary><strong>⚙️ What does <code>qna.ipynb</code> actually do?</strong></summary>
 
 <br>

@@ -98,17 +98,7 @@ Then:
 
 </details>
 
-<details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- The app opens in your browser.
-- You ask a question about your docs and get an answer with **Sources** you can expand.
-
-Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the image as a hosted service.
-
-</details>
+> Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the image as a hosted service.
 
 <details>
 <summary><strong>🔑 Environment variables</strong></summary>

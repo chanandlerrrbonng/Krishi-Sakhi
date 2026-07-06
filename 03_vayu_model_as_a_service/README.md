@@ -112,16 +112,6 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- You have two API keys and know your embedding + chat model IDs.
-- `OPENAI_BASE_URL`, both API keys, `EMBEDDING_MODEL`, and `CHAT_MODEL` are set in `ask-it/.env`.
-
-</details>
-
-<details>
 <summary><strong>📌 Things to remember</strong></summary>
 
 <br>

@@ -78,16 +78,6 @@ For quick local testing without the hosted service, use on-disk Qdrant via the `
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- Your Vector DB status shows **Ready**.
-- `QDRANT_URL` (without the trailing `/dashboard`) and `QDRANT_API_KEY` are set in `ask-it/.env`.
-
-</details>
-
-<details>
 <summary><strong>🔗 Resources</strong></summary>
 
 <br>

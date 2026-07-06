@@ -97,17 +97,6 @@ Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.ve
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- Your workspace opens and the terminal works.
-- `pip install -r requirements.txt` finished without errors.
-- A `.env` file exists in `ask-it/` (you'll fill it in later).
-
-</details>
-
-<details>
 <summary><strong>🔗 Where you'll work next & resources</strong></summary>
 
 <br>

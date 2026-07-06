@@ -88,16 +88,6 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- The upload cell finished without errors.
-- You can see your files under `ask-it/docs/` in the S3 Browser.
-
-</details>
-
-<details>
 <summary><strong>📚 The sample corpus & supported files</strong></summary>
 
 <br>

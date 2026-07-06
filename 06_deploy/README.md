@@ -211,17 +211,6 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- The ML Service status is **ready**.
-- Opening the public URL shows the Ask-It UI.
-- A test question returns a grounded answer with expandable **Sources**.
-
-</details>
-
-<details>
 <summary><strong>🗂️ Optional: Model Registry</strong></summary>
 
 <br>

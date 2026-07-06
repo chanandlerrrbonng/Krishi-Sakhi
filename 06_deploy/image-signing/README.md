@@ -76,16 +76,6 @@ python 06_deploy/image-signing/sign_image.py verify
 </details>
 
 <details>
-<summary><strong>✅ You're done when</strong></summary>
-
-<br>
-
-- `sign` completes without errors.
-- (Optional) `verify` confirms the signature for your image.
-
-</details>
-
-<details>
 <summary><strong>🔑 Environment variables</strong></summary>
 
 <br>
