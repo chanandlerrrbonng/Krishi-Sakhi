@@ -143,6 +143,8 @@ If you just want the overall shape before diving into each step:
    cp .env.example .env      # then fill in values as you go
    ```
 
+   Skip ```git clone``` if the repo is already present under /home/jovyan/ask-it.
+
 2. **Collect credentials** — Fill in `.env` using [Step 2](02_vayu_vector_databases/) (Vector DB) and [Step 3](03_vayu_model_as_a_service/) (models). Object Storage keys from [Step 1](01_dataset/) are optional.
 
 3. **Ingest once** — Open `04_starter_kit/qna.ipynb` in Vayu AI Studio, pick the kernel, and run all cells:
