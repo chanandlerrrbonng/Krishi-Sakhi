@@ -9,9 +9,14 @@
 2. Start the Streamlit app
 3. Open it in a browser and ask a question
 
+> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
+
 ---
 
-## How a question flows through the app
+<details>
+<summary><strong>🔄 How a question flows through the app</strong></summary>
+
+<br>
 
 ```text
 User question (chat_app.py)
@@ -29,9 +34,12 @@ LLM writes an answer + citations  (Vayu Model as a Service)
 Shown in the Streamlit UI  (port 8501)
 ```
 
----
+</details>
 
-## What's in this folder
+<details>
+<summary><strong>📁 What's in this folder</strong></summary>
+
+<br>
 
 | File | What it does |
 |------|--------------|
@@ -39,16 +47,22 @@ Shown in the Streamlit UI  (port 8501)
 | `rag_client.py` | The engine that does retrieval + LLM chat |
 | `Dockerfile` | Used in [Step 6](../06_deploy/) to build the deployable image |
 
----
+</details>
 
-## Before you start
+<details>
+<summary><strong>📋 Before you start</strong></summary>
+
+<br>
 
 - [Step 4](../04_starter_kit/) is done — your documents are indexed in the Vector DB.
 - `.env` has the values from [Step 2](../02_vayu_vector_databases/) (Vector DB) and [Step 3](../03_vayu_model_as_a_service/) (models).
 
----
+</details>
 
-## Run it
+<details>
+<summary><strong>▶️ Run it</strong></summary>
+
+<br>
 
 If your environment is already set up (from [Step 0](../00_vayu_workspace/)):
 
@@ -82,18 +96,24 @@ Then:
 - Adjust **Top-K** in the sidebar to control how many document chunks are retrieved.
 - Expand **Sources** under any answer to see where it came from.
 
----
+</details>
 
-## ✅ You're done when
+<details>
+<summary><strong>✅ You're done when</strong></summary>
+
+<br>
 
 - The app opens in your browser.
 - You ask a question about your docs and get an answer with **Sources** you can expand.
 
 Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the image as a hosted service.
 
----
+</details>
 
-## Environment variables
+<details>
+<summary><strong>🔑 Environment variables</strong></summary>
+
+<br>
 
 | Variable | Required | Used by | Purpose |
 |----------|----------|---------|---------|
@@ -106,9 +126,12 @@ Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to buil
 | `CHAT_MODEL` | Yes | `rag_client.py` | Must match ingest |
 | `COLLECTION_NAME` | No | `rag_client.py` | Default `knowledge_base_rag` |
 
----
+</details>
 
-## Troubleshooting
+<details>
+<summary><strong>🛠️ Troubleshooting</strong></summary>
+
+<br>
 
 | Symptom | Fix |
 |---------|-----|
@@ -117,17 +140,25 @@ Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to buil
 | Model errors | Confirm `CHAT_MODEL` / `OPENAI_BASE_URL`; check API key and credits |
 | Page won't load in workspace | Use the proxy URL (`/proxy/8501`) instead of `localhost` |
 
----
+</details>
 
-## Pro tips
+<details>
+<summary><strong>💡 Pro tips</strong></summary>
+
+<br>
 
 - **Re-run `qna.ipynb` after changing your documents** — otherwise the app searches stale data.
 - **Never bake secrets into Docker images** — pass them as runtime environment variables in the ML Service (Step 6).
 
+</details>
+
 ---
 
-## Navigation
+<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-| | | |
-|:--|:--:|--:|
-| [← Step 4 — RAG ingest lab](../04_starter_kit/) | [🏠 Overview](../README.md) | [Step 6 — Deploy ML Service →](../06_deploy/) |
+<table width="100%">
+<tr>
+<td align="left"><a href="../04_starter_kit/">← Step 4 — RAG ingest lab</a></td>
+<td align="right"><a href="../06_deploy/">Step 6 — Deploy ML Service →</a></td>
+</tr>
+</table>

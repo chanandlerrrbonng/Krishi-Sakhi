@@ -10,9 +10,14 @@
 3. Look up the exact model IDs
 4. Save everything into `.env`
 
+> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
+
 ---
 
-## Why two models and two keys?
+<details>
+<summary><strong>🤔 Why two models and two keys?</strong></summary>
+
+<br>
 
 Ask-It uses **two** models:
 
@@ -23,11 +28,12 @@ You'll create a **separate API key for each**. MaaS gives you an OpenAI-compatib
 
 See the [Model as a Service overview](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-intro) for background.
 
----
+</details>
 
-## Step by step
+<details>
+<summary><strong>1️⃣ Pick your two models</strong></summary>
 
-### 1. Pick your two models
+<br>
 
 Open the **Explore Models** catalog: [Explore Models](https://ai-gateway.cloudservices.tatacommunications.com/models/models/explore) ([guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-explore-models)).
 
@@ -38,7 +44,12 @@ Choose:
 
 You'll get the exact model IDs in step 3 below.
 
-### 2. Create two API keys
+</details>
+
+<details>
+<summary><strong>2️⃣ Create two API keys</strong></summary>
+
+<br>
 
 Open the **Secret Key** list: [API keys](https://ai-gateway.cloudservices.tatacommunications.com/models/models/user/secret-key-list) ([guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-api-keys)).
 
@@ -49,7 +60,12 @@ Click **Create API key** twice to make one key per model:
 | Embedding key | Your embedding model | `EMBEDDING_OPENAI_API_KEY` |
 | LLM key | Your chat model | `LLM_OPENAI_API_KEY` |
 
-### 3. Find the exact model IDs
+</details>
+
+<details>
+<summary><strong>3️⃣ Find the exact model IDs</strong></summary>
+
+<br>
 
 Ask the API which models are available, using each key. Replace the placeholders with your keys:
 
@@ -67,7 +83,12 @@ From each response, copy the model ID that matches your choices from step 1. The
 
 > If your tenant uses a different host, use your `OPENAI_BASE_URL` value instead (e.g. `"${OPENAI_BASE_URL}/models"`).
 
-### 4. Fill in `.env`
+</details>
+
+<details>
+<summary><strong>4️⃣ Fill in <code>.env</code></strong></summary>
+
+<br>
 
 At the `ask-it` repo root:
 
@@ -88,25 +109,34 @@ Then set:
 
 These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5–6).
 
----
+</details>
 
-## ✅ You're done when
+<details>
+<summary><strong>✅ You're done when</strong></summary>
+
+<br>
 
 - You have two API keys and know your embedding + chat model IDs.
 - `OPENAI_BASE_URL`, both API keys, `EMBEDDING_MODEL`, and `CHAT_MODEL` are set in `ask-it/.env`.
 
----
+</details>
 
-## Things to remember
+<details>
+<summary><strong>📌 Things to remember</strong></summary>
+
+<br>
 
 - **One API key per model** — embedding and LLM keys are kept separate in this template.
 - **The embedding model sets the vector size** — your Vector DB collection ([Step 2](../02_vayu_vector_databases/)) must match it. Change the embedding model later and you'll need to recreate the collection.
 - **Stay consistent** — use the *same* models and keys for both ingestion (Step 4) and the chat app (Steps 5–6).
 - **Never commit API keys** — set them only in `ask-it/.env`.
 
----
+</details>
 
-## Documentation
+<details>
+<summary><strong>📚 Documentation</strong></summary>
+
+<br>
 
 | Topic | Link |
 |-------|------|
@@ -117,10 +147,15 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 | Dashboard | [Dashboard](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-dashboard) |
 | LLM providers | [LLM Provider List](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/model-as-a-service/maas-llm-providers) |
 
+</details>
+
 ---
 
-## Navigation
+<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-| | | |
-|:--|:--:|--:|
-| [← Step 2 — Vector DB](../02_vayu_vector_databases/) | [🏠 Overview](../README.md) | [Step 4 — RAG ingest lab →](../04_starter_kit/) |
+<table width="100%">
+<tr>
+<td align="left"><a href="../02_vayu_vector_databases/">← Step 2 — Vector DB</a></td>
+<td align="right"><a href="../04_starter_kit/">Step 4 — RAG ingest lab →</a></td>
+</tr>
+</table>

@@ -6,9 +6,14 @@
 
 Vayu ML Services only run **signed** container images. Use this if you'd rather automate signing than follow the manual steps in the [Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/).
 
+> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
+
 ---
 
-## What the script creates
+<details>
+<summary><strong>📦 What the script creates</strong></summary>
+
+<br>
 
 Running [`sign_image.py`](sign_image.py) downloads the signing tools and writes these files:
 
@@ -21,9 +26,12 @@ Running [`sign_image.py`](sign_image.py) downloads the signing tools and writes 
 
 > These certificate files are gitignored and re-downloaded each time you run the script — you don't need to manage them yourself.
 
----
+</details>
 
-## Before you start
+<details>
+<summary><strong>📋 Before you start</strong></summary>
+
+<br>
 
 Make sure these are set in the root [`.env`](../../.env.example):
 
@@ -33,11 +41,14 @@ Make sure these are set in the root [`.env`](../../.env.example):
 - `REGISTRY_PASSWORD`
 - `VAYU_USERNAME` (needed for verify only)
 
-You should also have already built and pushed the image in [Step 6 → Step 1](../README.md#step-1--build-and-push-the-docker-image).
+You should also have already built and pushed the image in [Step 6 → Build and push](../README.md).
 
----
+</details>
 
-## Sign the image
+<details>
+<summary><strong>✍️ Sign the image</strong></summary>
+
+<br>
 
 ```bash
 cd ask-it
@@ -50,25 +61,34 @@ python 06_deploy/image-signing/sign_image.py sign
 
 > During signing, a browser prompt appears — follow it and copy the authorization code when redirected.
 
----
+</details>
 
-## Verify (optional)
+<details>
+<summary><strong>🔍 Verify (optional)</strong></summary>
+
+<br>
 
 ```bash
 export IMAGE=$IMAGE_REGISTRY/$REGISTRY_PROJECT/ask-it-chat:latest
 python 06_deploy/image-signing/sign_image.py verify
 ```
 
----
+</details>
 
-## ✅ You're done when
+<details>
+<summary><strong>✅ You're done when</strong></summary>
+
+<br>
 
 - `sign` completes without errors.
 - (Optional) `verify` confirms the signature for your image.
 
----
+</details>
 
-## Environment variables
+<details>
+<summary><strong>🔑 Environment variables</strong></summary>
+
+<br>
 
 | Variable | Used for | Source |
 |----------|----------|--------|
@@ -79,10 +99,15 @@ python 06_deploy/image-signing/sign_image.py verify
 | `REGISTRY_PASSWORD` | sign + verify + `docker login` | Root `.env` — container registry CLI secret |
 | `VAYU_USERNAME` | verify only | Root `.env` — your Vayu username (certificate identity) |
 
+</details>
+
 ---
 
-## Navigation
+<p align="center"><a href="https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/">📄 Manual signing guide</a></p>
 
-| | |
-|:--|--:|
-| [← Back to Step 6 — Deploy](../README.md) | [Manual signing guide →](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/) |
+<table width="100%">
+<tr>
+<td align="left"><a href="../README.md">← Back to Step 6 — Deploy</a></td>
+<td align="right"></td>
+</tr>
+</table>

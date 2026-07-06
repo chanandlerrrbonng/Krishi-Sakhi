@@ -12,9 +12,14 @@
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
 
+> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
+
 ---
 
-## The big picture
+<details>
+<summary><strong>🗺️ The big picture</strong></summary>
+
+<br>
 
 You'll deploy the **same** app you tested in Step 5. Nothing gets re-indexed — the container just *queries* the collection you already built.
 
@@ -27,9 +32,12 @@ You'll deploy the **same** app you tested in Step 5. Nothing gets re-indexed —
 
 > The container **does not** re-ingest documents. If you change `docs/`, re-run `qna.ipynb` before demoing.
 
----
+</details>
 
-## Before you start
+<details>
+<summary><strong>📋 Before you start</strong></summary>
+
+<br>
 
 | Step | You need |
 |------|----------|
@@ -45,9 +53,12 @@ Set these registry variables in the root [`.env`](../.env.example): `IMAGE_REGIS
 
 > **Optional automation:** [`image-signing/`](image-signing/) contains a helper script ([`sign_image.py`](image-signing/sign_image.py)) for the signing step.
 
----
+</details>
 
-## Step 1 — Build and push the Docker image
+<details>
+<summary><strong>1️⃣ Build and push the Docker image</strong></summary>
+
+<br>
 
 > **Important:** build from the `ask-it/` folder, **not** `05_build_app/`. Building from the wrong folder will fail on `COPY`.
 
@@ -70,16 +81,19 @@ docker build -f 05_build_app/Dockerfile -t $IMAGE_REGISTRY/$REGISTRY_PROJECT/ask
 
 Note the full image reference you pushed (e.g. `$IMAGE_REGISTRY/$REGISTRY_PROJECT/ask-it-chat:latest`) — you'll enter it in the wizard.
 
-> If you push a **new** tag later, the previous tag must be **signed before** you push the new one (see Step 2).
+> If you push a **new** tag later, the previous tag must be **signed before** you push the new one (see the next section).
 
 | Check | |
 |-------|---|
 | Port in image | **8501** (Streamlit; see `EXPOSE` in the Dockerfile) |
 | Secrets | **Not** baked into the image — only passed at runtime |
 
----
+</details>
 
-## Step 2 — Sign the image
+<details>
+<summary><strong>2️⃣ Sign the image</strong></summary>
+
+<br>
 
 Vayu ML Services only run **signed** images. Sign yours right after pushing.
 
@@ -89,21 +103,27 @@ Follow the [Container Registry guide](https://ipcloud.tatacommunications.com/doc
 
 > **Prefer automation?** Use the [automated image signing guide](image-signing/README.md).
 
----
+</details>
 
-## Step 3 — Open Vayu ML Services
+<details>
+<summary><strong>3️⃣ Open Vayu ML Services</strong></summary>
+
+<br>
 
 Go to [Vayu ML Services](https://ipcloud.tatacommunications.com/aistudio/#/deploy/mlops-service-list).
 
 For the full create wizard (Start → Infrastructure → Configure Compute → Observability → Review), see the [Creating ML Service guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/ml-service/#creating-ml-service).
 
----
+</details>
 
-## Step 4 — Create the ML Service (the wizard)
+<details>
+<summary><strong>4️⃣ Create the ML Service (the wizard)</strong></summary>
+
+<br>
 
 Follow the wizard and map Ask-It's settings as below.
 
-### 4.1 Start — image and runtime
+**4.1 Start — image and runtime**
 
 | Field | Ask-It value |
 |-------|--------------|
@@ -117,7 +137,7 @@ Follow the wizard and map Ask-It's settings as below.
 
 Leave **Args** empty unless your platform team specifies extra Streamlit flags.
 
-### 4.2 Environment variables (required)
+**4.2 Environment variables (required)**
 
 Add each key/value under **Environment Variable** on the Start step. Use the **same values** as your local `ask-it/.env` and your `qna.ipynb` ingest run. (The `.env` file is for local dev only — it is not baked into the image.)
 
@@ -147,28 +167,31 @@ COLLECTION_NAME=knowledge_base_rag
 
 > Do **not** set `QDRANT_PATH` for a hosted deployment unless you intentionally want on-disk Qdrant inside the container (not recommended here).
 
-### 4.3 Infrastructure
+**4.3 Infrastructure**
 
 Select the **Datacenter**, **Business Unit**, and **Environment** assigned to your workspace (same as your other Vayu resources).
 
-### 4.4 Configure compute
+**4.4 Configure compute**
 
 | Field | Guidance |
 |-------|----------|
 | **Resources / flavor** | CPU is plenty for Streamlit + API calls; add GPU only if your track requires it |
 | **Replicas** | `1` for a demo; increase for load testing |
 
-### 4.5 Observability
+**4.5 Observability**
 
 Enable **Monitoring** and **Logging** if available — very helpful for debugging retrieval or MaaS errors during a demo.
 
-### 4.6 Review and submit
+**4.6 Review and submit**
 
 Double-check the name, image, port **8501**, and all environment variables. Click **Submit** and wait until the status is **ready** on the ML Services list.
 
----
+</details>
 
-## Verify the endpoint
+<details>
+<summary><strong>🔍 Verify the endpoint</strong></summary>
+
+<br>
 
 1. Open **ML Services List** → click your service **Name**.
 2. On **View ML Service**, check **Summary** and **Connect** for the public or internal URL.
@@ -176,7 +199,7 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 4. Ask a question that exists in your docs (e.g. the field-trip reminder from `text-example.txt`).
 5. Expand **Sources** on the reply — citations should match your [Step 4](../04_starter_kit/) ingest.
 
-### If something's wrong
+**If something's wrong:**
 
 | Symptom | What to check |
 |---------|---------------|
@@ -185,17 +208,23 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 | Empty or wrong answers | Re-run `qna.ipynb`; `COLLECTION_NAME` and `EMBEDDING_MODEL` match ingest |
 | Model errors | `CHAT_MODEL` / `OPENAI_BASE_URL` correct; API key valid and has credits |
 
----
+</details>
 
-## ✅ You're done when
+<details>
+<summary><strong>✅ You're done when</strong></summary>
+
+<br>
 
 - The ML Service status is **ready**.
 - Opening the public URL shows the Ask-It UI.
 - A test question returns a grounded answer with expandable **Sources**.
 
----
+</details>
 
-## Optional: Model Registry
+<details>
+<summary><strong>🗂️ Optional: Model Registry</strong></summary>
+
+<br>
 
 If your track requires registering the RAG configuration:
 
@@ -205,9 +234,12 @@ If your track requires registering the RAG configuration:
 
 Register metadata like collection name, embedding model, chat model, and top-k — aligned with [`rag_client.py`](../05_build_app/rag_client.py). Deployment still runs through **ML Service** using the signed image from Step 1.
 
----
+</details>
 
-## Demo checklist (submission-ready)
+<details>
+<summary><strong>✔️ Demo checklist (submission-ready)</strong></summary>
+
+<br>
 
 - [ ] Corpus indexed in Vector DB ([`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb))
 - [ ] Docker image built from `ask-it/`, pushed, and **signed**
@@ -216,9 +248,12 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 - [ ] Test question returns a grounded answer with **Sources** expanded
 - [ ] Endpoint URL documented for judges (README or slide)
 
----
+</details>
 
-## Environment variable reference
+<details>
+<summary><strong>🔑 Environment variable reference</strong></summary>
+
+<br>
 
 | Variable | Required | Notes |
 |----------|----------|--------|
@@ -237,19 +272,27 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 | `REGISTRY_PASSWORD` | Step 6 build | `docker login` and signing |
 | `VAYU_USERNAME` | Step 6 verify | Certificate identity for cosign verify |
 
----
+</details>
 
-## Pro tips
+<details>
+<summary><strong>💡 Pro tips</strong></summary>
+
+<br>
 
 - **Re-deploy after env changes** — editing env vars usually requires a restart or new revision; confirm in the UI after saving.
 - **Same models end to end** — changing `EMBEDDING_MODEL` without re-ingesting breaks vector search.
 - **Watch your credits** — every question calls MaaS; use a smaller chat model for dry runs ([Step 3](../03_vayu_model_as_a_service/)).
 - **Never commit secrets** — keep registry passwords and API keys in the platform UI or a secure store only.
 
+</details>
+
 ---
 
-## Navigation
+<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-| | | |
-|:--|:--:|--:|
-| [← Step 5 — Build app](../05_build_app/) | [🏠 Overview](../README.md) | 🏁 Journey complete |
+<table width="100%">
+<tr>
+<td align="left"><a href="../05_build_app/">← Step 5 — Build app</a></td>
+<td align="right">🏁 Journey complete</td>
+</tr>
+</table>

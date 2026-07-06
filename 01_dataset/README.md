@@ -11,22 +11,26 @@
 
 > This step is **optional** — you can also just keep documents in the local `docs/` folder. But uploading to Object Storage is closer to a real project and useful if your team shares a corpus.
 
+> 💡 **Tip:** Each section below is collapsed. Click a heading to expand its details.
+
 ---
 
-## What's in this folder
+<details>
+<summary><strong>📁 What's in this folder</strong></summary>
+
+<br>
 
 | File / Folder | What it's for |
 |---------------|---------------|
 | `docs/` | A small sample knowledge base (`.md`, `.txt`, `.html`) to get you started |
 | `01_dataset.ipynb` | A notebook that syncs `docs/` to/from a cloud storage bucket |
 
----
+</details>
 
-## Step by step
+<details>
+<summary><strong>1️⃣ Add your storage credentials</strong></summary>
 
-> **Tip:** Keep the same folder structure locally and in the bucket. This keeps source citations working end to end.
-
-### 1. Add your storage credentials
+<br>
 
 Set these values in `ask-it/.env` (copy from `.env.example` first — never paste credentials into notebook cells):
 
@@ -45,7 +49,14 @@ cp .env.example .env
 
 > ⚠️ Never commit real credentials to git.
 
-### 2. Run the notebook
+> **Tip:** Keep the same folder structure locally and in the bucket — this keeps source citations working end to end.
+
+</details>
+
+<details>
+<summary><strong>2️⃣ Run the notebook</strong></summary>
+
+<br>
 
 Open [`01_dataset.ipynb`](01_dataset.ipynb), then select the kernel:
 
@@ -61,7 +72,12 @@ Open [`01_dataset.ipynb`](01_dataset.ipynb), then select the kernel:
 
 Then run the **Upload** cell to send `docs/` to Object Storage. (The **Download** cell does the reverse, if you ever need to pull the corpus back.)
 
-### 3. Verify the upload
+</details>
+
+<details>
+<summary><strong>3️⃣ Verify the upload</strong></summary>
+
+<br>
 
 Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) and check your files:
 
@@ -69,16 +85,22 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 2. Go to **`ask-it/docs/`**.
 3. Confirm your files are there (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
 
----
+</details>
 
-## ✅ You're done when
+<details>
+<summary><strong>✅ You're done when</strong></summary>
+
+<br>
 
 - The upload cell finished without errors.
 - You can see your files under `ask-it/docs/` in the S3 Browser.
 
----
+</details>
 
-## The sample corpus
+<details>
+<summary><strong>📚 The sample corpus & supported files</strong></summary>
+
+<br>
 
 | Example file | Description |
 |--------------|-------------|
@@ -90,17 +112,25 @@ Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/
 
 > Want to use your own documents? Drop them into `docs/` (in one of the supported formats) and re-run the upload cell.
 
----
+</details>
 
-## Best practices
+<details>
+<summary><strong>💡 Best practices</strong></summary>
+
+<br>
 
 - **Never commit** storage credentials to git or share them publicly.
 - **Mirror your structure** — keep the local `docs/` layout identical under `ask-it/docs/` in the bucket. This makes citations accurate and debugging easier.
 
+</details>
+
 ---
 
-## Navigation
+<p align="center"><a href="../README.md">🏠 Ask-It overview</a></p>
 
-| | | |
-|:--|:--:|--:|
-| [← Step 0 — Workspace](../00_vayu_workspace/) | [🏠 Overview](../README.md) | [Step 2 — Vayu Vector DB →](../02_vayu_vector_databases/) |
+<table width="100%">
+<tr>
+<td align="left"><a href="../00_vayu_workspace/">← Step 0 — Workspace</a></td>
+<td align="right"><a href="../02_vayu_vector_databases/">Step 2 — Vayu Vector DB →</a></td>
+</tr>
+</table>

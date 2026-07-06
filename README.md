@@ -4,7 +4,7 @@
 
 **Ask-It** is a starter template that helps you build a chat assistant that answers questions from *your own* documents — and always shows which document the answer came from.
 
-Think of it as "ChatGPT for your files": you give it a folder of documents (manuals, policies, PDFs, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
+Think of it as "ChatGPT for your files": you give it a folder of documents (manuals, policies, textbooks, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
 
 ---
 
@@ -31,7 +31,7 @@ This project uses a technique called **RAG (Retrieval-Augmented Generation)**. D
 Your docs  →  Embed & index  →  User asks a question  →  Find relevant pieces  →  LLM writes a sourced answer
 ```
 
-You do **not** need to be an AI expert to complete this. Each step below tells you exactly what to click and run.
+You do **not** need to be an AI expert to complete this. Each step tells you exactly what to click and run.
 
 ---
 
@@ -51,9 +51,14 @@ Follow these in order. Each folder has its own README with detailed instructions
 
 > **Tip:** Steps 0–4 set things up. Step 5 is where you first *see it work*. Step 6 is optional but recommended if you want a shareable URL (e.g. for judges).
 
+> 💡 The sections below are collapsed. Click a heading to expand its details.
+
 ---
 
-## Project layout
+<details>
+<summary><strong>🗂️ Project layout</strong></summary>
+
+<br>
 
 ```text
 ask-it/
@@ -79,9 +84,12 @@ ask-it/
     └── image-signing/            # Optional automated image signing
 ```
 
----
+</details>
 
-## Before you begin: the `.env` file
+<details>
+<summary><strong>🔐 Before you begin: the <code>.env</code> file</strong></summary>
+
+<br>
 
 Almost every step reads its settings from one file: **`ask-it/.env`**. You create it once (by copying `.env.example`) and fill in values as you complete each step. The notebooks and app load it automatically.
 
@@ -117,9 +125,12 @@ REGISTRY_PASSWORD=<container-registry-password>
 VAYU_USERNAME=<your-vayu-username>
 ```
 
----
+</details>
 
-## Quick start (the short version)
+<details>
+<summary><strong>🚀 Quick start (the short version)</strong></summary>
+
+<br>
 
 If you just want the overall shape before diving into each step:
 
@@ -162,9 +173,12 @@ If you just want the overall shape before diving into each step:
 
 > `IMAGE_REGISTRY` must be the registry **hostname only** (e.g. `image-registry-....cloudservices.tatacommunications.com`) — no `https://`, `http://`, or trailing `/`.
 
----
+</details>
 
-## Environment variables reference
+<details>
+<summary><strong>🔑 Environment variables reference</strong></summary>
+
+<br>
 
 | Variable | Required | Notes |
 |----------|----------|--------|
@@ -187,9 +201,12 @@ If you just want the overall shape before diving into each step:
 | `REGISTRY_PASSWORD` | Step 6 only | `docker login` and image signing |
 | `VAYU_USERNAME` | Step 6 only | Certificate identity for `tcl-cosign verify` |
 
----
+</details>
 
-## Tips for a great result
+<details>
+<summary><strong>💡 Tips for a great result</strong></summary>
+
+<br>
 
 - **Ingest before you chat** — The app only *queries*; run the notebook first so it has something to search.
 - **Show your sources** — Grounded answers with citations are far more trustworthy than fluent guesses.
@@ -197,8 +214,17 @@ If you just want the overall shape before diving into each step:
 - **Watch your credits** — Use smaller chat models for dry runs; monitor usage in Vayu observability during a demo.
 - **Need PDFs/DOCX?** — Add `pypdf` / `python-docx` loaders in the notebook (the starter handles `.md`, `.txt`, `.html`).
 
----
+</details>
 
-## License
+<details>
+<summary><strong>📄 License</strong></summary>
+
+<br>
 
 Use and modify for the **Vayu Hackathon** submission unless your team repo specifies otherwise.
+
+</details>
+
+---
+
+<p align="center">Ready? <a href="00_vayu_workspace/"><strong>Start with Step 0 — Set up your workspace →</strong></a></p>
