@@ -1,94 +1,106 @@
-# Step 1 — Vayu Object Storage (dataset)
+# Step 1 — Upload your documents (Vayu Object Storage)
 
-**Ask-It** › **Vayu Object Storage** · `01_dataset/`
+**Step 1 of 6** · [← Step 0 — Workspace](../00_vayu_workspace/) · [🏠 Overview](../README.md) · [Step 2 — Vector DB →](../02_vayu_vector_databases/)
 
-| | |
-|---|---|
-| **Previous** | [Step 0 — Vayu AI Studio Workspace](../00_vayu_workspace/) |
-| **Next** | [Step 2 — Vayu Vector DB →](../02_vayu_vector_databases/) |
+> **Goal:** Store the documents your assistant will answer from in **Vayu Object Storage**, so the notebooks in later steps can read them.
 
-Welcome! This folder contains your starting document corpus and scripts to sync it with **Vayu Object Storage** — essential for seamless downstream ingestion and RAG workflows in Vayu AI Studio.
+**What you'll do here:**
+1. Set your storage credentials in `.env`
+2. Run a notebook to upload the sample documents to a cloud bucket
+3. Confirm the files landed in the S3 Browser
 
----
-
-## Folder Contents
-
-| File / Folder | Purpose |
-|---------------|---------|
-| `docs/` | Sample knowledge base: `.md`, `.txt`, `.html` included |
-| `01_dataset.ipynb` | Jupyter notebook: sync `docs/` to/from an S3 bucket (boto3) |
+> This step is **optional** — you can also just keep documents in the local `docs/` folder. But uploading to Object Storage is closer to a real project and useful if your team shares a corpus.
 
 ---
 
-## Step-by-Step: Sync your Docs
+## What's in this folder
 
-> **Tip:** Maintain the same folder structure locally and in the bucket to ensure source citations work end-to-end.
+| File / Folder | What it's for |
+|---------------|---------------|
+| `docs/` | A small sample knowledge base (`.md`, `.txt`, `.html`) to get you started |
+| `01_dataset.ipynb` | A notebook that syncs `docs/` to/from a cloud storage bucket |
 
-1. **Set required environment variables** in `ask-it/.env` (copy from `.env.example` — do not paste credentials into notebook cells):
+---
 
-   ```bash
-   cd ask-it
-   cp .env.example .env
-   # Edit .env — VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
-   ```
+## Step by step
 
-   | Variable | Purpose |
-   |----------|---------|
-   | `VAYU_S3_KEY` | S3 access key ID |
-   | `VAYU_S3_SECRET` | S3 secret access key |
-   | `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
-   | `VAYU_S3_BUCKET` | Target bucket name |
+> **Tip:** Keep the same folder structure locally and in the bucket. This keeps source citations working end to end.
 
-   _(Never commit real credentials!)_
+### 1. Add your storage credentials
 
-2. **Run the notebook**
+Set these values in `ask-it/.env` (copy from `.env.example` first — never paste credentials into notebook cells):
 
-   Open [`01_dataset.ipynb`](01_dataset.ipynb), then select the kernel:
+```bash
+cd ask-it
+cp .env.example .env
+# Edit .env — set VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
+```
 
-   1. Open **Select Kernel** and choose **Python Environments**.
+| Variable | What it is |
+|----------|------------|
+| `VAYU_S3_KEY` | S3 access key ID |
+| `VAYU_S3_SECRET` | S3 secret access key |
+| `VAYU_S3_ENDPOINT` | Vayu Object Storage endpoint URL |
+| `VAYU_S3_BUCKET` | The bucket to upload to |
+
+> ⚠️ Never commit real credentials to git.
+
+### 2. Run the notebook
+
+Open [`01_dataset.ipynb`](01_dataset.ipynb), then select the kernel:
+
+1. Open **Select Kernel** → **Python Environments**.
 
    ![Select Kernel — Python Environments](../assets/kernel_select.png)
 
-   2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](../00_vayu_workspace/)).
+2. Pick the **Recommended** environment (it should point to the `.venv` from [Step 0](../00_vayu_workspace/)).
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
 
-   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](../00_vayu_workspace/)).
+3. Confirm the interpreter path ends with `<your-env-name>/bin/python` (e.g. `.venv/bin/python`).
 
-   Use the Upload/Download cells to move the corpus (`docs/`) between your local disk and Vayu Object Storage.
+Then run the **Upload** cell to send `docs/` to Object Storage. (The **Download** cell does the reverse, if you ever need to pull the corpus back.)
 
-3. **Verify upload in S3 Browser**
+### 3. Verify the upload
 
-   Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) to confirm your files uploaded successfully:
+Open the [Vayu Cloud Storage S3 Browser](https://ipcloud.tatacommunications.com/cloud/console/vcs/#/vcs/s3-browser) and check your files:
 
-   1. Select the bucket named in **`VAYU_S3_BUCKET`** (from your `.env`).
-   2. Navigate to **`ask-it/docs/`**.
-   3. Confirm your corpus files are present (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
+1. Open the bucket named in **`VAYU_S3_BUCKET`**.
+2. Go to **`ask-it/docs/`**.
+3. Confirm your files are there (e.g. `text-example.txt`, `markdown-example.md`, `html-example.html`).
 
 ---
 
-## Sample Corpus
+## ✅ You're done when
 
-| Example File | Description |
+- The upload cell finished without errors.
+- You can see your files under `ask-it/docs/` in the S3 Browser.
+
+---
+
+## The sample corpus
+
+| Example file | Description |
 |--------------|-------------|
 | `text-example.txt` | Field-trip reminder note |
 | `markdown-example.md` | Short markdown sample |
 | `html-example.html` | Minimal HTML file |
 
-**Supported ingest extensions:** `.md`, `.markdown`, `.txt`, `.html`, `.htm`, `.rst`, `.csv`
+**Supported file types for ingest:** `.md`, `.markdown`, `.txt`, `.html`, `.htm`, `.rst`, `.csv`
+
+> Want to use your own documents? Drop them into `docs/` (in one of the supported formats) and re-run the upload cell.
 
 ---
 
-## Best Practices
+## Best practices
 
-- **Never commit** storage credentials to git or share them in public repos.
-- Consistent structure: keep the local `docs/` layout mirrored under **`ask-it/docs/`** in the bucket to enable accurate citations and easier debugging.
+- **Never commit** storage credentials to git or share them publicly.
+- **Mirror your structure** — keep the local `docs/` layout identical under `ask-it/docs/` in the bucket. This makes citations accurate and debugging easier.
 
 ---
 
 ## Navigation
 
-| | |
-|---|---|
-| **Previous** | [Step 0 — Vayu AI Studio Workspace](../00_vayu_workspace/) |
-| **Next** | [Step 2 — Vayu Vector DB →](../02_vayu_vector_databases/) |
+| | | |
+|:--|:--:|--:|
+| [← Step 0 — Workspace](../00_vayu_workspace/) | [🏠 Overview](../README.md) | [Step 2 — Vayu Vector DB →](../02_vayu_vector_databases/) |

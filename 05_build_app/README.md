@@ -1,56 +1,56 @@
-# Step 5 — Vayu chat app & Realtime Inference
+# Step 5 — Run the chat app locally
 
-**Ask-It** › **Streamlit Chat App** · `05_build_app/`
+**Step 5 of 6** · [← Step 4 — Ingest lab](../04_starter_kit/) · [🏠 Overview](../README.md) · [Step 6 — Deploy →](../06_deploy/)
 
-| | |
-|---|---|
-| **Previous** | [Step 4 — Vayu RAG ingest lab](../04_starter_kit/) |
-| **Next** | [Step 6 — Deploy ML Service →](../06_deploy/) |
+> **Goal:** Run the **Ask-It** chat app on your machine and ask questions about your indexed documents. This is where it all comes together.
 
-Run the **Ask-It** Streamlit chat app locally, then continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the Docker image as a **Vayu ML Service**.
+**What you'll do here:**
+1. Confirm your documents are indexed (Step 4) and `.env` is filled in
+2. Start the Streamlit app
+3. Open it in a browser and ask a question
 
 ---
 
-## Pipeline flow
+## How a question flows through the app
 
 ```text
 User question (chat_app.py)
         │
         ▼
-Embed query (rag_client.py → Vayu Model as a Service)
+Embed the question  (rag_client.py → Vayu Model as a Service)
         │
         ▼
-Vector search (Vayu Vector DB — collection from Step 4)
+Search the Vector DB  (the collection you built in Step 4)
         │
         ▼
-LLM answer + citations (Vayu Model as a Service chat)
+LLM writes an answer + citations  (Vayu Model as a Service)
         │
         ▼
-Streamlit UI (port 8501)
+Shown in the Streamlit UI  (port 8501)
 ```
 
 ---
 
-## What's In This Step?
+## What's in this folder
 
-| File | Description |
-|------|-------------|
-| `chat_app.py` | Streamlit interface for asking questions |
-| `rag_client.py` | Abstraction for retrieval & LLM chat |
-| `Dockerfile` | Used in [Step 6](../06_deploy/) to build the ML Service image |
-
----
-
-## Prerequisites
-
-- [Step 4 — Vayu RAG ingest lab](../04_starter_kit/) completed — vectors in **Vayu Vector DB**
-- Env vars from [Step 2 — Vayu Vector DB](../02_vayu_vector_databases/) and [Step 3 — Vayu Model as a Service](../03_vayu_model_as_a_service/)
+| File | What it does |
+|------|--------------|
+| `chat_app.py` | The Streamlit chat interface |
+| `rag_client.py` | The engine that does retrieval + LLM chat |
+| `Dockerfile` | Used in [Step 6](../06_deploy/) to build the deployable image |
 
 ---
 
-## Run locally
+## Before you start
 
-From the workspace root (after [Step 0](../00_vayu_workspace/)):
+- [Step 4](../04_starter_kit/) is done — your documents are indexed in the Vector DB.
+- `.env` has the values from [Step 2](../02_vayu_vector_databases/) (Vector DB) and [Step 3](../03_vayu_model_as_a_service/) (models).
+
+---
+
+## Run it
+
+If your environment is already set up (from [Step 0](../00_vayu_workspace/)):
 
 ```bash
 cd ask-it
@@ -60,7 +60,7 @@ cd 05_build_app
 streamlit run chat_app.py
 ```
 
-If you have not set up the venv yet:
+If you're starting fresh:
 
 ```bash
 python3 -m venv .venv
@@ -69,18 +69,27 @@ cd ask-it
 pip install -r requirements.txt
 
 cp .env.example .env
-# Edit .env with your Vayu Vector DB and Model as a Service credentials
+# Fill in your Vector DB and Model as a Service credentials
 
 cd 05_build_app
 streamlit run chat_app.py
 ```
 
-- Open your browser at **http://localhost:8501**
-- When running inside a **Vayu AI Studio workspace**, use the workspace proxy URL instead (e.g. `https://<your-workspace-host>/proxy/8501`)
-- Change **Top-K** from the sidebar to fine-tune answers
-- Click and expand **Sources** for each response
+Then:
 
-When local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the Docker image.
+- Open **http://localhost:8501** in your browser.
+- Inside a **Vayu AI Studio workspace**, use the proxy URL instead (e.g. `https://<your-workspace-host>/proxy/8501`).
+- Adjust **Top-K** in the sidebar to control how many document chunks are retrieved.
+- Expand **Sources** under any answer to see where it came from.
+
+---
+
+## ✅ You're done when
+
+- The app opens in your browser.
+- You ask a question about your docs and get an answer with **Sources** you can expand.
+
+Once local testing works, continue to [Step 6 — Deploy](../06_deploy/) to build, sign, and push the image as a hosted service.
 
 ---
 
@@ -112,15 +121,13 @@ When local testing works, continue to [Step 6 — Deploy](../06_deploy/) to buil
 
 ## Pro tips
 
-- Re-running `qna.ipynb` is **required** after corpus updates!
-- Never bake secrets into Docker images — use runtime environment variables in the ML Service (Step 6).
+- **Re-run `qna.ipynb` after changing your documents** — otherwise the app searches stale data.
+- **Never bake secrets into Docker images** — pass them as runtime environment variables in the ML Service (Step 6).
 
 ---
 
 ## Navigation
 
-| | |
-|---|---|
-| **Previous** | [Step 4 — Vayu RAG ingest lab](../04_starter_kit/) |
-| **Next** | [Step 6 — Deploy ML Service →](../06_deploy/) |
-| **🏠 Overview** | [Ask-It overview](../README.md) |
+| | | |
+|:--|:--:|--:|
+| [← Step 4 — RAG ingest lab](../04_starter_kit/) | [🏠 Overview](../README.md) | [Step 6 — Deploy ML Service →](../06_deploy/) |
