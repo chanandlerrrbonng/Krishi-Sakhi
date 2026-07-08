@@ -7,9 +7,10 @@
 **What you'll do here:**
 1. Build and push a Docker image
 2. Sign the image (required by Vayu)
-3. Create an ML Service through the wizard
-4. After the ML Service is **Ready**, configure firewall rules so external clients can reach its **public URL** (see **Port 443 FW Rule 5 1.pdf**)
-5. Verify the live URL works
+3. Confirm the image shows a **signed** green checkmark in the Container Registry
+4. Create an ML Service through the wizard
+5. After the ML Service is **Ready**, configure firewall rules so external clients can reach its **public URL** (see **Port 443 FW Rule 5 1.pdf**)
+6. Verify the live URL works
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
 
@@ -50,6 +51,10 @@ You'll deploy the **same** app you tested in Step 5. Nothing gets re-indexed —
 | — | A container registry: username + CLI secret ([Container Registry guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/registry/)) |
 
 Set these registry variables in the root [`.env`](../.env.example): `IMAGE_REGISTRY`, `REGISTRY_PROJECT`, `REGISTRY_USERNAME`, `REGISTRY_PASSWORD`, `VAYU_USERNAME`.
+
+**Before you create the ML Service:** open the [Vayu Container Registry](https://ipcloud.tatacommunications.com/cloud/console/vks/#/ms/vayucontainerregistry), select your project (e.g. `ask-it-chat`), and open the **Artifacts** tab. Your pushed image must show a **green checkmark** — only then proceed to the ML Service wizard. If you see a **red X**, sign the image first (step 2 below, or the [automated signing guide](image-signing/README.md)), refresh the registry page, and wait for the green tick.
+
+![Green checkmark on a signed artifact in Container Registry](../assets/container_registry_signed.png)
 
 > **Optional automation:** [`image-signing/`](image-signing/) contains a helper script ([`sign_image.py`](image-signing/sign_image.py)) for the signing step.
 
@@ -108,7 +113,29 @@ Follow the [Container Registry guide](https://ipcloud.tatacommunications.com/doc
 ---
 
 <details>
-<summary><h3>3. Open Vayu ML Services</h3></summary>
+<summary><h3>3. Confirm the image is signed in Container Registry</h3></summary>
+
+**Do this before opening the ML Service wizard.**
+
+1. Go to [Vayu Container Registry](https://ipcloud.tatacommunications.com/cloud/console/vks/#/ms/vayucontainerregistry).
+2. Open your project (e.g. **`ask-it-chat`**) → **Artifacts** tab.
+3. Find the tag you pushed (e.g. **`latest`**) and check the status icon on the right:
+
+| Icon | Meaning | What to do |
+|------|---------|------------|
+| **Green checkmark** | Image is signed — ready to deploy | Continue to step 5 — Create the ML Service |
+| **Red X** | Image is **not** signed | Go back to step 2 — Sign the image (or the [automated signing guide](image-signing/README.md)), then refresh this page |
+
+![Signed artifact shows a green checkmark in Container Registry](../assets/container_registry_signed.png)
+
+> If you push a **new** tag after signing an older one, the new artifact must be signed and show the green tick before you deploy again.
+
+</details>
+
+---
+
+<details>
+<summary><h3>4. Open Vayu ML Services</h3></summary>
 
 Go to [Vayu ML Services](https://ipcloud.tatacommunications.com/aistudio/#/deploy/mlops-service-list).
 
@@ -119,11 +146,11 @@ For the full create wizard (Start → Infrastructure → Configure Compute → O
 ---
 
 <details>
-<summary><h3>4. Create the ML Service (the wizard)</h3></summary>
+<summary><h3>5. Create the ML Service (the wizard)</h3></summary>
 
 Follow the wizard and map Ask-It's settings as below.
 
-**4.1 Start — image and runtime**
+**5.1 Start — image and runtime**
 
 | Field | Ask-It value |
 |-------|--------------|
@@ -137,7 +164,7 @@ Follow the wizard and map Ask-It's settings as below.
 
 Leave **Args** empty unless your platform team specifies extra Streamlit flags.
 
-**4.2 Environment variables (required)**
+**5.2 Environment variables (required)**
 
 Add each key/value under **Environment Variable** on the Start step. Use the **same values** as your local `ask-it/.env` and your `qna.ipynb` ingest run. (The `.env` file is for local dev only — it is not baked into the image.)
 
@@ -167,22 +194,22 @@ COLLECTION_NAME=knowledge_base_rag
 
 > Do **not** set `QDRANT_PATH` for a hosted deployment unless you intentionally want on-disk Qdrant inside the container (not recommended here).
 
-**4.3 Infrastructure**
+**5.3 Infrastructure**
 
 Select the **Datacenter**, **Business Unit**, and **Environment** assigned to your workspace (same as your other Vayu resources).
 
-**4.4 Configure compute**
+**5.4 Configure compute**
 
 | Field | Guidance |
 |-------|----------|
 | **Resources / flavor** | CPU is plenty for Streamlit + API calls; add GPU only if your track requires it |
 | **Replicas** | `1` for a demo; increase for load testing |
 
-**4.5 Observability**
+**5.5 Observability**
 
 Enable **Monitoring** and **Logging** if available — very helpful for debugging retrieval or MaaS errors during a demo.
 
-**4.6 Review and submit**
+**5.6 Review and submit**
 
 Double-check the name, image, port **8501**, and all environment variables. Click **Submit** and wait until the status is **ready** on the ML Services list.
 
@@ -191,7 +218,7 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 ---
 
 <details>
-<summary><h3>5. Configure firewall access</h3></summary>
+<summary><h3>6. Configure firewall access</h3></summary>
 
 After the ML Service is **Ready**, configure firewall rules so external clients can reach the service **public URL**. See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
 
@@ -237,6 +264,7 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 
 - [ ] Corpus indexed in Vector DB ([`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb))
 - [ ] Docker image built from `ask-it/`, pushed, and **signed**
+- [ ] **Green checkmark** visible on the artifact in [Container Registry](https://ipcloud.tatacommunications.com/cloud/console/vks/#/ms/vayucontainerregistry) before ML Service create
 - [ ] ML Service **ready** with port **8501** and all env vars set
 - [ ] Firewall rules configured for the service **public URL** (see **Port 443 FW Rule 5 1.pdf**)
 - [ ] Public/demo URL opens the Ask-It UI
