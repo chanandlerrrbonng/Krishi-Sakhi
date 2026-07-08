@@ -80,9 +80,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it
 pip install -r requirements.txt
-
-cp .env.example .env
-# Fill in your Vector DB and Model as a Service credentials
+# Fill in your Vector DB and Model as a Service credentials in .env
 
 cd 05_build_app
 streamlit run chat_app.py

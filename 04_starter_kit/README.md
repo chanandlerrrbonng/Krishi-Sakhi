@@ -48,9 +48,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it
 pip install -r requirements.txt
-
-cp .env.example .env
-# Fill in credentials from Steps 2–3
+# Fill in credentials from Steps 2–3 in .env
 ```
 
 **Required in `ask-it/.env`** (the notebook stops early with a clear error if any are missing):

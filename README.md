@@ -140,7 +140,6 @@ If you just want the overall shape before diving into each step:
    source .venv/bin/activate
    cd ask-it
    pip install -r requirements.txt
-   cp .env.example .env      # then fill in values as you go
    ```
 
    Skip ```git clone``` if the repo is already present under /home/jovyan/ask-it.

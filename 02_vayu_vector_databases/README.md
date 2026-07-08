@@ -67,11 +67,10 @@ Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
 <details>
 <summary><h3>5. Save them to <code>.env</code></h3></summary>
 
-At the `ask-it` repo root:
+At the `ask-it` repo root, edit `.env` (created in [Step 0](../00_vayu_workspace/)):
 
 ```bash
 cd ask-it
-cp .env.example .env
 # Edit .env — set QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
 ```
 

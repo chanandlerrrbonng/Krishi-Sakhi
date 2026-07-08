@@ -31,11 +31,10 @@
 <details>
 <summary><h3>1. Add your storage credentials</h3></summary>
 
-Set these values in `ask-it/.env` (copy from `.env.example` first — never paste credentials into notebook cells):
+Set these values in `ask-it/.env` (never paste credentials into notebook cells):
 
 ```bash
 cd ask-it
-cp .env.example .env
 # Edit .env — set VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
 ```
 
