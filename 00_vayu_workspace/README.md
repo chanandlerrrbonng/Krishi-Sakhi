@@ -6,9 +6,10 @@
 
 **What you'll do here:**
 1. Create a Vayu AI Studio workspace (with Docker enabled)
-2. Clone this `ask-it` repository into it
-3. Install the Python dependencies
-4. Pick the right kernel for the notebooks
+2. After the workspace is **Ready**, configure firewall rules so external clients can reach the workspace **public URL** (see **Port 443 FW Rule 5 1.pdf**)
+3. Clone this `ask-it` repository into it
+4. Install the Python dependencies
+5. Pick the right kernel for the notebooks
 
 You only do this step once.
 
@@ -37,13 +38,23 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
 2. Click **Create Workspace** and follow the wizard (Start → Infrastructure → Configure Compute and Storage → Observability → Review). The [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace) walks through each screen.
 3. **Add an object storage host alias:** during creation, add a **host alias** using the **IP** and **endpoint** from your SOP document. Enter the endpoint as the hostname **only** — no `http://` or `https://`.
 4. **Turn on "Enable Docker in the Workspace"** before you finish. This is required later for [Step 5](../05_build_app/) and [Step 6](../06_deploy/).
+5. Submit the workspace and wait until the status shows **Ready**.
 
 </details>
 
 ---
 
 <details>
-<summary><h3>2. Get the code into your workspace</h3></summary>
+<summary><h3>2. Configure firewall access</h3></summary>
+
+After the workspace is **Ready**, configure firewall rules so external clients can reach the workspace **public URL**. See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
+
+</details>
+
+---
+
+<details>
+<summary><h3>3. Get the code into your workspace</h3></summary>
 
 Open the workspace terminal and clone this repository:
 
@@ -58,7 +69,7 @@ git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon
 ---
 
 <details>
-<summary><h3>3. Install dependencies</h3></summary>
+<summary><h3>4. Install dependencies</h3></summary>
 
 Still in the terminal, set up a Python virtual environment and install the packages:
 
@@ -79,7 +90,7 @@ cp .env.example .env
 ---
 
 <details>
-<summary><h3>4. Select the notebook kernel</h3></summary>
+<summary><h3>5. Select the notebook kernel</h3></summary>
 
 Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.venv` you just created:
 

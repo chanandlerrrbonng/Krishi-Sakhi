@@ -8,7 +8,8 @@
 1. Build and push a Docker image
 2. Sign the image (required by Vayu)
 3. Create an ML Service through the wizard
-4. Verify the live URL works
+4. After the ML Service is **Ready**, configure firewall rules so external clients can reach its **public URL** (see **Port 443 FW Rule 5 1.pdf**)
+5. Verify the live URL works
 
 > This step is optional but recommended if you want a shareable, always-on demo (e.g. for judges).
 
@@ -190,6 +191,15 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 ---
 
 <details>
+<summary><h3>5. Configure firewall access</h3></summary>
+
+After the ML Service is **Ready**, configure firewall rules so external clients can reach the service **public URL**. See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
+
+</details>
+
+---
+
+<details>
 <summary><h3>🔍 Verify the endpoint</h3></summary>
 
 1. Open **ML Services List** → click your service **Name**.
@@ -202,7 +212,7 @@ Double-check the name, image, port **8501**, and all environment variables. Clic
 
 | Symptom | What to check |
 |---------|---------------|
-| Page does not load | Port **8501**, **Public Expose** enabled, pod status **ready** |
+| Page does not load | Port **8501**, **Public Expose** enabled, pod status **ready**, firewall rules for the service **public URL** (see **Port 443 FW Rule 5 1.pdf**) |
 | "Failed to initialize RAG Engine" | Env vars match Steps 2–3; no typos in keys |
 | Empty or wrong answers | Re-run `qna.ipynb`; `COLLECTION_NAME` and `EMBEDDING_MODEL` match ingest |
 | Model errors | `CHAT_MODEL` / `OPENAI_BASE_URL` correct; API key valid and has credits |
@@ -228,6 +238,7 @@ Register metadata like collection name, embedding model, chat model, and top-k �
 - [ ] Corpus indexed in Vector DB ([`04_starter_kit/qna.ipynb`](../04_starter_kit/qna.ipynb))
 - [ ] Docker image built from `ask-it/`, pushed, and **signed**
 - [ ] ML Service **ready** with port **8501** and all env vars set
+- [ ] Firewall rules configured for the service **public URL** (see **Port 443 FW Rule 5 1.pdf**)
 - [ ] Public/demo URL opens the Ask-It UI
 - [ ] Test question returns a grounded answer with **Sources** expanded
 - [ ] Endpoint URL documented for judges (README or slide)

@@ -7,7 +7,8 @@
 **What you'll do here:**
 1. Create a Qdrant vector database in AI Studio
 2. Wait until it's **Ready**
-3. Copy its URL and API key into `.env`
+3. Configure firewall rules so external clients can reach its **public URL** (see **Port 443 FW Rule 5 1.pdf**)
+4. Copy its URL and API key into `.env`
 
 | [← Previous — Step 1 — Object Storage](../01_dataset/) | [Next — Step 3 — Model as a Service →](../03_vayu_model_as_a_service/) |
 |:---|---:|
@@ -44,7 +45,16 @@ Submit the deployment and wait until the status shows **Ready**.
 ---
 
 <details>
-<summary><h3>3. Copy your access details</h3></summary>
+<summary><h3>3. Configure firewall access</h3></summary>
+
+After the vector database is **Ready**, configure firewall rules so external clients can reach its **public URL**. See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
+
+</details>
+
+---
+
+<details>
+<summary><h3>4. Copy your access details</h3></summary>
 
 Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
 
@@ -55,7 +65,7 @@ Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
 ---
 
 <details>
-<summary><h3>4. Save them to <code>.env</code></h3></summary>
+<summary><h3>5. Save them to <code>.env</code></h3></summary>
 
 At the `ask-it` repo root:
 
@@ -70,7 +80,7 @@ cp .env.example .env
 ---
 
 <details>
-<summary><h3>5. (Optional) Local development</h3></summary>
+<summary><h3>6. (Optional) Local development</h3></summary>
 
 For quick local testing without the hosted service, use on-disk Qdrant via the `QDRANT_PATH` variable in your notebook instead.
 

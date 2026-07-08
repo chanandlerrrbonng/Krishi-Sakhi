@@ -9,6 +9,7 @@
 2. Create **two** API keys (one per model)
 3. Look up the exact model IDs
 4. Save everything into `.env`
+5. Configure firewall rules so your workspace can reach Model as a Service endpoints on port **443** (see **Port 443 FW Rule 5 1.pdf**)
 
 | [← Previous — Step 2 — Vector DB](../02_vayu_vector_databases/) | [Next — Step 4 — RAG ingest lab →](../04_starter_kit/) |
 |:---|---:|
@@ -107,6 +108,15 @@ Then set:
 | `CHAT_MODEL` | Chat model ID (from step 3) |
 
 These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5–6).
+
+</details>
+
+---
+
+<details>
+<summary><h3>5. Configure firewall access</h3></summary>
+
+Configure firewall rules so your workspace and deployed services can reach Model as a Service endpoints (port **443**). See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
 
 </details>
 
