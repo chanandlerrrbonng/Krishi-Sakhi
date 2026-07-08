@@ -59,6 +59,8 @@ Click **Create API key** twice to make one key per model:
 | Embedding key | Your embedding model | `EMBEDDING_OPENAI_API_KEY` |
 | LLM key | Your chat model | `LLM_OPENAI_API_KEY` |
 
+> **Important:** each API key is shown **only once** when you create it. Copy it immediately and paste it into `ask-it/.env` (or another safe place you control). You will **not** be able to view the full key again later — if you lose it, create a new key.
+
 </details>
 
 ---
@@ -108,6 +110,7 @@ These are used by `qna.ipynb` (Step 4) and the app in `05_build_app/` (Steps 5�
 <details>
 <summary><h3>📌 Things to remember</h3></summary>
 
+- **Copy keys when they appear** — MaaS shows each new API key only once; save it right away in `.env` before closing the dialog.
 - **One API key per model** — embedding and LLM keys are kept separate in this template.
 - **The embedding model sets the vector size** — your Vector DB collection ([Step 2](../02_vayu_vector_databases/)) must match it. Change the embedding model later and you'll need to recreate the collection.
 - **Stay consistent** — use the *same* models and keys for both ingestion (Step 4) and the chat app (Steps 5–6).
