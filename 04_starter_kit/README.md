@@ -44,6 +44,7 @@ If you haven't installed dependencies yet:
 ![Setting up](../assets/install.png)
 
 ```bash
+cd /home/jovyan
 python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it

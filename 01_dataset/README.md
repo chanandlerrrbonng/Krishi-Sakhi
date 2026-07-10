@@ -31,10 +31,10 @@
 <details>
 <summary><h3>1. Add your storage credentials</h3></summary>
 
-Set these values in `ask-it/.env` (never paste credentials into notebook cells):
+Set these values in `ask-it/.env` (never paste credentials into notebook cells). Object Storage credentials are in the **Access Guide**:
 
 ```bash
-cd ask-it
+cd /home/jovyan/ask-it
 # Edit .env — set VAYU_S3_KEY, VAYU_S3_SECRET, VAYU_S3_ENDPOINT, VAYU_S3_BUCKET
 ```
 

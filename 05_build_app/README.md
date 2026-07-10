@@ -66,8 +66,8 @@ Shown in the Streamlit UI  (port 8501)
 If your environment is already set up (from [Step 0](../00_vayu_workspace/)):
 
 ```bash
-cd ask-it
-source .venv/bin/activate   # if not already active
+cd /home/jovyan/ask-it
+source /home/jovyan/.venv/bin/activate   # if not already active
 
 cd 05_build_app
 streamlit run chat_app.py
@@ -76,6 +76,7 @@ streamlit run chat_app.py
 If you're starting fresh:
 
 ```bash
+cd /home/jovyan
 python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it

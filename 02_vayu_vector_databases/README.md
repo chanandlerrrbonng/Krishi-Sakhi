@@ -31,6 +31,19 @@ Open it here: [Vayu Vector DB](https://ipcloud.tatacommunications.com/aistudio/#
 
 In AI Studio, click **Create Vector Database** and select the **Qdrant** engine under **Vector Type**. (See the [Creating Qdrant guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant/#creating-qdrant).)
 
+**Sample resource selections for your Qdrant Vector DB:**
+
+| Parameter | Suggested selection |
+|-----------|---------------------|
+| **Engine (Type)** | Qdrant |
+| **Version** | `v1.10.1` |
+| **Compute Flavour** | General Purpose: **4 vCPU / 16GB RAM / cpu** (select **cpu** from the dropdown) |
+| **Storage Flavour** | **SSD1-Persistent Storage** |
+| **Storage Size** | **20 GB** |
+| **Replica** | **1** |
+
+> These are recommended minimum specs for development. Adjust as needed for your workload.
+
 </details>
 
 ---
@@ -56,9 +69,11 @@ After the vector database is **Ready**, configure firewall rules so external cli
 <details>
 <summary><h3>4. Copy your access details</h3></summary>
 
-Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
+Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the **Connect** tab on your Vector DB resource.
 
-> **Important — clean up the URL:** when you copy it, remove the trailing `dashboard` at the end. Use `https://<your-host>` — **not** `https://<your-host>/dashboard`.
+> **Use the Public Endpoint** when your app runs outside the cluster (local Streamlit, ML Service, or a demo URL). Enable firewall rules first — see **Port 443 FW Rule 5 1.pdf**.
+
+> **Important — clean up the URL:** when you copy `QDRANT_URL`, **remove `/dashboard` at the end** if present. Use the API root (e.g. `https://<your-host>`) — **not** `https://<your-host>/dashboard`.
 
 </details>
 
@@ -70,9 +85,11 @@ Note your **`QDRANT_URL`** and **`QDRANT_API_KEY`** from the console.
 At the `ask-it` repo root, edit `.env` (created in [Step 0](../00_vayu_workspace/)):
 
 ```bash
-cd ask-it
+cd /home/jovyan/ask-it
 # Edit .env — set QDRANT_URL, QDRANT_API_KEY, COLLECTION_NAME
 ```
+
+`COLLECTION_NAME` defaults to `knowledge_base_rag` in `.env.example`. You can choose another name; the notebook creates the collection if it does not exist.
 
 </details>
 

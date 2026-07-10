@@ -50,7 +50,7 @@ You should also have already built and pushed the image in [Step 6 — Deploy](.
 <summary><h3>✍️ Sign the image</h3></summary>
 
 ```bash
-cd ask-it
+cd /home/jovyan/ask-it
 set -a && source .env && set +a
 
 export IMAGE=$IMAGE_REGISTRY/$REGISTRY_PROJECT/ask-it-chat:latest

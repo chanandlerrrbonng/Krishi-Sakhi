@@ -5,11 +5,10 @@
 > **Goal:** Create a place in the cloud (a "workspace") where you'll run the notebooks and the chat app for the rest of this project.
 
 **What you'll do here:**
-1. Create a Vayu AI Studio workspace (with Docker enabled)
-2. After the workspace is **Ready**, configure firewall rules so external clients can reach the workspace **public URL** (see **Port 443 FW Rule 5 1.pdf**)
-3. Clone this `ask-it` repository into it
-4. Install the Python dependencies
-5. Pick the right kernel for the notebooks
+1. Create a Vayu AI Studio workspace (with Docker and public access enabled)
+2. Clone this `ask-it` repository into `/home/jovyan`
+3. Install the Python dependencies and create `.env`
+4. Pick the right kernel for the notebooks
 
 You only do this step once.
 
@@ -36,29 +35,32 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
 
 1. Log in to [Vayu AI Studio → Workspaces](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list).
 2. Click **Create Workspace** and follow the wizard (Start → Infrastructure → Configure Compute and Storage → Observability → Review). The [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace) walks through each screen.
-3. **Add an object storage host alias:** during creation, add a **host alias** using the **IP** and **endpoint** from your SOP document. Enter the endpoint as the hostname **only** — no `http://` or `https://`.
+3. **Add an object storage host alias:** during creation, add a **host alias** for object storage using the **IP** and **endpoint** from the **Access Guide**. Enter the endpoint as the hostname **only** — no `http://` or `https://`.
 4. **Turn on "Enable Docker in the Workspace"** before you finish. This is required later for [Step 5](../05_build_app/) and [Step 6](../06_deploy/).
-5. Submit the workspace and wait until the status shows **Ready**.
+5. **Public access:** enable the **Public Access** toggle in the workspace wizard.
+6. **Configure compute and storage (recommended):** on the **Configure Compute and Storage** step:
+   - **Flavor:** **4 vCPU / 8GB RAM / cpu** from **General Purpose** flavors (choose **cpu** from the dropdown)
+   - **Billing Mode:** **Hourly**
+   - **Storage Flavor:** **SSD1-Persistent Storage**
+   - **Billing Mode for Storage:** **Monthly**
+   - **Size:** **5**
+
+   Change these if your workload needs more resources.
+7. Submit the workspace and wait until the status shows **Ready**.
+8. Configure firewall rules. Follow **`Port 443 FW Rule 5 1.pdf`** (provided to candidates).
+9. To access the workspace, open the **Connect** tab on the workspace detail page and open the **Public Endpoint**.
 
 </details>
 
 ---
 
 <details>
-<summary><h3>2. Configure firewall access</h3></summary>
+<summary><h3>2. Get the code into your workspace</h3></summary>
 
-After the workspace is **Ready**, configure firewall rules so external clients can reach the workspace **public URL**. See **Port 443 FW Rule 5 1.pdf** (provided to candidates).
-
-</details>
-
----
-
-<details>
-<summary><h3>3. Get the code into your workspace</h3></summary>
-
-Open the workspace terminal and clone this repository:
+Open the workspace terminal and clone this repository into `/home/jovyan`:
 
 ```bash
+cd /home/jovyan
 git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
 ```
 
@@ -69,18 +71,19 @@ git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon
 ---
 
 <details>
-<summary><h3>4. Install dependencies</h3></summary>
+<summary><h3>3. Install dependencies</h3></summary>
 
 Still in the terminal, set up a Python virtual environment and install the packages:
 
 ```bash
+cd /home/jovyan
 python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it
 pip install -r requirements.txt
 
 cp .env.example .env
-# You'll fill in .env with credentials as you complete Steps 2–3 (and Step 6)
+# You'll fill in .env with credentials from the Access Guide and Steps 2–3 (and Step 6)
 ```
 
 > A **virtual environment** (`.venv`) keeps this project's packages separate from everything else. The `source .venv/bin/activate` line "turns it on" — you'll run it each time you open a new terminal.
@@ -90,7 +93,7 @@ cp .env.example .env
 ---
 
 <details>
-<summary><h3>5. Select the notebook kernel</h3></summary>
+<summary><h3>4. Select the notebook kernel</h3></summary>
 
 Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.venv` you just created:
 
@@ -125,6 +128,7 @@ You'll use this workspace for:
 
 - [Vayu AI Studio Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list)
 - [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/)
+- **`Port 443 FW Rule 5 1.pdf`** (provided to candidates)
 
 | [← Previous — Ask-It overview](../README.md) | [Overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/) |
 |:---|:---:|---:|

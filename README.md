@@ -39,6 +39,8 @@ You do **not** need to be an AI expert to complete this. Each step tells you exa
 
 ## 🗺️ Journey at a glance
 
+Shared service credentials for **Vayu Object Storage** and the **Container Registry** are provided in the **Access Guide**.
+
 Follow these in order. Each folder has its own README with detailed instructions.
 
 | Step | Vayu service | Folder | Role in the stack | How you wire it up |
@@ -93,6 +95,8 @@ Almost every step reads its settings from one file: **`ask-it/.env`**. You creat
 
 > **Never commit `.env` to git or share it** — it holds your secret keys.
 
+Object Storage and Container Registry values come from the **Access Guide**. Vector DB and MaaS values come from Steps 2–3.
+
 Here is the full template. You will collect these values as you go through Steps 1–3 (and 6):
 
 ```bash
@@ -132,19 +136,28 @@ VAYU_USERNAME=<your-vayu-username>
 
 If you just want the overall shape before diving into each step:
 
-1. **Set up** — Do [Step 0](00_vayu_workspace/) (create workspace, clone repo). Then, in the workspace terminal:
+1. **Set up** — Do [Step 0](00_vayu_workspace/) (create workspace, clone repo). From `/home/jovyan` in your workspace terminal:
 
    ```bash
+   cd /home/jovyan
    git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
    python3 -m venv .venv
    source .venv/bin/activate
    cd ask-it
    pip install -r requirements.txt
+   cp .env.example .env
    ```
 
-   Skip ```git clone``` if the repo is already present under /home/jovyan/ask-it.
+   Skip `git clone` if the repo is already present under `/home/jovyan/ask-it`.
 
-2. **Collect credentials** — Fill in `.env` using [Step 2](02_vayu_vector_databases/) (Vector DB) and [Step 3](03_vayu_model_as_a_service/) (models). Object Storage keys from [Step 1](01_dataset/) are optional.
+2. **Collect credentials** — Fill in `.env` using the step guides below. Object Storage and Container Registry values come from the **Access Guide**; Vector DB and MaaS values from [Step 2](02_vayu_vector_databases/) and [Step 3](03_vayu_model_as_a_service/).
+
+   | Variable(s) | Where to get them |
+   |-------------|-------------------|
+   | `VAYU_S3_KEY`, `VAYU_S3_SECRET`, `VAYU_S3_ENDPOINT`, `VAYU_S3_BUCKET` | **Access Guide** — [Step 1](01_dataset/) (optional; local `docs/` also works) |
+   | `QDRANT_URL`, `QDRANT_API_KEY`, `COLLECTION_NAME` | [Step 2 — Vayu Vector DB](02_vayu_vector_databases/) |
+   | `OPENAI_BASE_URL`, `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `EMBEDDING_MODEL`, `CHAT_MODEL` | [Step 3 — Vayu Model as a Service](03_vayu_model_as_a_service/) |
+   | `IMAGE_REGISTRY`, `REGISTRY_PROJECT`, `REGISTRY_USERNAME`, `REGISTRY_PASSWORD`, `VAYU_USERNAME` | **Access Guide** — [Step 6](06_deploy/) (build, sign, deploy) |
 
 3. **Ingest once** — Open `04_starter_kit/qna.ipynb` in Vayu AI Studio, pick the kernel, and run all cells:
 
