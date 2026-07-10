@@ -39,11 +39,11 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
 4. **Turn on "Enable Docker in the Workspace"** before you finish. This is required later for [Step 5](../05_build_app/) and [Step 6](../06_deploy/).
 5. **Public access:** enable the **Public Access** toggle in the workspace wizard.
 6. **Configure compute and storage (recommended):** on the **Configure Compute and Storage** step:
-   - **Flavor:** **4 vCPU / 8GB RAM / cpu** from **General Purpose** flavors (choose **cpu** from the dropdown)
+   - **Flavor:** **8 vCPU / 32GB RAM / cpu** from **General Purpose** flavors (choose **cpu** from the dropdown)
    - **Billing Mode:** **Hourly**
    - **Storage Flavor:** **SSD1-Persistent Storage**
    - **Billing Mode for Storage:** **Monthly**
-   - **Size:** **10 GiB**
+   - **Size:** **50 GiB**
 
    Change these if your workload needs more resources.
 7. Submit the workspace and wait until the status shows **Ready**.
