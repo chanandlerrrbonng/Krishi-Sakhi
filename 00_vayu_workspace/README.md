@@ -43,7 +43,7 @@ A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal,
    - **Billing Mode:** **Hourly**
    - **Storage Flavor:** **SSD1-Persistent Storage**
    - **Billing Mode for Storage:** **Monthly**
-   - **Size:** **5**
+   - **Size:** **10 GiB**
 
    Change these if your workload needs more resources.
 7. Submit the workspace and wait until the status shows **Ready**.

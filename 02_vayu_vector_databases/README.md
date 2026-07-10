@@ -39,7 +39,7 @@ In AI Studio, click **Create Vector Database** and select the **Qdrant** engine 
 | **Version** | `v1.10.1` |
 | **Compute Flavour** | General Purpose: **4 vCPU / 16GB RAM / cpu** (select **cpu** from the dropdown) |
 | **Storage Flavour** | **SSD1-Persistent Storage** |
-| **Storage Size** | **20 GB** |
+| **Storage Size** | **20 GiB** |
 | **Replica** | **1** |
 
 > These are recommended minimum specs for development. Adjust as needed for your workload.
