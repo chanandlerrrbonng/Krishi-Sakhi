@@ -13,4 +13,4 @@ tcl-cosign
 06_deploy/image-signing/fulcio.crt
 06_deploy/image-signing/rekor.key
 06_deploy/image-signing/ctlog.key
-.DS_Store
+.DS_Store.env.example
