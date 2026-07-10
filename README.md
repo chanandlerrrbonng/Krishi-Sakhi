@@ -1,185 +1,197 @@
-# Ask-It — Starter Template
+# 💬 Ask-It — Build a Document Chat Assistant on Vayu
 
-## Problem statement and outcome
+![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?logo=streamlit&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Vector%20DB-Qdrant-DC244C?logo=qdrant&logoColor=white)
+![Model as a Service](https://img.shields.io/badge/Models-Vayu%20MaaS-6E56CF)
+![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white)
+![Deploy](https://img.shields.io/badge/Deploy-Vayu%20ML%20Service-0EA5E9)
 
-**Problem:** Users often have to comb through massive documents (PDFs, policies, textbooks) in languages like Hindi, needing a quick answer they can trust. Choose a real user (e.g., a customer‑support agent, loan officer, MSME owner, junior doctor, law student, HR newcomer, student, or citizen) and a document set they care about. Build an end‑to‑end copilot **using the Vayu platform**: store the document corpus in **Vayu Object Storage**, ingest and chunk them in a **Vayu AI Studio** notebook, embed with an approved model from **Vayu Model as a Service**, index in **Vayu Vector DB (Qdrant)**, configure the RAG pipeline and register it in the **Vayu Model Registry**, and expose a chat UI via **Vayu Realtime Inference**.
+**Ask-It** is a starter template that helps you build a chat assistant that answers questions from *your own* documents — and always shows which document the answer came from. You give it a folder of documents (manuals, policies, textbooks, notes), and users can ask questions in plain language and get trustworthy, sourced answers — including in Indian languages.
 
-**Outcome:** This starter template demonstrates the full Vayu‑centric pipeline: upload docs to **Vayu Object Storage**, ingest‑chunk‑embed‑index in **Vayu AI Studio**, store vectors in **Vayu Vector DB**, register RAG configuration in the **Vayu Model Registry**, run the Streamlit chat app locally (Step 5), then containerise, sign, and serve it via **Vayu ML Service** (Step 6). The UI returns answers in plain language, cites the exact source document and line, supports multilingual queries (English + an Indian language), and respects guardrails (PII, toxicity, jailbreak).
+---
 
-### Chat UI preview
+## 🎯 What you'll build
 
-The chat UI (`05_build_app/chat_app.py`) is a Streamlit interface with retrieval settings, grounded answers, and expandable source citations. Run it locally in Step 5; deploy it as an ML Service in Step 6.
+A working question-answering app, powered end to end by the **Vayu platform**:
 
 ![Ask-It Streamlit chat UI](./assets/ask-it/app.png)
 
-Typical hackathon domains: customer-support manuals, HR/onboarding policies, research PDFs (add loaders if you need PDF/DOCX beyond the starter’s `.md` / `.txt` / `.html`).
+The chat UI (`05_build_app/chat_app.py`) lets users ask questions, returns grounded answers, and shows expandable source citations for every reply.
 
 ---
 
-## Project layout (steps)
+## ⚙️ How it works (in plain English)
+
+This project uses a technique called **RAG (Retrieval-Augmented Generation)**. Here is the whole idea in four steps:
+
+1. **Store** your documents in cloud storage.
+2. **Chunk & embed** them — split documents into small pieces and turn each piece into a list of numbers (an *embedding*) that captures its meaning.
+3. **Search** — when a user asks a question, find the document pieces whose meaning is closest to the question.
+4. **Answer** — hand those pieces to a language model (LLM) and ask it to write an answer, citing the sources.
+
+```text
+Your docs  →  Embed & index  →  User asks a question  →  Find relevant pieces  →  LLM writes a sourced answer
+```
+
+You do **not** need to be an AI expert to complete this. Each step tells you exactly what to click and run.
+
+---
+
+## 🗺️ Journey at a glance
+
+Shared service credentials for **Vayu Object Storage** and the **Container Registry** are provided in the **Access Guide**.
+
+Follow these in order. Each folder has its own README with detailed instructions.
+
+| Step | Vayu service | Folder | Role in the stack | How you wire it up |
+|:----:|--------------|--------|-------------------|--------------------|
+| 0 | Vayu AI Studio Workspace | [`00_vayu_workspace/`](00_vayu_workspace/) | Compute environment for the notebooks and app | Create your workspace with Docker enabled and clone this repo |
+| 1 | Vayu Object Storage | [`01_dataset/`](01_dataset/) | Data — your source documents | Upload your documents to a cloud bucket (optional; the local `docs/` folder also works) |
+| 2 | Vayu Vector DB (Qdrant) | [`02_vayu_vector_databases/`](02_vayu_vector_databases/) | Retrieval — stores embeddings for meaning-based search | Create a Qdrant database, then copy `QDRANT_URL` and `QDRANT_API_KEY` into `.env` |
+| 3 | Vayu Model as a Service | [`03_vayu_model_as_a_service/`](03_vayu_model_as_a_service/) | Models — one embedding model and one chat model (LLM) | Create two API keys, then set `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, and `CHAT_MODEL` in `.env` |
+| 4 | Vayu AI Studio (RAG lab) | [`04_starter_kit/`](04_starter_kit/) | Ingestion — chunk, embed, and index the docs | Run `qna.ipynb` to chunk, embed, and index your documents |
+| 5 | Streamlit (local) | [`05_build_app/`](05_build_app/) | App — chat UI plus the RAG engine | Run `chat_app.py` locally and test with Top-K and Sources |
+| 6 | Vayu ML Service | [`06_deploy/`](06_deploy/) | Hosting — the deployed container | Build, sign, and push the image, then deploy it as an ML Service |
+
+> **Tip:** Steps 0–4 set things up. Step 5 is where you first *see it work*. Step 6 is optional but recommended if you want a shareable URL (e.g. for judges).
+
+---
+
+<details>
+<summary><h3>🗂️ Project layout</h3></summary>
 
 ```text
 ask-it/
-├── README.md
-├── requirements.txt
-├── .env.example                  # Template — copy to .env and fill in values
-├── 00_vayu_workspace/
-│   └── README.md                 # Allocate a Vayu Workspace
+├── README.md                     # You are here
+├── requirements.txt              # Python dependencies
+├── .env.example                  # Template — copy to .env and fill in your values
 │
+├── 00_vayu_workspace/            # Step 0 · Create a Vayu Workspace
 ├── 01_dataset/
-│   ├── 01_dataset.ipynb          # Upload docs to Vayu Object Storage
-│   └── docs/                     # Sample corpus (.md, .txt, .html)
-│
-├── 02_vayu_vector_databases/
-│   └── README.md                 # Provision Vayu Vector DB (Qdrant)
-│
-├── 03_vayu_model_as_a_service/
-│   └── README.md                 # Get Vayu Model as a Service key
-│
+│   ├── 01_dataset.ipynb          # Step 1 · Upload docs to Object Storage
+│   └── docs/                     # Sample documents (.md, .txt, .html)
+├── 02_vayu_vector_databases/     # Step 2 · Provision Vector DB (Qdrant)
+├── 03_vayu_model_as_a_service/   # Step 3 · Get model API keys
 ├── 04_starter_kit/
-│   └── qna.ipynb                 # Vayu AI Studio: chunk → MaaS embed → Vector DB index
-│
+│   └── qna.ipynb                 # Step 4 · Chunk → embed → index
 ├── 05_build_app/
-│   ├── chat_app.py               # Streamlit chat UI (run locally)
+│   ├── chat_app.py               # Step 5 · Streamlit chat UI (run locally)
 │   ├── rag_client.py             # RAG engine (retrieve + prompt + citations)
-│   ├── Dockerfile                # Image definition — built in Step 6
-│   └── README.md                 # Local Streamlit run
-│
+│   ├── Dockerfile                # Step 6 · Image definition
+│   └── README.md
 └── 06_deploy/
-    ├── README.md                 # Build, sign, push image + ML Service endpoint
-    └── image-signing/            # Optional automated tcl-cosign signing
+    ├── README.md                 # Step 6 · Build, sign, push, deploy
+    └── image-signing/            # Optional automated image signing
 ```
 
-| Step | Vayu service | Folder | What to run / open |
-|------|--------------|--------|-------------------|
-| 0 | **Vayu AI Studio Workspace** | `00_vayu_workspace/` | `README.md` — create workspace (enable Docker) |
-| 1 | **Vayu Object Storage** | `01_dataset/` | `01_dataset.ipynb` — sync `docs/` to object storage |
-| 2 | **Vayu Vector DB** (Qdrant) | `02_vayu_vector_databases/` | `README.md` — provision DB; set `QDRANT_URL` / `QDRANT_API_KEY` |
-| 3 | **Vayu Model as a Service** | `03_vayu_model_as_a_service/` | `README.md` — MaaS API key, base URL, embedding + chat models |
-| 4 | **Vayu AI Studio RAG lab** | `04_starter_kit/` | `qna.ipynb` — chunk, embed (MaaS), index (Vector DB) |
-| 5 | **Vayu chat app (local)** | `05_build_app/` | `streamlit run chat_app.py` — test RAG locally |
-| 6 | **Vayu ML Service (deploy)** | `06_deploy/` | Build, sign, push Docker image; deploy hosted endpoint |
+</details>
 
 ---
 
-## Mapping to the Vayu “Ask-It — Guided Journey”
+<details>
+<summary><h3>🔐 Before you begin: the <code>.env</code> file</h3></summary>
 
-| Journey step | How to leverage Vayu ecosystem (detailed) |
-|--------------|------------------------------------------|
-| **Vayu AI Studio Workspace** | Create your workspace with **Enable Docker in the Workspace** turned on, then clone this repo ([`00_vayu_workspace/`](00_vayu_workspace/)). |
-| **Vayu Object Storage** | Store raw documents (S3‑compatible). Sync `docs/` to a bucket so **Vayu AI Studio** notebooks can read them during ingest (`01_dataset.ipynb`). |
-| **Vayu Vector DB** | Provision hosted **Qdrant** in AI Studio (Vector DB → Create → select **Qdrant**). Set `QDRANT_URL` and `QDRANT_API_KEY` in `ask-it/.env`. See the [Creating Qdrant guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/vector-db/qdrant/#creating-qdrant). |
-| **Vayu Model as a Service** | Pick embedding + chat models from the **MaaS catalog**. Set `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `EMBEDDING_MODEL`, `CHAT_MODEL`. |
-| **Vayu RAG ingest (notebook)** | `load_chunks_from_docs` → `embed_texts` (MaaS) → `upsert_chunks` into the **Vayu Vector DB** collection `COLLECTION_NAME`. |
-| **Vayu RAG runtime** | `rag_client.RAGEngine` — retrieve from Vector DB, stitch context, call MaaS chat, return citations (notebook tests + Streamlit UI). |
-| **Vayu chat UI (local)** | `streamlit run chat_app.py` in [`05_build_app/`](05_build_app/) — same Vector DB collection and source panel for judges. |
-| **Vayu ML Service (deploy)** | In [`06_deploy/`](06_deploy/): build, sign, and push the Docker image, then create **ML Service** in AI Studio (port **8501**, Streamlit); set Vector DB + MaaS env vars. |
+Almost every step reads its settings from one file: **`ask-it/.env`**. You create it once (by copying `.env.example`) and fill in values as you complete each step. The notebooks and app load it automatically.
+
+> **Never commit `.env` to git or share it** — it holds your secret keys.
+
+Object Storage and Container Registry values come from the **Access Guide**. Vector DB and MaaS values come from Steps 2–3.
+
+Here is the full template. You will collect these values as you go through Steps 1–3 (and 6):
+
+```bash
+# Vayu Vector DB (Qdrant) — from Step 2
+QDRANT_URL=<your-qdrant-url>
+QDRANT_API_KEY=<your-qdrant-api-key>
+COLLECTION_NAME=knowledge_base_rag
+
+# Vayu Model as a Service — from Step 3
+OPENAI_BASE_URL=<your-maas-base-url>
+LLM_OPENAI_API_KEY=<your-maas-api-key>
+EMBEDDING_OPENAI_API_KEY=<your-maas-api-key>
+EMBEDDING_MODEL=<your-embedding-model>
+CHAT_MODEL=<your-chat-model>
+
+# Vayu Object Storage (optional) — from Step 1
+VAYU_S3_KEY=<your-access-key>
+VAYU_S3_SECRET=<your-secret-key>
+VAYU_S3_ENDPOINT=<your-s3-endpoint>
+VAYU_S3_BUCKET=<your-bucket-name>
+
+# Vayu Container Registry — from Step 6 (build, sign, deploy)
+# Host only — do not include https://, http://, or a trailing /
+IMAGE_REGISTRY=<your-image-registry>
+REGISTRY_PROJECT=<your-registry-project>
+REGISTRY_USERNAME=<container-registry-username>
+REGISTRY_PASSWORD=<container-registry-password>
+VAYU_USERNAME=<your-vayu-username>
+```
+
+</details>
 
 ---
 
-## Tech direction / tools (Vayu ecosystem)
+<details>
+<summary><h3>🚀 Quick start (the short version)</h3></summary>
 
-| Layer | Vayu / stack choice |
-|--------|---------------------|
-| Documents | **Vayu Object Storage** (optional) + local `01_dataset/docs/` |
-| Compute | **Vayu AI Studio** — `04_starter_kit/qna.ipynb` |
-| Vector search | **Vayu Vector DB** (Qdrant) |
-| Embeddings + chat | **Vayu Model as a Service** — OpenAI-compatible API |
-| App surface | **Streamlit** (`05_build_app/chat_app.py`) — local in Step 5 |
-| Deploy | **Vayu ML Service** — build/sign/push image in Step 6 ([`06_deploy/`](06_deploy/)) |
+If you just want the overall shape before diving into each step:
 
-**In the box:** `04_starter_kit/qna.ipynb` (ingest + lab), `05_build_app/rag_client.py`, `05_build_app/chat_app.py`, `01_dataset/docs/` sample corpus, `requirements.txt`, `05_build_app/Dockerfile`.
-
----
-
-## Quick start
-
-### What this code does
-
-1. **Vayu RAG ingest** — `04_starter_kit/qna.ipynb` chunks `01_dataset/docs/`, embeds via **Vayu Model as a Service**, upserts into **Vayu Vector DB**.
-2. **Vayu RAG query** — `05_build_app/rag_client.py` embeds the question, searches Vector DB, calls **Vayu Model as a Service** chat, returns answer + citations.
-3. **Vayu chat UI (local)** — `05_build_app/chat_app.py` queries the **same** Vector DB collection; does **not** re-ingest. Run the notebook first.
-4. **Vayu ML Service (deploy)** — build, sign, and push the Docker image, then host the chat UI on the platform ([`06_deploy/`](06_deploy/)).
-
-### Minimal run
-
-1. **Set up the environment**
-
-   Complete [Step 0](00_vayu_workspace/) first (workspace, clone repo). Inside your workspace terminal:
+1. **Set up** — Do [Step 0](00_vayu_workspace/) (create workspace, clone repo). From `/home/jovyan` in your workspace terminal:
 
    ```bash
+   cd /home/jovyan
+   git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
    python3 -m venv .venv
    source .venv/bin/activate
    cd ask-it
    pip install -r requirements.txt
+   cp .env.example .env
    ```
 
-2. **Create a `.env` file** in the project root (`ask-it/.env`) with your Vayu credentials:
+   Skip `git clone` if the repo is already present under `/home/jovyan/ask-it`.
 
-   ```bash
-   # Vayu Vector DB (Qdrant) — Step 2
-   QDRANT_URL=<your-qdrant-url>
-   QDRANT_API_KEY=<your-qdrant-api-key>
-   COLLECTION_NAME=knowledge_base_rag
+2. **Collect credentials** — Fill in `.env` using the step guides below. Object Storage and Container Registry values come from the **Access Guide**; Vector DB and MaaS values from [Step 2](02_vayu_vector_databases/) and [Step 3](03_vayu_model_as_a_service/).
 
-   # Vayu Model as a Service — Step 3
-   OPENAI_BASE_URL=<your-maas-base-url>
-   LLM_OPENAI_API_KEY=<your-maas-api-key>
-   EMBEDDING_OPENAI_API_KEY=<your-maas-api-key>
-   EMBEDDING_MODEL=<your-embedding-model>
-   CHAT_MODEL=<your-chat-model>
+   | Variable(s) | Where to get them |
+   |-------------|-------------------|
+   | `VAYU_S3_KEY`, `VAYU_S3_SECRET`, `VAYU_S3_ENDPOINT`, `VAYU_S3_BUCKET` | **Access Guide** — [Step 1](01_dataset/) (optional; local `docs/` also works) |
+   | `QDRANT_URL`, `QDRANT_API_KEY`, `COLLECTION_NAME` | [Step 2 — Vayu Vector DB](02_vayu_vector_databases/) |
+   | `OPENAI_BASE_URL`, `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `EMBEDDING_MODEL`, `CHAT_MODEL` | [Step 3 — Vayu Model as a Service](03_vayu_model_as_a_service/) |
+   | `IMAGE_REGISTRY`, `REGISTRY_PROJECT`, `REGISTRY_USERNAME`, `REGISTRY_PASSWORD`, `VAYU_USERNAME` | **Access Guide** — [Step 6](06_deploy/) (build, sign, deploy) |
 
-   # Vayu Object Storage (optional) — Step 1
-   VAYU_S3_KEY=<your-access-key>
-   VAYU_S3_SECRET=<your-secret-key>
-   VAYU_S3_ENDPOINT=<your-s3-endpoint>
-   VAYU_S3_BUCKET=<your-bucket-name>
+3. **Ingest once** — Open `04_starter_kit/qna.ipynb` in Vayu AI Studio, pick the kernel, and run all cells:
 
-   # Vayu Container Registry (Step 6 — build, sign, deploy)
-   # Host only — do not include https://, http://, or a trailing /
-   IMAGE_REGISTRY=<your-image-registry>
-   REGISTRY_PROJECT=<your-registry-project>
-   REGISTRY_USERNAME=<container-registry-username>
-   REGISTRY_PASSWORD=<container-registry-password>
-   VAYU_USERNAME=<your-vayu-username>
-   ```
-
-   Python scripts and notebooks load this file automatically via `load_dotenv`. Do not commit `.env` to git.
-
-   For `IMAGE_REGISTRY`, use the registry **hostname only** (e.g. `image-registry-....cloudservices.tatacommunications.com`) — no `https://`, `http://`, or trailing `/`.
-
-3. **Run ingest (once)**
-
-   Open `04_starter_kit/qna.ipynb` in Vayu AI Studio, select the kernel, then run all cells:
-
-   1. Open **Select Kernel** and choose **Python Environments**.
+   1. Open **Select Kernel** → **Python Environments**.
 
    ![Select Kernel — Python Environments](assets/kernel_select.png)
 
-   2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](00_vayu_workspace/)).
+   2. Choose the **Recommended** environment (it should point to the `.venv` from [Step 0](00_vayu_workspace/)).
 
    ![Select a Python Environment](assets/Select_kernerl_env.png)
 
-   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](00_vayu_workspace/)).
+   3. Confirm the interpreter path ends with `<your-env-name>/bin/python` (e.g. `.venv/bin/python`).
 
-   See [Step 4](04_starter_kit/) for full ingest details.
+   Full details in [Step 4](04_starter_kit/).
 
-4. **Launch the chat UI locally** (`05_build_app/`)
+4. **Chat locally** — Run the app and open the URL it prints:
 
    ```bash
    cd 05_build_app
    streamlit run chat_app.py
    ```
 
-   Open **http://localhost:8501** (or the Studio proxy URL, e.g. `https://<your-workspace-host>/proxy/8501`). Use the sidebar **top-k** and expand **Sources** on each reply.
+   Open **http://localhost:8501** (or the Studio proxy URL, e.g. `https://<your-workspace-host>/proxy/8501`). Use the sidebar **Top-K** and expand **Sources** on each reply.
 
-5. **Deploy to Vayu** (optional, for judges)
+5. **Deploy (optional)** — Once local testing works, build, sign, and push the image in [Step 6](06_deploy/).
 
-   After local testing works, build, sign, and push the Docker image in [Step 6](06_deploy/).
+> `IMAGE_REGISTRY` must be the registry **hostname only** (e.g. `image-registry-....cloudservices.tatacommunications.com`) — no `https://`, `http://`, or trailing `/`.
+
+</details>
 
 ---
 
-## Environment variables
+<details>
+<summary><h3>🔑 Environment variables reference</h3></summary>
 
 | Variable | Required | Notes |
 |----------|----------|--------|
@@ -202,18 +214,26 @@ ask-it/
 | `REGISTRY_PASSWORD` | Step 6 only | `docker login` and image signing |
 | `VAYU_USERNAME` | Step 6 only | Certificate identity for `tcl-cosign verify` |
 
----
-
-## Tips
-
-- **Ingest before you chat** — The Streamlit app only queries; judges should see a fresh index from your real domain files.
-- **Show sources** — Expand citations in the UI; grounded answers score better than fluent hallucinations.
-- **Embedding dimension** — If you change embedding models, recreate the **Vayu Vector DB** collection (vector size must match).
-- **Credits** — Use smaller chat models for dry runs; watch usage in Vayu observability during the demo.
-- **PDF/DOCX** — Add `pypdf` / `python-docx` loaders in the notebook if your problem needs them.
+</details>
 
 ---
 
-## License
+<details>
+<summary><h3>💡 Tips for a great result</h3></summary>
+
+- **Ingest before you chat** — The app only *queries*; run the notebook first so it has something to search.
+- **Show your sources** — Grounded answers with citations are far more trustworthy than fluent guesses.
+- **Keep models consistent** — If you change the embedding model, recreate the Vector DB collection (the vector size must match).
+- **Watch your credits** — Use smaller chat models for dry runs; monitor usage in Vayu observability during a demo.
+- **Need PDFs/DOCX?** — Add `pypdf` / `python-docx` loaders in the notebook (the starter handles `.md`, `.txt`, `.html`).
+
+</details>
+
+---
+
+<details>
+<summary><h3>📄 License</h3></summary>
 
 Use and modify for the **Vayu Hackathon** submission unless your team repo specifies otherwise.
+
+</details>

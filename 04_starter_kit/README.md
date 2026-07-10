@@ -1,133 +1,172 @@
-# Step 4 — Vayu RAG ingest lab (AI Studio)
+# 🧪 Step 4 — Index your documents (RAG ingest lab)
 
-**Ask-It** › **Vayu AI Studio RAG lab** · `04_starter_kit/`
+**Ask-It** › **Vayu AI Studio (RAG lab)** · `04_starter_kit/`
 
-| | |
-|---|---|
-| **⬅ Previous** | [Step 3 — Vayu Model as a Service](../03_vayu_model_as_a_service/) |
-| **Next ➡** | [Step 5 — Vayu chat app](../05_build_app/) |
+> **Goal:** Run one notebook (`qna.ipynb`) that reads your documents, turns them into embeddings, and stores them in your Vector DB — so the chat app has something to search.
 
-**Before using the Vayu chat UI, run `qna.ipynb` in Vayu AI Studio.**  
-This notebook chunks your documents, embeds them via **Vayu Model as a Service**, and indexes them in **Vayu Vector DB (Qdrant)**.
+**What you'll do here:**
+1. Confirm Steps 0–3 are done and `.env` is filled in
+2. Open `qna.ipynb` and select the kernel
+3. Run all cells and watch it index + answer a test question
 
----
+> **This step is required before the chat app will work.** The app in Step 5 only *searches* — this notebook is what actually fills the database.
 
-## Folder Contents
-
-| File | Description |
-|------|-------------|
-| `qna.ipynb` | Chunk documents, embed via MaaS, upsert to Vector DB, test RAG with citations |
+| [← Previous — Step 3 — Model as a Service](../03_vayu_model_as_a_service/) | [Next — Step 5 — Chat app →](../05_build_app/) |
+|:---|---:|
 
 ---
 
-## Prerequisites
+<details>
+<summary><h3>📁 What's in this folder</h3></summary>
 
-| Step | Vayu service / folder |
-|------|------------------------|
-| 0 | [Vayu AI Studio Workspace](../00_vayu_workspace/) |
-| 1 | [Vayu Object Storage](../01_dataset/) — files in `docs/` |
-| 2 | [Vayu Vector DB](../02_vayu_vector_databases/) — `QDRANT_URL`, `QDRANT_API_KEY` |
-| 3 | [Vayu Model as a Service](../03_vayu_model_as_a_service/) — API key, base URL, model IDs |
+| File | What it does |
+|------|--------------|
+| `qna.ipynb` | Chunks your documents, embeds them via MaaS, stores them in the Vector DB, and runs a test question with citations |
 
-Install dependencies:
+</details>
+
+---
+
+<details>
+<summary><h3>📋 Before you start</h3></summary>
+
+Make sure these earlier steps are complete:
+
+| Step | What you need from it |
+|------|-----------------------|
+| [0](../00_vayu_workspace/) | A workspace with the repo cloned and `.venv` created |
+| [1](../01_dataset/) | Your documents in `docs/` |
+| [2](../02_vayu_vector_databases/) | `QDRANT_URL`, `QDRANT_API_KEY` in `.env` |
+| [3](../03_vayu_model_as_a_service/) | API keys, base URL, and model IDs in `.env` |
+
+If you haven't installed dependencies yet:
 
 ![Setting up](../assets/install.png)
 
 ```bash
+cd /home/jovyan
 python3 -m venv .venv
 source .venv/bin/activate
 cd ask-it
 pip install -r requirements.txt
-
-cp .env.example .env
-# Edit .env with credentials from Steps 2–3
+# Fill in credentials from Steps 2–3 in .env
 ```
 
-**Required environment variables** (set in `ask-it/.env` — the config cell fails fast if any are missing):
+**Required in `ask-it/.env`** (the notebook stops early with a clear error if any are missing):
+`QDRANT_URL`, `QDRANT_API_KEY`, `LLM_OPENAI_API_KEY`, `EMBEDDING_OPENAI_API_KEY`, `OPENAI_BASE_URL`, `COLLECTION_NAME`.
 
-```bash
-# QDRANT_URL, QDRANT_API_KEY, LLM_OPENAI_API_KEY,
-# EMBEDDING_OPENAI_API_KEY, OPENAI_BASE_URL, COLLECTION_NAME, etc.
-```
+</details>
 
 ---
 
-## Quick Start
+<details>
+<summary><h3>1. Open the notebook and pick the kernel</h3></summary>
 
-1. **Open the ingest notebook:** `04_starter_kit/qna.ipynb` in your Vayu AI Studio workspace, then select the kernel:
+Open `04_starter_kit/qna.ipynb`, then:
 
-   1. Open **Select Kernel** and choose **Python Environments**.
+1. Open **Select Kernel** → **Python Environments**.
 
    ![Select Kernel — Python Environments](../assets/kernel_select.png)
 
-   2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` from [Step 0](../00_vayu_workspace/)).
+2. Pick the **Recommended** environment (it should point to the `.venv` from [Step 0](../00_vayu_workspace/)).
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
 
-   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in [Step 0](../00_vayu_workspace/)).
+3. Confirm the interpreter path ends with `<your-env-name>/bin/python` (e.g. `.venv/bin/python`).
 
-2. **Run all cells:** The notebook chunks documents, embeds them, upserts to Vector DB, and tests `rag_answer()` with citations.
-
-3. **Continue to the chat app:** Proceed to [Step 5](../05_build_app/) to run the Streamlit UI locally, then [Step 6](../06_deploy/) to deploy.
+</details>
 
 ---
 
-## What does `qna.ipynb` do?
+<details>
+<summary><h3>2. Run all cells</h3></summary>
 
-| Stage | Description |
-|-------|-------------|
-| Connect | Sets up **Vayu Vector DB** (Qdrant) and **Vayu Model as a Service** clients |
-| Probe | Checks embedding dimensions to auto-configure the collection |
-| Index | Chunks documents in `DOCS_DIR`, generates embeddings, and upserts to `COLLECTION_NAME` |
-| Test | Runs `rag_answer()` to perform RAG with citations |
+Run every cell top to bottom. The notebook will chunk your documents, embed them, store them in the Vector DB, and finish by calling `rag_answer()` on a sample question — with citations.
 
-Set which documents to use:
+</details>
+
+---
+
+<details>
+<summary><h3>3. Continue</h3></summary>
+
+Once it runs cleanly, go to [Step 5](../05_build_app/) to chat with your data locally.
+
+</details>
+
+---
+
+<details>
+<summary><h3>⚙️ What does <code>qna.ipynb</code> actually do?</h3></summary>
+
+| Stage | What happens |
+|-------|--------------|
+| **Connect** | Sets up the **Vector DB** (Qdrant) and **MaaS** clients |
+| **Probe** | Checks the embedding size to auto-configure the collection |
+| **Index** | Chunks the docs in `DOCS_DIR`, embeds them, and stores them in `COLLECTION_NAME` |
+| **Test** | Runs `rag_answer()` to prove retrieval + answering works |
+
+Choose which documents to index near the bottom of the notebook:
 
 ```python
 DOCS_DIR = Path("../01_dataset/docs")
 ```
 
-**Tips:**
-- Using hosted **Vayu Vector DB**? In **cell 6** of `qna.ipynb`, comment out `qdrant = local_db()` and uncomment `qdrant = hosted_instance()` (`local_db()` is for on-disk Qdrant only).
-- Need to rebuild the index? In the same **cell 6**, uncomment `ensure_collection(qdrant, recreate=True)` before running **cell 7** (`upsert_chunks(chunks)`). Cell 7’s header comment also notes this.
+</details>
 
 ---
 
-## Key functions
+<details>
+<summary><h3>🔧 Two settings you may need to change</h3></summary>
+
+Both are in **cell 6** of `qna.ipynb`:
+
+- **Using the hosted Vector DB?** Comment out `qdrant = local_db()` and uncomment `qdrant = hosted_instance()`. (`local_db()` is for on-disk Qdrant only.)
+- **Rebuilding the index from scratch?** Uncomment `ensure_collection(qdrant, recreate=True)` before running **cell 7** (`upsert_chunks(chunks)`). This wipes old vectors first.
+
+</details>
+
+---
+
+<details>
+<summary><h3>🧩 The key functions</h3></summary>
 
 | Function | Purpose |
 |----------|---------|
-| `load_chunks_from_docs` | Read files and split into chunks |
-| `embed_texts` | Embeddings via Vayu Model as a Service |
-| `upsert_chunks` | Upsert vectors to Vayu Vector DB |
-| `retrieve` & `rag_answer` | Query + generate answer with sources |
+| `load_chunks_from_docs` | Read files and split them into chunks |
+| `embed_texts` | Create embeddings via Vayu Model as a Service |
+| `upsert_chunks` | Store vectors in the Vayu Vector DB |
+| `retrieve` & `rag_answer` | Search, then generate an answer with sources |
+
+</details>
 
 ---
 
-## What happens after ingest?
+<details>
+<summary><h3>🚀 What happens after ingest?</h3></summary>
 
-With the venv still active from **Install dependencies** above (and env vars from Steps 2–3):
+With the `.venv` still active and env vars from Steps 2–3 set, you can jump straight into the app:
 
 ```bash
 cd 05_build_app
 streamlit run chat_app.py
 ```
 
-Use the same `.env` values as in **Step 2 (Vayu Vector DB)** and **Step 3 (Vayu Model as a Service)**.
+Use the **same** `.env` values you used here.
+
+</details>
 
 ---
 
-## Pro tips
+<details>
+<summary><h3>💡 Pro tips</h3></summary>
 
-- Use the same embedding and chat models as [Step 3 — Vayu Model as a Service](../03_vayu_model_as_a_service/).
-- If you change embedding models, **recreate** the Vayu Vector DB collection (vector size must match).
+- Use the same embedding and chat models as [Step 3](../03_vayu_model_as_a_service/).
+- If you change the embedding model, **recreate** the Vector DB collection — the vector size must match.
+
+</details>
 
 ---
 
-## Navigation
-
-| | |
-|---|---|
-| **⬅ Previous** | [Step 3 — Vayu Model as a Service](../03_vayu_model_as_a_service/) |
-| **Next ➡** | [Step 5 — Vayu chat app](../05_build_app/) |
-| **🏠 Overview** | [Ask-It overview](../README.md) |
+| [← Previous — Step 3 — Model as a Service](../03_vayu_model_as_a_service/) | [Overview](../README.md) | [Next — Step 5 — Chat app →](../05_build_app/) |
+|:---|:---:|---:|

@@ -1,106 +1,134 @@
-# Step 0 — Vayu AI Studio Workspace
+# 🧑‍💻 Step 0 — Set up your Vayu Workspace
 
 **Ask-It** › **Vayu AI Studio Workspace** · `00_vayu_workspace/`
 
-Welcome to the **Ask-It** project! This step guides you through creating and preparing a **Vayu AI Studio** workspace for notebooks and the chat app.
+> **Goal:** Create a place in the cloud (a "workspace") where you'll run the notebooks and the chat app for the rest of this project.
+
+**What you'll do here:**
+1. Create a Vayu AI Studio workspace (with Docker and public access enabled)
+2. Clone this `ask-it` repository into `/home/jovyan`
+3. Install the Python dependencies and create `.env`
+4. Pick the right kernel for the notebooks
+
+You only do this step once.
+
+| [← Previous — Ask-It overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/) |
+|:---|---:|
 
 ---
 
-## Quick Navigation
+<details>
+<summary><h3>🧭 What is a "workspace"?</h3></summary>
 
-| | |
-|:--:|:--:|
-| **⬅ Previous** | [Ask-It overview](../README.md) |
-| **➡ Next** | [Step 1 — Vayu Object Storage →](../01_dataset/) |
-
----
-
-## Workspace Overview
+A **Vayu AI Studio workspace** is a ready-to-use cloud computer with a terminal, a code editor, and Jupyter notebooks. Instead of setting up Python on your own laptop, you do everything inside this workspace.
 
 ![Vayu AI Studio Workspace Overview](../assets/workspaces.png)
 
----
-
-## Open Workspace
-
-Go to [Vayu AI Studio Workspace](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list).
-
-For the full create wizard (Start → Infrastructure → Configure Compute and Storage → Observability → Review), see the [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace).
+</details>
 
 ---
 
-## Get Started
+<details>
+<summary><h3>1. Create the workspace</h3></summary>
 
-1. **Create a Vayu AI Studio workspace**
+> **Already have a workspace?** If one was provided to you, skip straight to the next section.
 
-   > **SKIP THIS STEP** if a Vayu AI Studio workspace has already been provided to you — continue with step 2 below.
+1. Log in to [Vayu AI Studio → Workspaces](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list).
+2. Click **Create Workspace** and follow the wizard (Start → Infrastructure → Configure Compute and Storage → Observability → Review). The [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace) walks through each screen.
+3. **Add an object storage host alias:** during creation, add a **host alias** for object storage using the **IP** and **endpoint** from the **Access Guide**. Enter the endpoint as the hostname **only** — no `http://` or `https://`.
+4. **Turn on "Enable Docker in the Workspace"** before you finish. This is required later for [Step 5](../05_build_app/) and [Step 6](../06_deploy/).
+5. **Public access:** enable the **Public Access** toggle in the workspace wizard.
+6. **Configure compute and storage (recommended):** on the **Configure Compute and Storage** step:
+   - **Flavor:** **8 vCPU / 32GB RAM / cpu** from **General Purpose** flavors (choose **cpu** from the dropdown)
+   - **Billing Mode:** **Hourly**
+   - **Storage Flavor:** **SSD1-Persistent Storage**
+   - **Billing Mode for Storage:** **Monthly**
+   - **Size:** **50 GiB**
 
-   - Log in to [Vayu AI Studio](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list).
-   - Click **Create Workspace** and follow the prompts. See the [Creating Workspace guide](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/#creating-workspace) for step-by-step wizard details.
-   - **Object storage host alias:** During workspace creation, add a **host alias** for object storage using the **IP** and **endpoint** from your provided SOP document. Enter the endpoint as the hostname **only** — do not include `http://` or `https://`.
-   - Make sure **Enable Docker in the Workspace** is turned on before you finish creating the workspace (required for [Step 5](../05_build_app/) and [Step 6](../06_deploy/)).
+   Change these if your workload needs more resources.
+7. Submit the workspace and wait until the status shows **Ready**.
+8. Configure firewall rules. Follow **`Port 443 FW Rule 5 1.pdf`** (provided to candidates).
+9. To access the workspace, open the **Connect** tab on the workspace detail page and open the **Public Endpoint**.
 
-2. **Import this repository**
+</details>
 
-   Clone or upload the `ask-it` repository into your new workspace:
+---
 
-   ```bash
-   git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
-   ```
+<details>
+<summary><h3>2. Get the code into your workspace</h3></summary>
 
-   Or upload it manually via the UI.
+Open the workspace terminal and clone this repository into `/home/jovyan`:
 
-3. **Install Python dependencies**
+```bash
+cd /home/jovyan
+git clone https://ailab.cloudservices.tatacommunications.com/code/vayu-hackathon/ask-it.git
+```
 
-   Inside your workspace terminal:
+(Or upload the folder manually through the UI.)
 
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   cd ask-it
-   pip install -r requirements.txt
+</details>
 
-   cp .env.example .env
-   # Edit .env with credentials from Steps 2–3 (and registry vars for Step 6)
-   ```
+---
 
-4. **Select the notebook kernel**
+<details>
+<summary><h3>3. Install dependencies</h3></summary>
 
-   When you open any `.ipynb` in this project, use the virtual environment above:
+Still in the terminal, set up a Python virtual environment and install the packages:
 
-   1. Open **Select Kernel** and choose **Python Environments**.
+```bash
+cd /home/jovyan
+python3 -m venv .venv
+source .venv/bin/activate
+cd ask-it
+pip install -r requirements.txt
+
+cp .env.example .env
+# You'll fill in .env with credentials from the Access Guide and Steps 2–3 (and Step 6)
+```
+
+> A **virtual environment** (`.venv`) keeps this project's packages separate from everything else. The `source .venv/bin/activate` line "turns it on" — you'll run it each time you open a new terminal.
+
+</details>
+
+---
+
+<details>
+<summary><h3>4. Select the notebook kernel</h3></summary>
+
+Whenever you open a notebook (`.ipynb`) in this project, tell it to use the `.venv` you just created:
+
+1. Open **Select Kernel** and choose **Python Environments**.
 
    ![Select Kernel — Python Environments](../assets/kernel_select.png)
 
-   2. Under **Select a Python Environment**, pick the **Recommended** environment (it should point to the `.venv` Python you just created).
+2. Pick the **Recommended** environment (it should point to your new `.venv`).
 
    ![Select a Python Environment](../assets/Select_kernerl_env.png)
 
-   3. **Validate the path:** Confirm the selected interpreter path ends with `<your-env-name>/bin/python` (for example, `.venv/bin/python` if you created `.venv` in step 3).
+3. **Double-check the path:** the selected interpreter should end with `<your-env-name>/bin/python` — for example, `.venv/bin/python`.
 
-5. **Where to work**
-
-   Use this workspace when working on:
-
-   - [01_dataset/ — Vayu Object Storage](../01_dataset/)
-   - [04_starter_kit/qna.ipynb — Vayu RAG ingest](../04_starter_kit/qna.ipynb)
-   - [05_build_app/ — Vayu chat & deploy](../05_build_app/)
+</details>
 
 ---
 
-## Resources
+<details>
+<summary><h3>🧭 Where you'll work next</h3></summary>
 
-| Resource | Link |
-|----------|------|
-| Vayu AI Studio | [Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list) |
-| Documentation | [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/) |
+You'll use this workspace for:
+
+- [Step 1 — Vayu Object Storage](../01_dataset/) (upload your documents)
+- [Step 4 — RAG ingest notebook](../04_starter_kit/qna.ipynb)
+- [Step 5 — Chat app & deploy](../05_build_app/)
+
+</details>
 
 ---
 
-## Navigation
+#### Resources
 
-| | |
-|:--:|:--:|
-| **⬅ Previous** | [Ask-It overview](../README.md) |
-| **➡ Next** | [Step 1 — Vayu Object Storage →](../01_dataset/) |
-| **Overview** | [Ask-It overview](../README.md) |
+- [Vayu AI Studio Workspace Dashboard](https://ipcloud.tatacommunications.com/aistudio/#/build/workspace-list)
+- [Workspace documentation](https://ipcloud.tatacommunications.com/docs/docs/user-docs/vayu-ai-studio/workspace/)
+- **`Port 443 FW Rule 5 1.pdf`** (provided to candidates)
+
+| [← Previous — Ask-It overview](../README.md) | [Overview](../README.md) | [Next — Step 1 — Object Storage →](../01_dataset/) |
+|:---|:---:|---:|
