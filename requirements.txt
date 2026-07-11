@@ -1,5 +1,16 @@
+# --- Base Environment Dependencies ---
 qdrant-client
 openai
 streamlit
 python-dotenv
 boto3
+
+# --- Document Processing Dependencies ---
+langchain-text-splitters
+tiktoken
+beautifulsoup4
+langdetect
+pypdf
+rank_bm25
+sentence-transformers
+torch

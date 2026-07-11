@@ -14,3 +14,4 @@ tcl-cosign
 06_deploy/image-signing/rekor.key
 06_deploy/image-signing/ctlog.key
 .DS_Store.env.example
+.hf_cache/
