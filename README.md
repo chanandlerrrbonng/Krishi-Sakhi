@@ -519,7 +519,7 @@ Every claim in this README is backed by running code. The guardrails exist in `r
 
 Fluent answers are easy. An answer a Bank Sakhi can stake a family's entitlement on — in her language, with the rule cited to the exact line — is the product.
 
-**For Bharat, a verifiable answer is the product.**
+**For Bharat, a verifiable answer is the product**
 
 ---
 
